@@ -1,2 +1,45 @@
 <h1>Admin::Customers#show</h1>
 <p>Find me in app/views/admin/customers/show.html.erb</p>
+
+<div class='container pt-5'>
+    <div class='row'>
+        <div class='col-md-6'>
+          <h2><%= @customer.last_name + @customer.first_name %>さんの会員詳細</h2>
+          <!--mt-3:画面サイズ全て、上側のマージンを1rem-->
+            <table class='table table-bordered mt-3'>
+              <tr>
+          <td class="table-active">会員ID</th>
+          <td><%= @customer.id %></td>
+        </tr>
+              <tr>
+                <td class='table-active'>氏名</td>
+                <td><%= @customer.last_name %> <%= @customer.first_name %></td>
+              </tr>
+              <tr>
+                <td class='table-active'>カナ</td>
+                <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
+              </tr>
+              <tr>
+                <td class='table-active'>メールアドレス</td>
+                <td><%= @customer.email %></td>
+              </tr>
+              <tr>
+                <td class='table-active'>自己紹介</td>
+                <td><%= @customer.self_introduction %></td>
+              </tr>
+              <tr>
+          <td class="table-active">会員ステータス</th>
+          <td class="<%= @customer.is_deleted ? 'text-gray' : 'text-green' %>"><%= @customer.is_deleted ? '退会済み' : '有効' %></td>
+        </tr>
+            </table></div>
+                </div>
+            </div>
+            <div class='container pt-5'>
+                <div class='row'>
+                    <div class='col-md-6'>
+                <%= link_to "編集する", edit_admin_customer_path(@customer), class:"btn btn-success" %>
+                <%= link_to "投稿一覧を見る", posts_path(@customer), class:"btn btn-success" %>
+                <%= link_to "いいね一覧を見る", favorites_path(@customer), class:"btn btn-success" %>
+        </div>
+    </div>
+</div>

@@ -1,2 +1,32 @@
 <h1>Public::Customers#edit</h1>
 <p>Find me in app/views/public/customers/edit.html.erb</p>
+
+<div class="container">
+  <h2>会員情報編集</h2>
+    <%= form_with model: @customer, url: current_customer_path, method: :patch do |f| %>
+    <div class="row">
+          <div class="col-2 offset-md-1"><%= f.label "氏名" %></div>
+          <div class="col-1"><%= f.text_field :last_name, :size => "10", placeholder: "令和" %></div>
+          <div class="col-1"><%= f.text_field :first_name, :size => "10", placeholder: "道子" %></div>
+        </div>
+        <div class="row">
+          <div class="col-2 offset-md-1"><%= f.label "フリガナ" %></div>
+          <div class="col-1"><%= f.text_field :last_name_kana, :size => "10", placeholder: "レイワ" %></div>
+          <div class="col-1"><%= f.text_field :first_name_kana, :size => "10", placeholder: "ミチコ" %></div>
+        </div>
+        <div class="row">
+          <div class="col-2 offset-md-1"><%= f.label "メールアドレス" %></div>
+          <div class="col-3"><%= f.email_field :email, :size => "25", placeholder: "sample@example.com" %></div>
+        </div>
+         <div class="row">
+          <div class="col-2 offset-md-1"><%= f.label "自己紹介" %></div>
+          <div class="col-3"><%= f.text_area :self_introduction, :size => "25", placeholder: "自己紹介" %></div>
+        </div>
+        <div class="row">
+        <div class="col-2 offset-md-1"></div>
+        <div class="col-3"><%= f.submit '編集内容を保存', class:"btn btn-success" %>
+        　<%= link_to "退会する", current_customer_unsubscribe_path, class:"btn btn-danger" %></div>
+    </div>
+    <% end %>
+ </div>
+

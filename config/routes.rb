@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   sessions: 'public/sessions'
   }
 
+  devise_scope :customer do
+    post 'customers/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
+
   devise_for :admin, skip: [:registrations] ,controllers: {
   sessions: "admin/sessions"
   }
@@ -27,7 +31,10 @@ Rails.application.routes.draw do
     resources :comments, only: [:index, :show, :destroy]
     resources :customers, only: [:index, :show, :edit, :update]
   end
+
+  get "search_tag" => "posts#search_tag"
 end
+
   # namespace :admin do
   #   get 'comments/index'
   #   get 'comments/show'

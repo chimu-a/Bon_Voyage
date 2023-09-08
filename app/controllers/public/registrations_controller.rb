@@ -1,8 +1,21 @@
 # frozen_string_literal: true
 
 class Public::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_account_update_params, only: [:update]
+
+  def after_sign_up_path_for(_resource)
+    current_customer_path
+  end
+
+  # 特定のパラメータを設定およびカスタマイズするためのメソッド
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name, :last_name_kana, :first_name_kana,:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :self_introduction])
+  end
+  # 特定のパラメータを設定およびカスタマイズするためのメソッド
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:last_name, :first_name, :last_name_kana, :first_name_kana,:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :self_introduction])
+  end
 
   # GET /resource/sign_up
   # def new

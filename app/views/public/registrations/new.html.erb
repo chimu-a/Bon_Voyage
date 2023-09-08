@@ -1,29 +1,89 @@
-<h2>Sign up</h2>
+<div class="container mt-5 mb-5">
+  <div class="row my-3">
+    <div class="col-sm-8 px-sm-0 offset-sm-1">
+      <h2>新規会員登録</h2>
+    </div>
+  </div>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<!--  <div class="field">-->
+<!--    < f.label :"氏名" %><br />-->
+<!--    < f.email_field :email, autofocus: true, autocomplete: "email" %>-->
+<!--  </div>-->
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+<!--  <div class="field">-->
+<!--    < f.label :email %><br />-->
+<!--    < f.email_field :email, autofocus: true, autocomplete: "email" %>-->
+<!--  </div>-->
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+<!--  <div class="field">-->
+<!--    < f.label :"パスワード" %>-->
+<!--    < if @minimum_password_length %>-->
+<!--    <em>(<= @minimum_password_length %> characters minimum)</em>-->
+<!--    < end %><br />-->
+<!--    <= f.password_field :password, autocomplete: "new-password" %>-->
+<!--  </div>-->
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+<!--  <div class="field">-->
+<!--    <= f.label :"パスワード（確認用）"%><br />-->
+<!--    <= f.password_field :password_confirmation, autocomplete: "new-password" %>-->
+<!--  </div>-->
 
-<%= render "public/shared/links" %>
+<!--  <div class="actions">-->
+<!--    <= f.submit "新規登録" %>-->
+<!--  </div>-->
+<!--< end %>-->
+
+<!--< render "public/shared/links" %>-->
+
+<div class="row">
+      <div class="col-2 offset-md-1"><%= f.label "氏名" %></div>
+      <div class="col-1 text-right pr-0"><%= f.label "(姓)" %></div>
+      <div class="col-1"><%= f.text_field :last_name, :size => "10", placeholder: "令和" %></div>
+      <div class="col-1 text-right pr-0"><%= f.label "(名)" %></div>
+      <div class="col-1"><%= f.text_field :first_name, :size => "10", placeholder: "道子" %></div>
+    </div>
+    <div class="row">
+      <div class="col-2 offset-md-1"><%= f.label "フリガナ" %></div>
+      <div class="col-1 text-right pr-0"><%= f.label "(セイ)" %></div>
+      <div class="col-1"><%= f.text_field :last_name_kana, :size => "10", placeholder: "レイワ" %></div>
+      <div class="col-1 text-right pr-0"><%= f.label "(メイ)" %></div>
+      <div class="col-1"><%= f.text_field :first_name_kana, :size => "10", placeholder: "ミチコ" %></div>
+    </div>
+    <div class="row">
+      <div class="col-3 offset-md-1"><%= f.label "メールアドレス" %></div>
+      <div class="col-3"><%= f.email_field :email, :size => "25", placeholder: "sample@example.com" %></div>
+    </div>
+    <div class="row">
+      <div class="col-3 offset-md-1">
+        <% if @minimum_password_length %>
+          <%= f.label "パスワード(#{@minimum_password_length}文字以上)" %>
+        <% end %>
+      </div>
+      <div class="col-3"><%= f.password_field :password %></div>
+    </div>
+    <div class="row">
+      <div class="col-3 offset-md-1"><%= f.label "パスワード(確認用)" %></div>
+      <div class="col-3"><%= f.password_field :password_confirmation %></div>
+    </div>
+    <div class="row">
+      <div class="col-3 offset-md-1"><%= f.label "自己紹介" %></div>
+      <div class="col-3"><%= f.text_area :self_introduction, :size => "25", placeholder: "自己紹介" %></div>
+    </div>
+    <div class="row">
+      <div class="col-3 offset-md-1"></div>
+        <div class="col-1.5"></div>
+        <div class="col-2"><%= f.submit "新規登録", class:"col btn btn-success" %></div>
+      </div>
+  <% end %>
+  <div class="row">
+    <div class="col-3 offset-md-1">
+      <h5>すでに登録済みの方</h5>
+    </div>
+    <div class="col-3">
+      <%= render "public/shared/links" %>
+    </div>
+  </div>
+</div>

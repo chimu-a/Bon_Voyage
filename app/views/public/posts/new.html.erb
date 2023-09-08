@@ -1,2 +1,62 @@
 <h1>Public::Posts#new</h1>
 <p>Find me in app/views/public/posts/new.html.erb</p>
+
+<div class="container">
+  <% if @post.errors.any? %>
+  <%= @post.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+  <% end %>
+  <h2>新規投稿</h2>
+   <div class="row">
+     <div class="col-sm-2" ></div>
+       <div class="col-sm-8" >
+         <%= form_with model: @post, url: posts_path , method: :post, local: true do |f| %>
+         <table>
+      　    <tbody>
+      　       <tr>
+        　　     <td>タイトル</td>
+        　　     <td><%= f.text_field :title, placeholder: "タイトル" %></td>
+        　    </tr>
+             <tr>
+        　　     <td>メイン画像</td>
+        　　     <td><%= f.file_field :image, accept: "image/*" %></td>
+        　    </tr>
+        　    <tr>
+        　　     <td>日付</td>
+        　　     <!--何日から何日までこれで良いか確認-->
+        　　     <td><%= f.date_field :sample_at %>〜<%= f.date_field :sample_at %></td>
+        　　</tr>
+        　　<tr>
+        　　    <td>タグ(,で区切ると複数タグ登録できます)</td>
+        　　  <td><%= f.text_field :name,value: @tag_list, class: 'form-control' %></td>
+        　　  </tr>
+        　　   </tbody>
+        　　    </table>
+        　　       <table class="table">
+          <thead>
+            <tr>
+              <th class='table-active'>画像</th>
+              <th class='table-active'>場所</th>
+              <th class='table-active'>説明文</th>
+          </thead>
+        　    </tr>
+        　    <%= f.fields_for :@post_items do |t| %> <%# fields_forで子モデルのフォームをネストする %>
+
+        　　     <td><%= f.file_field :image, accept: "image/*" %></td>
+
+        　    　<td><%= t.text_field :place %></td><%# 変数tを使っていることに注意！ %>
+
+              <td><%= t.text_field :explanatory_text %></td><%# 変数tを使っていることに注意！ %>
+  <% end %></table>
+        　      <td><%= f.submit '新規登録', class:"btn btn-success" %></td>
+          <% end %>
+
+          </table>
+        </div>
+        <div class="col-sm-2" ></div>
+  </div>
+</div>

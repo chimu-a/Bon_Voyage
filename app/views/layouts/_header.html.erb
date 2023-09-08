@@ -1,26 +1,86 @@
-<% if admin_signed_in? %>
-  <li>
-    <%= link_to admin_items_path,class: 'nav-link text-light' do %>
-      <i class=""></i> 投稿一覧
-    <% end %>
-  </li>
-  <li>
-    <%=  link_to admin_customers_path,class: 'nav-link text-light' do %>
-      <i class=""></i> 会員一覧
-    <% end %>
-  </li>
-  <li>
-    <%=  link_to admin_root_path ,class: 'nav-link text-light' do %>
-      <i class=""></i> コメント一覧
-    <% end %>
-  </li>
-  <li>
-    <%= link_to admin_genres_path, class: 'nav-link text-light' do %>
-      <i class=""></i> ジャンル一覧
-    <% end %>
-  </li>
-  <li>
-    <%= link_to destroy_admin_session_path, method: :delete,class: 'nav-link text-light' do %>
-      <i class=""></i> ログアウト
-    <% end %>
-  </li>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#deb887">
+    <div class="container">
+      <a class="text-light" href="/"><%= image_tag('', size: '50x50') %>BonVoyage</a>
+      　<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        　<span class="navbar-toggler-icon"></span>
+      　</button>
+      　<div class="collapse navbar-collapse" id="navbarNavDropdown">
+        　<ul class="navbar-nav ml-auto">
+        　<% if admin_signed_in? %>
+            <li>
+              <%= link_to admin_posts_path,class: 'nav-link text-light' do %>
+                <i class=""></i> 投稿一覧
+              <% end %>
+            </li>
+            <li>
+              <%=  link_to admin_customers_path,class: 'nav-link text-light' do %>
+                <i class=""></i> 会員一覧
+              <% end %>
+            </li>
+            <li>
+              <%=  link_to admin_comments_path ,class: 'nav-link text-light' do %>
+                <i class=""></i> コメント一覧
+              <% end %>
+            </li>
+            <li>
+              <%= link_to destroy_admin_session_path, method: :delete,class: 'nav-link text-light' do %>
+                <i class=""></i> ログアウト
+              <% end %>
+            </li>
+             <% elsif customer_signed_in? %>
+              <li class="my-auto">
+                <div class="text-white pr-2">ようこそ！<%= current_customer.last_name %>様</div>
+              </li>
+              <li>
+                <%= link_to about_path,class: 'nav-link text-light' do %>
+                  <i class=""></i> サービス紹介
+                <% end %>
+              </li>
+              <li>
+              <%= link_to posts_path,class: 'nav-link text-light' do %>
+                <i class=""></i> 投稿一覧
+              <% end %>
+            </li>
+              <li>
+                <%= link_to current_customer_path,class: 'nav-link text-light' do %>
+                  <i class=""></i> マイページ
+                <% end %>
+              </li>
+              <li>
+                <%= link_to destroy_customer_session_path, method: :delete,class: 'nav-link text-light' do %>
+                  <i class=""></i> ログアウト
+                <% end %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to about_path,class: 'nav-link text-light' do %>
+                  <i class=""></i> サービス紹介
+                <% end %>
+              </li>
+              <li>
+                <%= link_to posts_path,class: 'nav-link text-light' do %>
+                  <i class=""></i> 投稿一覧
+                <% end %>
+              </li>
+              <li>
+                <%= link_to new_customer_registration_path,class: 'nav-link text-light' do %>
+                  <i class=""></i> 新規登録
+                <% end %>
+              </li>
+              <li>
+                <%= link_to customer_session_path ,class: 'nav-link text-light' do %>
+                  <i class=""></i> ログイン
+                <% end %>
+              </li>
+              <li>
+                <%= link_to customers_guest_sign_in_path, method: :post, class: 'nav-link text-light' do %>
+                <i class=""></i> ゲストログイン
+                <% end %>
+              </li>
+             <% end %>
+            </ul>
+          </div>
+    </div>
+  </nav>
+</header>

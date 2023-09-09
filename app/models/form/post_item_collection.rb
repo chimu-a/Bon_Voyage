@@ -1,10 +1,10 @@
 class Form::PostItemCollection < Form::Base
-  FORM_COUNT = 10 #ここで、作成したい登録フォームの数を指定
+  # FORM_COUNT = 10 #ここで、作成したい登録フォームの数を指定
   attr_accessor :post_items
 
   def initialize(attributes = {})
-    super attributes
-    self.post_items = FORM_COUNT.times.map { PostItem.new() } unless self.post_items.present?
+    # super attributes
+    # self.post_items = FORM_COUNT.times.map { PostItem.new() } unless self.post_items.present?
   end
 
   def post_items_attributes=(attributes)

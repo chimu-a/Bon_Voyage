@@ -1,12 +1,15 @@
 class Public::PostsController < ApplicationController
   def index
     @posts = Post.all
+    # 追記
+    @post = Post.new
+    @post_items = @post.post_items.build
   end
 
   def new
     @post = Post.new
     @post_items = @post.post_items.build
-    2.times { @post.post_items.build }
+    4.times { @post_items }
     @form = Form::PostItemCollection.new
   end
 
@@ -49,7 +52,7 @@ class Public::PostsController < ApplicationController
       flash[:success] = "削除に成功しました"
       redirect_to '/posts'
   end
-  
+
   def search_tag
     #検索結果画面でもタグ一覧表示
     @tag_list = Tag.all

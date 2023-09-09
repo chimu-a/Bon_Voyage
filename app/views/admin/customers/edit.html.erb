@@ -1,2 +1,48 @@
 <h1>Admin::Customers#edit</h1>
 <p>Find me in app/views/admin/customers/edit.html.erb</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 px-sm-0 offset-sm-1">
+      <h2><%= @customer.last_name + @customer.first_name %>さんの会員情報編集</h2>
+    </div>
+  </div>
+  <%= form_with model: @customer, url: admin_customer_path, method: :patch, local: true do |f| %>
+  <div class="row">
+    <div class="col-sm-6 px-sm-0 offset-sm-1">
+    <table class="table table-bordered">
+        <div class="row">
+         <div class="col-2 offset-md-1">会員ID</div>
+         <div class="col-3"><%= @customer.id %></div>
+       </div>
+        <div class="row">
+          <div class="col-2 offset-md-1"><%= f.label "氏名" %></div>
+          <div class="col-1"><%= f.text_field :last_name, :size => "10", placeholder: "令和" %></div>
+          <div class="col-1"><%= f.text_field :first_name, :size => "10", placeholder: "道子" %></div>
+        </div>
+        <div class="row">
+          <div class="col-2 offset-md-1"><%= f.label "フリガナ" %></div>
+          <div class="col-1"><%= f.text_field :last_name_kana, :size => "10", placeholder: "レイワ" %></div>
+          <div class="col-1"><%= f.text_field :first_name_kana, :size => "10", placeholder: "ミチコ" %></div>
+        </div>
+        <div class="row">
+          <div class="col-2 offset-md-1"><%= f.label "メールアドレス" %></div>
+          <div class="col-3"><%= f.email_field :email, :size => "25", placeholder: "sample@example.com" %></div>
+        </div>
+         <div class="row">
+          <div class="col-2 offset-md-1"><%= f.label "自己紹介" %></div>
+          <div class="col-3"><%= f.text_area :self_introduction, :size => "25", placeholder: "自己紹介" %></div>
+        </div>
+        <div class="row">
+          <div class="col-2 offset-md-1"><%= f.label "会員ステータス" %></div>
+          <div class="col-3"><%= f.select :is_deleted, [['有効', false], ['退会済み', true]], {}, { class: 'form-control' } %></div>
+        </div>
+    </table>
+    </div>
+  </div>
+  <div class="row">
+        <div class="col-2 offset-md-1"></div>
+        <div class="col-3"><%= f.submit '変更を保存' %></div>
+  </div>
+  <% end %>
+</div>

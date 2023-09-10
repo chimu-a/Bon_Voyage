@@ -10,8 +10,12 @@ class Post < ApplicationRecord
   has_many :post_items, dependent: :destroy
   has_one_attached :image
 
-  # controllerにてpost_itemsが使えるようにする
-  accepts_nested_attributes_for :post_items
+  # accepts_nested_attributes_for:controllerにてpost_itemsが使えるようにする
+  # allow_destroy: true:親モデルのフォームで子モデルの削除を許可
+  # reject_if: :all_blank:空の子モデルは作成されない
+  accepts_nested_attributes_for :post_items, allow_destroy: true, reject_if: :all_blank, limit: 8
+
+  validates :prefecture_id, numericality: { other_than: 1}
 
   def save_tags(tags)
   # タグが存在していれば、タグの名前を配列として全て取得

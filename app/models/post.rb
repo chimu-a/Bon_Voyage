@@ -36,4 +36,25 @@ class Post < ApplicationRecord
       self.tags << tag
     end
   end
+
+  def search_tag
+    #検索結果画面でもタグ一覧表示
+    @tag_list = Tag.all
+    　#検索されたタグを受け取る
+    @tag = Tag.find(params[:tag_id])
+    　#検索されたタグに紐づく投稿を表示
+    @posts = @tag.posts
+  end
+
+  def favorited_by?(customer)
+    favorites.exists?(customer_id: customer.id)
+  end
+
+  def self.search(search)
+    if search != nil
+      Post.where('title LIKE(?) or text LIKE(?)' , "%#{search}%",  "%#{search}%")
+    else
+      Post.all
+    end
+  end
 end

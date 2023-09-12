@@ -25,7 +25,7 @@ class Public::PostsController < ApplicationController
     if post.save
       post.save_tags(tag_list)
       flash[:success] = "投稿に成功しました"
-      redirect_to post_path(post)
+      redirect_to posts_path
     else
       render :new
     end
@@ -34,7 +34,9 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @tag_list = @post.tags.pluck(:name).join(',')
+    @customer = @post.customer
     @post_tags = @post.tags
+    @comment = Comment.new
   end
 
   def edit
@@ -49,7 +51,7 @@ class Public::PostsController < ApplicationController
     if post.update(post_params)
       post.save_tags(tag_list)
       flash[:success] = "更新に成功しました"
-      redirect_to post_path(post)
+      redirect_to post_path
     else
       render :edit
     end
@@ -77,8 +79,8 @@ class Public::PostsController < ApplicationController
 
   def post_params
     # Postitemモデルに渡す値をpost_items_attributesで設定
-    params.require(:post).permit(:customer_id, :prefecture_id, :title, :date ,:image,
-    post_items_attributes: [:id, :post_id, :place, :explanatory_text, :image])
+    params.require(:post).permit(:customer_id, :prefecture_id, :title, :start_date , :end_date, :image,
+    post_items_attributes: [:id, :post_id, :place, :explanatory_text, :image, :date, :time, :moving_method, :number_of_times])
   end
 
 

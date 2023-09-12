@@ -4,7 +4,10 @@ class CreatePostItems < ActiveRecord::Migration[6.1]
       t.integer :post_id, null: false
       t.string :place, null: false
       t.text :explanatory_text, null: false
-      t.timestamps
+      t.date :date, null: false
+      t.time :time, null: false
+      t.integer :moving_method
+      t.integer :number_of_times
     end
   end
 end

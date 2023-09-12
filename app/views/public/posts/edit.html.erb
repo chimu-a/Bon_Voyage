@@ -32,16 +32,18 @@
         　    <tr>
         　　     <td>日付</td>
         　　     <!--何日から何日までこれで良いか確認-->
-        　　     <td><%= f.date_field :date %>〜<%= f.date_field :date %></td>
+        　　     <td><%= f.date_field :start_date %>〜<%= f.date_field :end_date %></td>
         　　</tr>
         　　<tr>
         　　    <td>タグ(,で区切ると複数タグ登録できます)</td>
-        　　  <td><%= f.text_field :name,value: @tag_lis, class: 'form-control' %></td>
+        　　  <td><%= f.text_field :name,value: @tag_list, class: 'form-control' %></td>
         　　  </tr>
   　　     <tr>
   　　     <table class="table">
           <thead>
             <tr>
+              <th class='table-active'>日付</th>
+              <th class='table-active'>時間</th>
               <th class='table-active'>画像</th>
               <th class='table-active'>場所</th>
               <th class='table-active'>説明文</th>
@@ -50,6 +52,8 @@
           <%# 8.times do %>
         　    <%= f.fields_for :post_items do|f| %> <%# fields_forで子モデルのフォームをネストする %>
         　     <tr>
+        　        <td><%= f.date_field :date %></td>
+        　       <td> <%= f.time_field :time %></td>
         　　      <td><%= f.file_field :image, accept: "image/*" %></td>
         　     　<td><%= f.text_field :place %></td><%# 変数tを使っていることに注意！ %>
                 <td><%= f.text_field :explanatory_text %></td><%# 変数tを使っていることに注意！ %>

@@ -15,14 +15,23 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get "/about" => "homes#about", as: "about"
-    resources :posts
-    resources :favorites, only: [:index, :create, :destroy]
-    resources :comments, only: [:index, :create, :destroy]
-    get "current_customer" => "customers#show"
-    patch "current_customer" => "customers#update"
-    get "current_customer/edit" => "customers#edit"
-    get "current_customer/unsubscribe" => "customers#unsubscribe"
-    patch "current_customer/withdraw" => "customers#withdraw"
+    resources :posts do
+      resource :favorites, only: [:index, :create, :destroy]
+    end
+    resources :post_items do
+      resources :comments, only: [:index, :create, :destroy]
+    end
+    resources :customers, only: [:show, :edit, :update] do
+      member do
+        get :favorites
+      end
+    end
+    # get "current_customer" => "customers#show"
+    # patch "current_customer" => "customers#update"
+    # get "current_customer/edit" => "customers#edit"
+    get "customer/unsubscribe" => "customers#unsubscribe"
+    patch "customer/withdraw" => "customers#withdraw"
+
   end
 
   namespace :admin do

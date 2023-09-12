@@ -66,11 +66,12 @@ ActiveRecord::Schema.define(version: 2023_09_07_010316) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "user_name", null: false
     t.string "last_name", null: false
     t.string "first_name", null: false
     t.string "last_name_kana", null: false
     t.string "first_name_kana", null: false
-    t.text "self_introduction", null: false
+    t.text "self_introduction"
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -89,8 +90,10 @@ ActiveRecord::Schema.define(version: 2023_09_07_010316) do
     t.integer "post_id", null: false
     t.string "place", null: false
     t.text "explanatory_text", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.date "date", null: false
+    t.time "time", null: false
+    t.integer "moving_method"
+    t.integer "number_of_times"
   end
 
   create_table "post_tags", force: :cascade do |t|
@@ -107,7 +110,8 @@ ActiveRecord::Schema.define(version: 2023_09_07_010316) do
     t.integer "customer_id", null: false
     t.integer "prefecture_id", null: false
     t.string "title", null: false
-    t.date "date", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

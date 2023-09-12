@@ -1,4 +1,4 @@
- <%= button_to "+", {controller: 'posts', action: 'new'}, {method: :get} %>
+ <%= button_to "作成", {controller: 'posts', action: 'new'}, {method: :get} %>
 
  <div class='container pt-5'>
   <div class='row'>
@@ -13,15 +13,15 @@
      <div> <%= link_to image_tag(post.image, width: '200', height: '200'), post_path(post) %>  </div>
        <tr>
         　  <td><%= post.title %></td>
-        　  <td><%= post.date %>〜<%= post.date %></td>
         　</tr>
         　<tr>
         <!--　  <%# @post_tags.each do |tag| %>-->
      　　 <!--<td> <i class="fa-sharp fa-solid fa-tag"></i>-->
         <!--<%#= link_to tag.name,search_tag_path(tag_id: tag.id) %></td>-->
 
-         <td><i class="fa-sharp fa-solid fa-tag"></i>
-         <%= link_to post.tags.map(&:name).join(', '),search_tag_path(tag_id: tag.id) %></td>
+         <p><i class="fa-sharp fa-solid fa-tag"></i>
+         <%= link_to post.tags.map(&:name).join(', '),search_tag_path(tag_id: tag.id) %></p>
+
         　</tr>
     </div>
     </div>

@@ -6,12 +6,13 @@ class Customer < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :commnets, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_one_attached :image
 
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |customer|
       customer.password = SecureRandom.urlsafe_base64
+      customer.user_name = "ゲストユーザー"
       customer.last_name = "ゲスト"
       customer.first_name = "ユーザー"
       customer.last_name_kana = "ゲスト"

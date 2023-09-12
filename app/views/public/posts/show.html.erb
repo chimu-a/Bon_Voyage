@@ -1,5 +1,3 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
 
 <div>
   <%= flash[:success] %>
@@ -10,6 +8,7 @@
     <div class="row">
       <div class="col-sm" >
     　　<%= image_tag @post.image, size: "300x200" %>
+        <p><%= link_to @customer.user_name, customer_path(@post.customer_id) %></p>
     　</div>
     　<div class="col-sm" >
       　<table class="table">
@@ -19,7 +18,7 @@
         　</tr>
         　<tr>
         　  <td>日付</td>
-        　  <td><%= @post.date %>〜<%= @post.date %></td>
+        　  <td><%= @post.start_date %>〜<%= @post.end_date %></td>
         　</tr>
         　<tr>
         　  <td>タグ</td>
@@ -28,22 +27,56 @@
         <%= link_to tag.name,search_tag_path(tag_id: tag.id) %></td>
       <% end %>
         　</tr>
-      <% @post.post_items.each do |post_items| %>
-       <tr>
-      　     <td>画像</td>
-        <td><%= image_tag post_items.image, size: "300x200" %></td>
-       </tr>
-       <tr>
-        <td>場所</td>
-        <td><%= post_items.place %></td>
-        </tr>
+        　<table class="table">
+        <thead>
         <tr>
-        <td>コメント</td>
-        <td><%= post_items.explanatory_text %></td>
+          <th>日付</th>
+          <th>時間</th>
+          <th>画像</th>
+          <th>場所</th>
+          <th>コメント</th>
+        </tr>
+      </thead>
+      <% @post.post_items.each do |post_item| %>
+       <tr>
+        <td> <%= post_item.date %></td>
+        <td> <%= post_item.time.strftime("%R") %></td>
+        <td><%= image_tag post_item.image, size: "100x100" %></td>
+        <td><%= post_item.place %></td>
+        <td><%= post_item.explanatory_text %></td>
+        <td>
+        <div>
+          <p>コメント件数：<%= post_item.comments.count %></p>
+            <% post_item.comments.each do |comment| %>
+              <p><%#= image_tag comment.customer.get_profile_image(100,100) %></p>
+              <%= comment.customer.user_name %>
+              <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
+            <% end %>
+          </div>
+          <div>
+            <%= form_with model: [post_item, @comment] do |f| %>
+              <%= f.text_area :content, rows: '5', placeholder: "コメントをここに" %>
+              <%= f.submit "送信する" %>
+            <% end %>
+          </div>
+        </td>
         </tr>
         </div>
       <% end %>
         </table>
+        <% if @post.favorited_by?(current_customer) %>
+    <p>
+      <%= link_to post_favorites_path(@post), method: :delete do %>
+        ♥<%= @post.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_favorites_path(@post), method: :post do %>
+        ♡<%= @post.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
       </div>
     </div>
 </div>

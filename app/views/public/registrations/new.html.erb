@@ -37,7 +37,10 @@
 <!--< end %>-->
 
 <!--< render "public/shared/links" %>-->
-
+<div class="row">
+      <div class="col-3 offset-md-1"><%= f.label "ユーザーネーム" %></div>
+      <div class="col-3"><%= f.text_field :user_name, :size => "10", placeholder: "みちこ" %></div>
+    </div>
 <div class="row">
       <div class="col-2 offset-md-1"><%= f.label "氏名" %></div>
       <div class="col-1 text-right pr-0"><%= f.label "(姓)" %></div>

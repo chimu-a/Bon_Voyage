@@ -1,16 +1,19 @@
 <h1>Admin::Customers#show</h1>
 <p>Find me in app/views/admin/customers/show.html.erb</p>
 
-<div class='container pt-5'>
-    <div class='row'>
-        <div class='col-md-6'>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+<div class="col-md-3">
           <h2><%= @customer.last_name + @customer.first_name %>さんの会員詳細</h2>
-          <!--mt-3:画面サイズ全て、上側のマージンを1rem-->
-            <table class='table table-bordered mt-3'>
+         <table class='table'>
               <tr>
           <td class="table-active">会員ID</th>
           <td><%= @customer.id %></td>
         </tr>
+        <tr>
+                <td>ユーザーネーム</td>
+                <td><%= @customer.user_name %></td>
+              </tr>
               <tr>
                 <td class='table-active'>氏名</td>
                 <td><%= @customer.last_name %> <%= @customer.first_name %></td>
@@ -31,14 +34,42 @@
           <td class="table-active">会員ステータス</th>
           <td class="<%= @customer.is_deleted ? 'text-gray' : 'text-green' %>"><%= @customer.is_deleted ? '退会済み' : '有効' %></td>
         </tr>
-            </table></div>
+
+            </table>
+             <%= link_to "編集する", edit_admin_customer_path(@customer.id), class:"btn btn-success" %></div>
                 </div>
             </div>
+             <div class="col-md-8 offset-md-1">
+
+  <h2>Posts</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>画像</th>
+        <th>タイトル</th>
+        <th>タグ</th>
+        <th coldpan="3"></th>
+      </tr>
+    </thead>
+
+    <% @posts.each do |post| %>
+
+    <tbody>
+      <tr>
+        <td><%= link_to image_tag(post.image, width: '100', height: '100'), post_path(post) %> </td>
+　　    <td><%= link_to post.title, post_path(post.id) %></td>
+        <td><%= link_to post.tags.map(&:name).join(', '),search_tag_path(tag_id: tag.id) %></td>
+      </tr>
+
+    </tbody>
+    <% end %>
+  </table>
+</div>
             <div class='container pt-5'>
                 <div class='row'>
                     <div class='col-md-6'>
-                <%= link_to "編集する", edit_admin_customer_path(@customer.id), class:"btn btn-success" %>
-                <%= link_to "投稿一覧を見る", admin_posts_path(@customer.id), class:"btn btn-success" %>
+
+                <%#= link_to "投稿一覧を見る", admin_customer_path(@post.customer_id), class:"btn btn-success" %>
                 <%= link_to "コメント一覧を見る", admin_comments_path(@customer.id), class:"btn btn-success" %>
         </div>
     </div>

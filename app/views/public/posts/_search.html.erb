@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+ 　　　　　　　　　　<!--materialize.cssを用いてキーワード検索とタグ検索を切り替え-->
+        <li class="tab col s6"><a href="#test1">キーワード検索</a></li>
+        <li class="tab col s6"><a href="#test2">タグ検索</a></li>
+      </ul>
+      <!--キーワード検索-->
+      <div id ="test1" >
+ 　　　　　　　　　　　<!--Ransackを使うとsearch_form_forを使える！-->
+        <%= search_form_for @search,url: search_products_path do |f| %>
+
+          <div class="form-group">
+            <i class="material-icons prefix">search</i>
+            <%= f.search_field :name_cont, class: 'form-control', placeholder: 'キーワードで検索' %>
+            <%= f.submit 'Search',:class=> "btn waves-effect waves-light" %>
+          </div>
+        <% end %>
+      <!--キーワード検索の結果を表示-->
+        <div class="col s6">
+          <div class="card" id = "test1">
+            <div class="blue-grey darken-1">
+              <ul class="card">
+                <% @results.each do |result| %>
+                  <%= render 'posts/show' , a_post: result %>
+                  </ul>
+                  <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!--タグ検索-->
+      <div id ="test2">
+        <div class="form-group">
+        <i class="material-icons prefix">search</i>
+        <!--タグはform_tagを用いて-->
+        <%= form_tag({action: 'search', method: "get"}) do %>
+          <%= text_field_tag :search %>
+          <%= submit_tag 'Search', :class =>  "btn waves-effect waves-light" %>
+        <% end %>
+        </div>
+　　　　　　　　　　　　　　　<!--タグ検索の結果を表示-->
+        <div class="col s6">
+          <div class="card" id = "test1">
+            <div class="blue-grey darken-1">
+              <ul class="card">
+                <% @tag_search.each do |result| %>
+                  <%= render 'posts/show' , a_post: result %>
+                  </ul>
+                <% end %>
+           </div>
+          </div>
+        </div>
+      　　</div>
+     </div>
+    </div>
+  </div>
+</div>

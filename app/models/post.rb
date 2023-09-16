@@ -50,11 +50,19 @@ class Post < ApplicationRecord
     favorites.exists?(customer_id: customer.id)
   end
 
-  def self.search(search)
-    if search != nil
-      Post.where('title LIKE(?) or text LIKE(?)' , "%#{search}%",  "%#{search}%")
-    else
-      Post.all
-    end
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "customer_id", "end_date", "id", "prefecture_id", "start_date", "title", "updated_at"]
   end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["customer", "favorites", "image_attachment", "image_blob", "post_items", "post_tags", "prefecture", "tags"]
+  end
+
+  # def self.search(search)
+  #   if search != nil
+  #     Post.where('title LIKE(?)' , "%#{search}%")
+  #   else
+  #     Post.all
+  #   end
+  # end
 end

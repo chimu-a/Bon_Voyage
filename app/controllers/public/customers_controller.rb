@@ -13,7 +13,7 @@ class Public::CustomersController < ApplicationController
 
   def update
     @customer = Customer.find(params[:id])
-    customer.update(customer_params)
+    @customer.update(customer_params)
     if @customer.save
       redirect_to customer_path
     else
@@ -26,7 +26,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def withdraw
-    @customer = Customer.find(params[:id])
+    customer = Customer.find(params[:id])
     customer.update(is_deleted: true)
     reset_session
     redirect_to root_path

@@ -7,11 +7,11 @@
           <h2><%= @customer.last_name + @customer.first_name %>さんの会員詳細</h2>
          <table class='table'>
               <tr>
-          <td class="table-active">会員ID</th>
+          <td>会員ID</th>
           <td><%= @customer.id %></td>
-        </tr>
-        <tr>
-                <td>ユーザーネーム</td>
+            </tr>
+            <tr>
+              <td>ユーザーネーム</td>
                 <td><%= @customer.user_name %></td>
               </tr>
               <tr>
@@ -31,15 +31,15 @@
                 <td><%= @customer.self_introduction %></td>
               </tr>
               <tr>
-          <td class="table-active">会員ステータス</th>
-          <td class="<%= @customer.is_deleted ? 'text-gray' : 'text-green' %>"><%= @customer.is_deleted ? '退会済み' : '有効' %></td>
+          <td>会員ステータス</th>
+          <td="<%= @customer.is_deleted ? 'text-gray' : 'text-green' %>"><%= @customer.is_deleted ? '退会済み' : '有効' %></td>
         </tr>
-
+          </tbody>
             </table>
+            <div class="row">
              <%= link_to "編集する", edit_admin_customer_path(@customer.id), class:"btn btn-success" %></div>
                 </div>
-            </div>
-             <div class="col-md-8 offset-md-1">
+             <div class="col-md-8 offset-md-1 h-50">
 
   <h2>Posts</h2>
   <table class="table">
@@ -65,12 +65,17 @@
     <% end %>
   </table>
 </div>
-            <div class='container pt-5'>
-                <div class='row'>
-                    <div class='col-md-6'>
-
+            <div class="col-md-8 offset-md-1 h-50">
                 <%#= link_to "投稿一覧を見る", admin_customer_path(@post.customer_id), class:"btn btn-success" %>
-                <%= link_to "コメント一覧を見る", admin_comments_path(@customer.id), class:"btn btn-success" %>
+                <h2>コメント一覧</h2>
+                  <table class="table">
+    <thead>
+       </thead>
+       <tr><%= link_to "コメント一覧を見る", admin_comments_path(@customer.id), class:"btn btn-success" %></tr>
+        <tbody>
+    </tbody>
+  </table>
         </div>
     </div>
 </div>
+</div></div>

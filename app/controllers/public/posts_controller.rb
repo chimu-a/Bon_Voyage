@@ -6,6 +6,21 @@ class Public::PostsController < ApplicationController
     @post_items = @post.post_items.build
     @tag_list = Tag.all
     @post_tags = @post.tags
+    @search = Post.ransack(params[:q])
+    @results = @search.result
+    # if params[:new_post]
+    #   @posts = Post.new_post
+    # elsif params[:old_post]
+    #   @posts = Post.old_post
+    # else
+    #   @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+    # end
+    # if params[:keyword]
+    #   @posts = @posts.search(params[:keyword]).page(params[:page])
+    # else
+    #   @posts = @posts.page(params[:page])
+    # end
+    # @keyword = params[:keyword]
   end
 
   def new
@@ -74,6 +89,15 @@ class Public::PostsController < ApplicationController
     　#検索されたタグに紐づく投稿を表示
     @posts = @tag.posts
   end
+
+  # def search
+  #   # キーワード検索
+  #   @search = Post.ransack(params[:q])
+  #   @results = @search.result.order("created_at DESC").page(params[:page]).per(10)
+
+  #   # タグ検索
+  #   @tag_search = Post.tagged_with(params[:search])
+  # end
 
   private
 

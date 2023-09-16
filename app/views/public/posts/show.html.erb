@@ -13,6 +13,10 @@
     　<div class="col-sm" >
       　<table class="table">
       　   <tr>
+      　     <td>都道府県</td>
+        　  <td><%= @post.prefecture_id %></td>
+        　</tr>
+      　   <tr>
       　     <td>タイトル</td>
         　  <td><%= @post.title %></td>
         　</tr>
@@ -22,10 +26,12 @@
         　</tr>
         　<tr>
         　  <td>タグ</td>
+        　<td>
         　  <% @post_tags.each do |tag| %>
-     　　 <td> <i class="fa-sharp fa-solid fa-tag"></i>
-        <%= link_to tag.name,search_tag_path(tag_id: tag.id) %></td>
+      <i class="fa-sharp fa-solid fa-tag"></i>
+        <%= link_to tag.name,search_path(tag_id: tag.id) %>
       <% end %>
+      </td>
         　</tr>
         　<table class="table">
         <thead>

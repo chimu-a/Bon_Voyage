@@ -15,8 +15,14 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get "/about" => "homes#about", as: "about"
+    get "search" => "searches#search"
+    # get "search" => "posts#search"
+    # get "search" => "posts#search"
     resources :posts do
       resource :favorites, only: [:index, :create, :destroy]
+      # collection do
+      #   get 'search', to: 'posts#search', as: :search
+      # end
     end
     resources :post_items do
       resources :comments, only: [:index, :create, :destroy]
@@ -24,13 +30,15 @@ Rails.application.routes.draw do
     resources :customers, only: [:show, :edit, :update] do
       member do
         get :favorites
+        get :unsubscribe
+        patch :withdraw
       end
     end
     # get "current_customer" => "customers#show"
     # patch "current_customer" => "customers#update"
     # get "current_customer/edit" => "customers#edit"
-    get "customer/unsubscribe" => "customers#unsubscribe"
-    patch "customer/withdraw" => "customers#withdraw"
+    # get "customer/:id/unsubscribe" => "customers#unsubscribe"
+    # patch "customer/:id/withdraw" => "customers#withdraw"
 
   end
 
@@ -39,9 +47,8 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :edit, :update, :destroy]
     resources :comments, only: [:index, :show, :destroy]
     resources :customers, only: [:index, :show, :edit, :update]
+    get "search" => "searches#search"
   end
-
-  get "search_tag" => "posts#search_tag"
 end
 
   # namespace :admin do

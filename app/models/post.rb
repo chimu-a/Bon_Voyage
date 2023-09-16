@@ -1,7 +1,9 @@
 class Post < ApplicationRecord
   # 下記記載でモジュールを取り込んでいる
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :prefecture
+  # belongs_to :prefecture
+  belongs_to_active_hash :prefecture
+
   has_many :post_tags, dependent: :destroy
   # "through: :post_tags"は2つのモデル間の関連が"post_tagsモデル"を通して行われることを示す
   has_many :tags, through: :post_tags
@@ -51,11 +53,13 @@ class Post < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "customer_id", "end_date", "id", "prefecture_id", "start_date", "title", "updated_at"]
+    # ["created_at", "customer_id", "end_date", "id", "prefecture_id", "start_date", "title", "updated_at"]
+    %w(title prefecture_id)
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["customer", "favorites", "image_attachment", "image_blob", "post_items", "post_tags", "prefecture", "tags"]
+    # ["customer", "favorites", "image_attachment", "image_blob", "post_items", "post_tags", "prefecture", "tags"]
+    %w(prefecture)
   end
 
   # def self.search(search)
@@ -65,4 +69,15 @@ class Post < ApplicationRecord
   #     Post.all
   #   end
   # end
+
+  # 曖昧検索
+  def self.search(keyword, prefs)
+    # joinsで各テーブルを結合して1つのテーブルとみなす
+    # LIKEであいまい検索(%は何が入ってもOK)
+    # INで配列を検索(SQLでのwhereInのこと)
+    # joinsで繋いだ先を検索する場合は、テーブル名とカラム名を「.」で連結させる
+    joins(:tags, :post_items)
+          .where('title LIKE ? OR tags.name LIKE ? OR post_items.place LIKE ? OR post_items.explanatory_text LIKE ? OR prefecture_id IN (?)',
+                  "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", prefs)
+  end
 end

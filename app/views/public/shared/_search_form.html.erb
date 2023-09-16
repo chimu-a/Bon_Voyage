@@ -1,0 +1,6 @@
+<%= form_with url: url, method: :get do |form| %>
+  <div class="input-group">
+    <%= form.text_field :q, class: 'form-control', placeholder: t('defaults.search_word') %>
+    <%= form.submit t('defaults.search_word'), class: 'btn btn-primary' %>
+  </div>
+<% end %>

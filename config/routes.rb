@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get "/about" => "homes#about", as: "about"
-    get "search" => "searches#search"
+    get "search" => "searches#search", as: :search
+    get "search_tag" => "posts#search_tag"
     # get "search" => "posts#search"
     # get "search" => "posts#search"
     resources :posts do
@@ -48,6 +49,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:index, :show, :destroy]
     resources :customers, only: [:index, :show, :edit, :update]
     get "search" => "searches#search"
+    get "search_tag" => "posts#search_tag"
   end
 end
 

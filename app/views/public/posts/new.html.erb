@@ -52,9 +52,9 @@
         　        <td><%= f.date_field :date %></td>
         　       <td> <%= f.time_field :time %></td>
         　　      <td><%= f.file_field :image, accept: "image/*" %></td>
-        　     　<td><%= f.text_field :place %></td><%# 変数tを使っていることに注意！ %>
-                <td><%= f.text_field :explanatory_text %></td><%# 変数tを使っていることに注意！ %>
-              </tr>
+        　     　<td><%= f.text_field :place %></td>
+        　     　<td><%= f.text_field :explanatory_text %></td>
+        　       </tr>
              <%# end %>
            <% end %>
          </table>
@@ -64,6 +64,5 @@
           </tbody>
           </table>
         </div>
-        <div class="col-sm-2" ></div>
   </div>
 </div>

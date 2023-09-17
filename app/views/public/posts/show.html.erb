@@ -14,7 +14,7 @@
       　<table class="table">
       　   <tr>
       　     <td>都道府県</td>
-        　  <td><%= @post.prefecture_id %></td>
+      　     <td><%= @prefectures[@post.prefecture_id-2] %></td>
         　</tr>
       　   <tr>
       　     <td>タイトル</td>
@@ -28,11 +28,11 @@
         　  <td>タグ</td>
         　<td>
         　  <% @post_tags.each do |tag| %>
-      <i class="fa-sharp fa-solid fa-tag"></i>
-        <%= link_to tag.name,search_path(tag_id: tag.id) %>
-      <% end %>
-      </td>
-        　</tr>
+            <i class="fa-sharp fa-solid fa-tag"></i>
+              <%= link_to tag.name, posts_path(tag_id: tag.id) %>
+            <% end %>
+            </td>
+          </tr>
         　<table class="table">
         <thead>
         <tr>
@@ -57,7 +57,9 @@
               <p><%#= image_tag comment.customer.get_profile_image(100,100) %></p>
               <%= comment.customer.user_name %>
               <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
-              <%= link_to "削除", post_item_comment_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-success" %>
+              <% if comment.customer == current_customer %>
+               <%= link_to "削除", post_item_comment_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-success" %>
+               <% end %>
             <% end %>
           </div>
           <div>
@@ -71,6 +73,8 @@
         </div>
       <% end %>
         </table>
+        <!--非ログイン時でも閲覧可能にする-->
+        <%# if customer_signed_in? && @post.favorited_by?(current_customer) %>
         <% if @post.favorited_by?(current_customer) %>
     <p>
       <%= link_to post_favorites_path(@post), method: :delete do %>
@@ -87,5 +91,7 @@
       </div>
     </div>
 </div>
-<div class="text-center"><%= link_to "編集する", edit_post_path(@post), class:"btn btn-success" %></div>
+<% if @post.customer == current_customer %>
+    <div class="text-center"><%= link_to "編集する", edit_post_path(@post), class:"btn btn-success" %></div>
+    <% end %>
 

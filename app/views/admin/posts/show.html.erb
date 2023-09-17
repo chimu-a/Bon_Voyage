@@ -49,7 +49,7 @@
               <p><%#= image_tag comment.customer.get_profile_image(100,100) %></p>
               <%= comment.customer.user_name %>
               <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
-              <%= link_to "削除", admin_comment_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-success" %>
+              <%#= link_to "削除", admin_comment_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-success" %>
             <% end %>
           </div>
         </td>

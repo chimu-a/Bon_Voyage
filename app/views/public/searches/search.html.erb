@@ -1,28 +1,29 @@
 <div class="row">
   <% if @posts.present? %>
     <h2>「<%= params[:q] if params[:q].present? %>」の投稿（<%= @posts.length %>）</h2>
-      <table class="table">
-    <thead>
-      <tr>
-        <th>画像</th>
-        <th>タイトル</th>
-        <th>タグ</th>
-        <th coldpan="3"></th>
-      </tr>
-    </thead>
+      <% @posts.each do |post| %>
+    <div class="col-lg-3" >
+    <div class="">
+     <div> <%= link_to image_tag(post.image, width: '150', height: '150'), post_path(post) %>  </div>
+       <tr>
+         <td><%= post.title %></td>
+         <td><%= link_to post.customer.user_name, admin_customer_path(post.customer) %></td>
+       </tr>
+        <!--　  <%# @post_tags.each do |tag| %>-->
+     　　 <!--<td> <i class="fa-sharp fa-solid fa-tag"></i>-->
+        <!--<%#= link_to tag.name,search_tag_path(tag_id: tag.id) %></td>-->
 
-    <% @posts.each do |post| %>
-
-    <tbody>
-      <tr>
-        <td><%= link_to image_tag(post.image, width: '100', height: '100'), post_path(post) %> </td>
-　　    <td><%= link_to post.title, post_path(post.id) %></td>
-        <td><%= link_to post.tags.map(&:name).join(', '),search_path(tag_id: tag.id) %></td>
-      </tr>
-
-    </tbody>
+         <!--<p><i class="fa-sharp fa-solid fa-tag"></i>-->
+         <!--<%#= link_to post.tags.map(&:name).join(', '),search_path(tag_id: tag.id) %></p>-->
+         <p>
+        　  <% post.tags.each do |tag| %>
+            <i class="fa-sharp fa-solid fa-tag"></i>
+              <%= link_to tag.name, posts_path(tag_id: tag.id) %>
+           <% end %>
+         </p>
+    </div>
+    </div>
     <% end %>
-  </table>
       <!--<div>-->
       <!--  <%#= paginate @posts %>-->
       <!--</div>-->

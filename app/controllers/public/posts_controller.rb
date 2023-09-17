@@ -1,13 +1,20 @@
 class Public::PostsController < ApplicationController
   def index
-    @posts = Post.all
+    # タグ名押すと絞り込んで表示される
+    if params[:tag_id].present?
+      @tag = Tag.find(params[:tag_id])
+      @posts = @tag.posts
+    else
+      @posts = Post.all
+    end
+    # @posts = Post.all
     # 追記
     @post = Post.new
     @post_items = @post.post_items.build
-    @tag_list = Tag.all
+    # @tag_list = Tag.all
     @post_tags = @post.tags
-    @search = Post.ransack(params[:q])
-    @results = @search.result
+    # @search = Post.ransack(params[:q])
+    # @results = @search.result
     # if params[:new_post]
     #   @posts = Post.new_post
     # elsif params[:old_post]
@@ -52,6 +59,7 @@ class Public::PostsController < ApplicationController
     @customer = @post.customer
     @post_tags = @post.tags
     @comment = Comment.new
+    @prefectures = ['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県']
   end
 
   def edit
@@ -89,6 +97,8 @@ class Public::PostsController < ApplicationController
     　#検索されたタグに紐づく投稿を表示
     @posts = @tag.posts
   end
+  
+  
 
   # def search
   #   # キーワード検索

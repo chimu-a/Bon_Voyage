@@ -1,6 +1,3 @@
-<h1>Admin::Customers#show</h1>
-<p>Find me in app/views/admin/customers/show.html.erb</p>
-
 <div class="container px-5 px-sm-0">
   <div class="row">
 <div class="col-md-3">
@@ -58,7 +55,12 @@
       <tr>
         <td><%= link_to image_tag(post.image, width: '100', height: '100'), post_path(post) %> </td>
 　　    <td><%= link_to post.title, post_path(post.id) %></td>
-        <td><%= link_to post.tags.map(&:name).join(', '),search_tag_path(tag_id: tag.id) %></td>
+        <td>
+        　  <% post.tags.each do |tag| %>
+            <i class="fa-sharp fa-solid fa-tag"></i>
+              <%= link_to tag.name, posts_path(tag_id: tag.id) %>
+            <% end %>
+            </td>
       </tr>
 
     </tbody>

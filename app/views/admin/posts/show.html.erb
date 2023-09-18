@@ -1,12 +1,9 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
-
 <div class="container">
   <h2>投稿詳細</h2>
     <div class="row">
       <div class="col-sm" >
     　　<%= image_tag @post.image, size: "300x200" %>
-        <p><%= link_to @customer.user_name, admin_customer_path(@post.customer_id) %></p>
+        <p><%= link_to @customer.user_name, admin_customer_path(@post.customer_id), class: "link text-secondary" %></p>
     　</div>
     　<div class="col-sm" >
       　<table class="table">
@@ -22,7 +19,7 @@
         　  <td>タグ</td>
         　  <% @post_tags.each do |tag| %>
      　　 <td> <i class="fa-sharp fa-solid fa-tag"></i>
-        <%= link_to tag.name,search_tag_path(tag_id: tag.id) %></td>
+        <%= link_to tag.name,search_tag_path(tag_id: tag.id), class: "link text-secondary" %></td>
       <% end %>
         　</tr>
         　<table class="table">
@@ -65,6 +62,6 @@
       </div>
     </div>
 </div>
-<div class="text-center"><%#= link_to "編集する", admin_edit_post_path(@post), class:"btn btn-success" %></div>
+<div class="text-center"><%= link_to "編集する", edit_admin_post_path(@post), class:"btn btn-outline-success" %></div>
 
 

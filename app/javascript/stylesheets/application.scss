@@ -1,1 +1,7 @@
 @use '~bootstrap/scss/bootstrap';
+
+.bg {
+  // ref: https://coliss.com/articles/build-websites/operation/css/css-responsive-full-background-image-by-sixrevisions.html
+  // https://developer.mozilla.org/ja/docs/Web/CSS/background-position
+  background: url("../images/15582.jpg") top left / cover no-repeat fixed;
+}

@@ -3,12 +3,15 @@
   <%= flash[:success] %>
 </div>
 
-<div class="container">
-  <h2>投稿詳細</h2>
-    <div class="row">
-      <div class="col-sm" >
+<div class='container pt-5'>
+  <div class='row'>
+    <div class='col-lg'>
+  　　<h2>投稿詳細</h2>
+  　</div>
+    <div class="row m-2">
+      <div class="col-lg-3" >
     　　<%= image_tag @post.image, size: "300x200" %>
-        <p><%= link_to @customer.user_name, customer_path(@post.customer_id) %></p>
+        <p><%= link_to @customer.user_name, customer_path(@post.customer_id), class: "link text-secondary" %></p>
     　</div>
     　<div class="col-sm" >
       　<table class="table">
@@ -29,7 +32,7 @@
         　<td>
         　  <% @post_tags.each do |tag| %>
             <i class="fa-sharp fa-solid fa-tag"></i>
-              <%= link_to tag.name, posts_path(tag_id: tag.id) %>
+              <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
             <% end %>
             </td>
           </tr>
@@ -58,40 +61,40 @@
               <%= comment.customer.user_name %>
               <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
               <% if comment.customer == current_customer %>
-               <%= link_to "削除", post_item_comment_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-success" %>
+               <%= link_to "削除", post_item_comment_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %>
                <% end %>
             <% end %>
-          </div>
-          <div>
-            <%= form_with model: [post_item, @comment] do |f| %>
-              <%= f.text_area :content, rows: '5', placeholder: "コメントをここに" %>
-              <%= f.submit "送信する" %>
-            <% end %>
-          </div>
-        </td>
-        </tr>
         </div>
+        <div>
+          <%= form_with model: [post_item, @comment] do |f| %>
+            <%= f.text_area :content, rows: '5', placeholder: "コメントをここに" %>
+            <%= f.submit "送信する" %>
+          <% end %>
+        </div>
+        </td>
+       </tr>
       <% end %>
-        </table>
+      </table>
         <!--非ログイン時でも閲覧可能にする-->
         <%# if customer_signed_in? && @post.favorited_by?(current_customer) %>
         <% if @post.favorited_by?(current_customer) %>
-    <p>
-      <%= link_to post_favorites_path(@post), method: :delete do %>
-        ♥<%= @post.favorites.count %> いいね
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to post_favorites_path(@post), method: :post do %>
-        ♡<%= @post.favorites.count %> いいね
-      <% end %>
-    </p>
-  <% end %>
-      </div>
+          <p>
+            <%= link_to post_favorites_path(@post), class: "link text-danger", method: :delete do %>
+              ♥<%= @post.favorites.count %> いいね
+            <% end %>
+          </p>
+          <% else %>
+          <p>
+            <%= link_to post_favorites_path(@post), class: "link text-secondary", method: :post do %>
+              ♡<%= @post.favorites.count %> いいね
+            <% end %>
+          </p>
+        <% end %>
     </div>
+  </div>
+</div>
 </div>
 <% if @post.customer == current_customer %>
-    <div class="text-center"><%= link_to "編集する", edit_post_path(@post), class:"btn btn-success" %></div>
-    <% end %>
+  <div class="text-center"><%= link_to "編集する", edit_post_path(@post), class:"btn btn-outline-success" %></div>
+<% end %>
 

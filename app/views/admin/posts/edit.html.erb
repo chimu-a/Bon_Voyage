@@ -1,2 +1,69 @@
-<h1>Admin::Posts#edit</h1>
-<p>Find me in app/views/admin/posts/edit.html.erb</p>
+<!--<div class="container">-->
+<!--  <%# if @post.errors.any? %>-->
+<!--  <%#= @post.errors.count %>件のエラーが発生しました-->
+<!--  <ul>-->
+<!--    <%# @post.errors.full_messages.each do |message| %>-->
+<!--      <li><%#= message %></li>-->
+<!--    <%# end %>-->
+<!--  </ul>-->
+<!--  <%# end %>-->
+<div class="container pt-5">
+  <div class="row">
+    <div class="col-sm">
+      <h2>投稿編集</h2>
+      <%= form_with model: @post, url: admin_post_path, method: :patch do |f| %>
+      <table>
+  　     <tbody>
+          <tr>
+  　         <td>都道府県</td>
+    　　      <td><%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"select-box", id:"item-prefecture"}) %></td>
+    　     </tr>
+  　       <tr>
+    　　      <td>タイトル</td>
+    　　      <td><%= f.text_field :title, placeholder: "タイトル" %></td>
+    　     </tr>
+          <tr>
+    　　      <td>メイン画像</td>
+    　　      <td><%= f.file_field :image, accept: "image/*" %></td>
+    　     </tr>
+    　     <tr>
+    　　      <td>日付</td>
+    　　      <!--何日から何日までこれで良いか確認-->
+    　　      <td><%= f.date_field :start_date %>〜<%= f.date_field :end_date %></td>
+    　　      </tr>
+        　　<tr>
+        　　    <td>タグ(,で区切ると複数タグ登録できます)</td>
+        　　    <td><%= f.text_field :name,value: @tag_list, class: 'form-control' %></td>
+        　　  </tr>
+    　　      <tr>
+    　　      <table class="table">
+              <thead>
+                <tr>
+                  <th class='table-active'>日付</th>
+                  <th class='table-active'>時間</th>
+                  <th class='table-active'>画像</th>
+                  <th class='table-active'>場所</th>
+                  <th class='table-active'>説明文</th>
+                </tr>
+              </thead>
+          <%# 8.times do %>
+        　     <%= f.fields_for :post_items do|f| %> <%# fields_forで子モデルのフォームをネストする %>
+        　     <tr>
+        　       <td><%= f.date_field :date %></td>
+        　       <td> <%= f.time_field :time %></td>
+        　　      <td><%= f.file_field :image, accept: "image/*" %></td>
+        　     　<td><%= f.text_field :place %></td><%# 変数tを使っていることに注意！ %>
+                <td><%= f.text_field :explanatory_text %></td><%# 変数tを使っていることに注意！ %>
+              </tr>
+             <%# end %>
+              <% end %>
+    　         </tr>
+                <td><%= f.submit '変更を保存', class:"btn btn-outline-success" %>
+                <%= link_to "削除", admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %></td>
+      <% end %>
+     </div>
+     <div class="col-sm-2" ></div>
+    </tbody>
+    </table>
+  </div>
+</div>

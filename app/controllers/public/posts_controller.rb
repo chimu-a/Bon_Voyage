@@ -97,8 +97,8 @@ class Public::PostsController < ApplicationController
     　#検索されたタグに紐づく投稿を表示
     @posts = @tag.posts
   end
-  
-  
+
+
 
   # def search
   #   # キーワード検索

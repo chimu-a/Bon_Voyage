@@ -17,7 +17,7 @@
           <tr>
             <!--<td><%#= image_tag post.image, size: "100x100" %>-->
             <td><%#= link_to customer.user_name, admin_customer_path(post.customer_id) %></td>
-            <td><%= link_to post.customer.user_name, admin_customer_path(post.customer) %></td>
+            <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
             <td><%= post.title %></td>
             <% post.post_items.each do |post_item| %>
             <% if post_item.comments.count > 0 %>
@@ -34,7 +34,7 @@
                     <p><%#= image_tag comment.customer.get_profile_image(100,100) %></p>
                     <%= comment.customer.user_name %>
                     <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
-                    <%= link_to "削除", post_item_comments_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-success" %>
+                    <%= link_to "削除", post_item_comments_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %>
                   <% end %>
               </div>
             </tr>

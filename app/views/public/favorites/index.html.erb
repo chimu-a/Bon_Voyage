@@ -1,9 +1,6 @@
-<h1>Public::Favorites#index</h1>
-<p>Find me in app/views/public/favorites/index.html.erb</p>
-
-<p>いいねした投稿一覧</p>
-<%= link_to image_tag( post.image.variant(resize: '100x100') ), post_path(post.id) %>
-<%= link_to post.user_name.name, user_path(post.customer.id) %>
-<i class="fa fa-heart unlike-btn"></i>
-<%= post.likes.length %>
-<%= link_to post.title, post_path(post.id) %>
+<h1>いいねした投稿一覧</h1>
+  <%= link_to image_tag( post.image.variant(resize: '100x100') ), post_path(post.id) %>
+  <%= link_to post.user_name.name, user_path(post.customer.id), class:"link text-secondary" %>
+    <i class="fa fa-heart unlike-btn"></i>
+  <%= post.likes.length %>
+  <%= link_to post.title, post_path(post.id), class:"link text-secondary" %>

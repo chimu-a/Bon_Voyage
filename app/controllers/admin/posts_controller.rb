@@ -13,13 +13,33 @@ class Admin::PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
+    @tag_list = @post.tags.pluck(:name).join(',')
+    4.times { @post.post_items.build }
   end
 
   def update
+    post = Post.find(params[:id])
+    tag_list = params[:post][:name].split(',')
+    if post.update(post_params)
+      post.save_tags(tag_list)
+      flash[:success] = "更新に成功しました"
+      redirect_to post_path
+    else
+      render :edit
+    end
+
   end
 
   def destroy
+    post = Post.find(params[:id])
+     @post.post_items.destroy_all
+    post.destroy
+      flash[:success] = "削除に成功しました"
+      redirect_to '/posts'
   end
+
+  private
 
   def post_params
     # Postitemモデルに渡す値をpost_items_attributesで設定

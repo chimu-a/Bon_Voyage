@@ -1,62 +1,58 @@
 <!--pt-5:画面サイズ全て、上側のパディングを3rem-->
 <div class="container px-5 px-sm-0">
   <div class="row">
-<div class="col-md-3">
-          <h2>User info</h2>
-          <!--mt-3:画面サイズ全て、上側のマージンを1rem-->
-            <table class='table'>
-              <tbody>
-                <tr>
-                <td>ユーザーネーム</td>
-                <td><%= @customer.user_name %></td>
-              </tr>
-              <tr>
-                <td>自己紹介</td>
-                <td><%= @customer.self_introduction %></td>
-              </tr>
-              </tbody>
-            </table>
-            <% if @customer == current_customer %>
-            <div class="row">
-           <%= link_to edit_customer_path(@customer.id), class:"btn btn-outline-secondary btn-block" do%>
+    <div class="col-md-3">
+      <h2>会員</h2>
+      <!--mt-3:画面サイズ全て、上側のマージンを1rem-->
+        <table class='table'>
+          <tbody>
+            <tr>
+            <td>ユーザーネーム</td>
+            <td><%= @customer.user_name %></td>
+          </tr>
+          <tr>
+            <td>自己紹介</td>
+            <td><%= @customer.self_introduction %></td>
+          </tr>
+          </tbody>
+        </table>
+        <% if @customer == current_customer %>
+        <div class="row">
+          <%= link_to edit_customer_path(@customer.id), class:"btn btn-outline-secondary btn-block" do%>
           <i class="fas fa-user-cog" aria-hidden="true"></i>
           <% end %>
-      </div>
-      <% end %>
-</div>
-            <div class="col-md-8 offset-md-1">
-
-  <h2>Posts</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>画像</th>
-        <th>タイトル</th>
-        <th>タグ</th>
-        <th coldpan="3"></th>
-      </tr>
-    </thead>
-
-    <% @posts.each do |post| %>
-
-    <tbody>
-      <tr>
-        <td><%= link_to image_tag(post.image, width: '100', height: '100'), post_path(post) %> </td>
-　　    <td><%= link_to post.title, post_path(post.id) %></td>
-        <td>
-        　  <% post.tags.each do |tag| %>
+        </div>
+        <% end %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+    <h2>投稿一覧</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>画像</th>
+          <th>タイトル</th>
+          <th>タグ</th>
+          <th coldpan="3"></th>
+        </tr>
+      </thead>
+      <% @posts.each do |post| %>
+      <tbody>
+        <tr>
+          <td><%= link_to image_tag(post.image, width: '100', height: '100'), post_path(post) %> </td>
+  　　    <td><%= link_to post.title, post_path(post.id), class: "link text-secondary" %></td>
+          <td>
+      　     <% post.tags.each do |tag| %>
             <i class="fa-sharp fa-solid fa-tag"></i>
-              <%= link_to tag.name, posts_path(tag_id: tag.id) %>
+              <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
             <% end %>
-            </td>
-      </tr>
-
-    </tbody>
+          </td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+    </div>
+    <% if @customer == current_customer %>
+      <%= link_to "いいね一覧を見る", favorites_customer_path(@customer.id), class:"btn btn-outline-warning" %>
     <% end %>
-  </table>
-</div>
-<% if @customer == current_customer %>
-  <%= link_to "いいね一覧を見る", favorites_customer_path(@customer.id), class:"btn btn-success" %>
-<% end %>
-</div>
+  </div>
 </div>

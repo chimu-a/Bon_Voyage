@@ -2,12 +2,14 @@
   <% if @posts.present? %>
     <h2>「<%= params[:q] if params[:q].present? %>」の投稿（<%= @posts.length %>）</h2>
       <% @posts.each do |post| %>
+</div>
+<div class="row">
     <div class="col-lg-3" >
     <div class="">
-     <div> <%= link_to image_tag(post.image, width: '150', height: '150'), post_path(post) %>  </div>
+     <div><%= link_to image_tag(post.image, width: '150', height: '150'), post_path(post) %></div>
        <tr>
          <td><%= post.title %></td>
-         <td><%= link_to post.customer.user_name, admin_customer_path(post.customer) %></td>
+         <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
        </tr>
         <!--　  <%# @post_tags.each do |tag| %>-->
      　　 <!--<td> <i class="fa-sharp fa-solid fa-tag"></i>-->
@@ -18,7 +20,7 @@
          <p>
         　  <% post.tags.each do |tag| %>
             <i class="fa-sharp fa-solid fa-tag"></i>
-              <%= link_to tag.name, posts_path(tag_id: tag.id) %>
+              <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
            <% end %>
          </p>
     </div>

@@ -1,8 +1,16 @@
-<h1>いいねした投稿一覧</h1>
-<% @customer.favorites.each do |favorite| %>
-<%= link_to image_tag( favorite.post.image, size: "100x100" ), post_path(favorite.post.id) %>
-<%= link_to favorite.post.customer.user_name, customer_path(favorite.post.customer.id), class:"link text-secondary" %>
-<i class="fa fa-heart unlike-btn"></i>
-<%= favorite.post.favorites.length %>
-<%= link_to favorite.post.title, post_path(favorite.post.id), class:"link text-secondary" %>
-<% end %>
+<div class="container pt-5">
+  <div class="row pt-5">
+    <h2>いいねした投稿一覧</h2>
+  </div>
+  <div class="row m-2">
+    <% @customer.favorites.each do |favorite| %>
+    <div class="col-lg-3" >
+      <%= link_to image_tag( favorite.post.image, size: "150x150" ), post_path(favorite.post.id) %>
+      <p><%= link_to favorite.post.customer.user_name, customer_path(favorite.post.customer.id), class:"link text-secondary" %>
+      <i class="fa fa-heart unlike-btn"></i>
+      <%= favorite.post.favorites.length %>
+      <%= link_to favorite.post.title, post_path(favorite.post.id), class:"link text-secondary" %></p>
+    <% end %>
+    </div>
+  </div>
+</div>

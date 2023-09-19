@@ -1,6 +1,8 @@
-<div class="container">
-  <h2>投稿詳細</h2>
-    <div class="row">
+<div class="container pt-5">
+  <div class="row pt-5">
+    <h2>投稿詳細</h2>
+  </div>
+  <div class="row">
       <div class="col-sm" >
     　　<%= image_tag @post.image, size: "300x200" %>
         <p><%= link_to @customer.user_name, admin_customer_path(@post.customer_id), class: "link text-secondary" %></p>

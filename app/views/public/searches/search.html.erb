@@ -1,38 +1,40 @@
-<div class="row">
+<div class="container pt-5">
+  <div class="row pt-5">
   <% if @posts.present? %>
-    <h2>「<%= params[:q] if params[:q].present? %>」の投稿（<%= @posts.length %>）</h2>
-      <% @posts.each do |post| %>
-</div>
-<div class="row">
+    <h2>「<%= params[:keywords] if params[:keywords].present? %>」の投稿（<%= @posts.length %>）</h2>
+　</div>
+　<div class="row">
     <div class="col-lg-3" >
     <div class="">
-     <div><%= link_to image_tag(post.image, width: '150', height: '150'), post_path(post) %></div>
-       <tr>
-         <td><%= post.title %></td>
-         <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
-       </tr>
+      <% @posts.each do |post| %>
+    <div><%= link_to image_tag(post.image, width: '150', height: '150'), post_path(post) %></div>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
+      </tr>
         <!--　  <%# @post_tags.each do |tag| %>-->
      　　 <!--<td> <i class="fa-sharp fa-solid fa-tag"></i>-->
         <!--<%#= link_to tag.name,search_tag_path(tag_id: tag.id) %></td>-->
 
          <!--<p><i class="fa-sharp fa-solid fa-tag"></i>-->
          <!--<%#= link_to post.tags.map(&:name).join(', '),search_path(tag_id: tag.id) %></p>-->
-         <p>
-        　  <% post.tags.each do |tag| %>
-            <i class="fa-sharp fa-solid fa-tag"></i>
-              <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
-           <% end %>
-         </p>
+      <p>
+        <% post.tags.each do |tag| %>
+          <i class="fa-sharp fa-solid fa-tag"></i>
+            <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
+        <% end %>
+      </p>
+      <% end %>
     </div>
     </div>
-    <% end %>
       <!--<div>-->
       <!--  <%#= paginate @posts %>-->
       <!--</div>-->
-    <% else %>
-      <h2>一致する投稿がありませんでした。</h2>
-    <% end %>
+  <% else %>
+    <h2>一致する投稿がありませんでした。</h2>
+  <% end %>
   </div>
+</div>
 <!--  <%# if @tags.present? %>-->
 <!--    <h2>「<%#= params[:q] if params[:q].present? %>」のタグ（<%#= @tags.length %>）</h2>-->
 <!--    <div class="row row-cols-1 row-cols-md-6 g-4">-->

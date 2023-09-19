@@ -1,16 +1,15 @@
-<div class="container">
-  <div class="row">
+<div class="container pt-5">
+  <div class="row pt-5"></div>
     <h2>コメント一覧</h2>
-
       <table class="table">
         <thead>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
+        <!--<tr>-->
+        <!--  <th></th>-->
+        <!--  <th></th>-->
+        <!--  <th></th>-->
+        <!--  <th></th>-->
+        <!--</tr>-->
+        </thead>
         <% @posts.each do |post| %>
         <% if post.post_items.map{|item| item.comments.count}.sum > 0 %>
         <%# if post.comment.present? %>
@@ -45,7 +44,7 @@
         <!--  <%# else %>-->
         <!--  コメントはありません。-->
         <!--<%# end %>-->
-         <% end %>
+          <% end %>
       </table>
       <%= paginate @posts %>
     </div>

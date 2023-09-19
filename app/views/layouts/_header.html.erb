@@ -37,7 +37,7 @@
           </li>
           <% elsif customer_signed_in? %>
             <li class="my-auto">
-              <div class="text-white pr-2">ようこそ！<%= current_customer.user_name %>様</div>
+              <div class="text-white pr-2">Welcome！<%= current_customer.user_name %>様</div>
             </li>
             <li>
               <%= link_to about_path,class: "nav-link text-light" do %>

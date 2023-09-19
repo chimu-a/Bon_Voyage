@@ -1,25 +1,23 @@
-<div class="container">
-  <div class="row">
+<div class="container pt-5">
+  <div class="row pt-5"></div>
     <h2>会員一覧</h2>
-
       <table class="table">
         <thead>
-        <tr>
-          <th>会員ID</th>
-          <th>氏名</th>
-          <th>メールアドレス</th>
-          <th>ステータス</th>
-        </tr>
-      </thead>
+          <tr>
+            <th>会員ID</th>
+            <th>氏名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
         <% @customers.each do |customer| %>
           <tr>
             <td><%= customer.id %></td>
             <td><%= link_to customer.last_name + customer.first_name, admin_customer_path(customer.id), class: "link text-secondary" %></td>
             <td><%= customer.email %></td>
-           <td class="<%= customer.is_deleted ? 'text-gray' : 'text-green' %>"><%= customer.is_deleted ? '退会済み' : '有効' %></td>
+            <td class="<%= customer.is_deleted ? 'text-gray' : 'text-green' %>"><%= customer.is_deleted ? '退会済み' : '有効' %></td>
           </tr>
         <% end %>
       </table>
       <%= paginate @customers %>
-    </div>
-  </div>
+</div>

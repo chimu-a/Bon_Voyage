@@ -37,7 +37,7 @@
     <div class="row">
      <%= link_to "編集する", edit_admin_customer_path(@customer.id), class:"btn btn-outline-secondary btn-block" %></div>
         </div>
-     <div class="col-md- offset-md-1 h-50">
+     <div class="col-md-7 offset-md-1">
 
   <h2>投稿一覧</h2>
   <table class="table">
@@ -54,8 +54,8 @@
 
     <tbody>
       <tr>
-        <td><%= link_to image_tag(post.image, width: '100', height: '100'), post_path(post) %> </td>
-　　    <td><%= link_to post.title, post_path(post.id), class: "link text-secondary" %></td>
+        <td><%= link_to image_tag(post.image, width: '100', height: '100'), admin_post_path(post) %> </td>
+　　    <td><%= link_to post.title, admin_post_path(post), class: "link text-secondary" %></td>
         <td>
         　  <% post.tags.each do |tag| %>
             <i class="fa-sharp fa-solid fa-tag"></i>
@@ -83,7 +83,7 @@
             <!--<td><%#= image_tag post.image, size: "100x100" %>-->
             <td><%#= link_to customer.user_name, admin_customer_path(post.customer_id) %></td>
             <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
-            <td><%= post.title %></td>
+            <td><%= link_to post.title, admin_post_path(post), class: "link text-secondary" %></td>
             <% post.post_items.each do |post_item| %>
             <% if post_item.comments.count > 0 %>
             <tr>

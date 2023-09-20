@@ -9,8 +9,10 @@ class Admin::CommentsController < ApplicationController
   end
 
   def destroy
-    Comment.find(params[:id]).destroy
-    redirect_to request.referer
+    comment = Comment.find(params[:id])
+    @post = comment.post_item.post
+    comment.destroy
+    # redirect_to request.referer
   end
 
   private

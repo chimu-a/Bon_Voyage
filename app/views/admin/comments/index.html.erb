@@ -1,51 +1,12 @@
 <div class="container pt-5">
   <div class="row pt-5"></div>
     <h2>コメント一覧</h2>
-      <table class="table">
-        <thead>
-        <!--<tr>-->
-        <!--  <th></th>-->
-        <!--  <th></th>-->
-        <!--  <th></th>-->
-        <!--  <th></th>-->
-        <!--</tr>-->
-        </thead>
-        <% @posts.each do |post| %>
-        <% if post.post_items.map{|item| item.comments.count}.sum > 0 %>
-        <%# if post.comment.present? %>
-          <tr>
-            <!--<td><%#= image_tag post.image, size: "100x100" %>-->
-            <td><%#= link_to customer.user_name, admin_customer_path(post.customer_id) %></td>
-            <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
-            <td><%= post.title %></td>
-            <% post.post_items.each do |post_item| %>
-            <% if post_item.comments.count > 0 %>
-            <tr>
-              <!--<td> <%#= post_item.date %></td>-->
-              <!--<td> <%#= post_item.time.strftime("%R") %></td>-->
-              <td><%= image_tag post_item.image, size: "100x100" %></td>
-              <td><%= post_item.place %></td>
-              <td><%= post_item.explanatory_text %></td>
-              <td>
-              <div>
-                <p>コメント件数：<%= post_item.comments.count %></p>
-                  <% post_item.comments.each do |comment| %>
-                    <p><%#= image_tag comment.customer.get_profile_image(100,100) %></p>
-                    <%= comment.customer.user_name %>
-                    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
-                    <%= link_to "削除", post_item_comments_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %>
-                  <% end %>
-              </div>
-            </tr>
-            <% end %>
-          <% end %>
-          </tr>
-          <% end %>
-        <!--  <%# else %>-->
-        <!--  コメントはありません。-->
-        <!--<%# end %>-->
-          <% end %>
-      </table>
+      <% @posts.each do |post| %>
+        <table class="table" id="post-id-<%=post.id%>">
+          <%= render 'post', post: post %>
+        </table>
+      <% end %>
+
       <%= paginate @posts %>
     </div>
   </div>

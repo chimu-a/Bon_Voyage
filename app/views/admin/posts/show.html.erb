@@ -48,8 +48,7 @@
               <p><%#= image_tag comment.customer.get_profile_image(100,100) %></p>
               <%= comment.customer.user_name %>
               <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
-              <%#= link_to "削除", admin_comment_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-success" %>
-            <% end %>
+              <%= link_to "削除", admin_comment_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %>
           </div>
         </td>
         </tr>
@@ -57,13 +56,12 @@
       <% end %>
         </table>
       <% if @post.favorites.present? %>
-  ♥<%= @post.favorites.count %> いいね
-  <% else %>
-    いいねはありません
-  <% end %>
+        ♥<%= @post.favorites.count %> いいね
+      <% else %>
+        いいねはありません
+      <% end %>
+      <% end %>
       </div>
     </div>
 </div>
 <div class="text-center"><%= link_to "編集する", edit_admin_post_path(@post), class:"btn btn-outline-success" %></div>
-
-

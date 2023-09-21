@@ -3,9 +3,9 @@ class Public::PostsController < ApplicationController
     # タグ名押すと絞り込んで表示される
     if params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
-      @posts = @tag.posts
+      @posts = @tag.posts.page(params[:page])
     else
-      @posts = Post.all
+      @posts = Post.page(params[:page])
     end
     # @posts = Post.all
     # 追記

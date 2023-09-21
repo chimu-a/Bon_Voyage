@@ -58,8 +58,8 @@
               <td><%= post_item.explanatory_text %></td>
               <td>
                 <i class="fa-solid fa-comment-dots"></i>
-                <span id="comment_count"><%= post_item.comments.count %></span>
-                <div id="post-comments">
+                <span id="comment_count-<%="#{post_item.id}"%>"><%= post_item.comments.count %></span>
+                <div id="post-comments-<%="#{post_item.id}"%>">
                   <%= render "public/comments/commentslist", post_item: post_item, post: @post %>
                 </div>
                 <div id="comment-form">

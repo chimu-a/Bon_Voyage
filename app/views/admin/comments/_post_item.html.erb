@@ -8,7 +8,7 @@
   <i class="fa-solid fa-comment-dots"></i>
   <span id="comment_count"><%= post_item.comments.count %></span>
    <div id="post-comments">
-    <%= render "admin/comments/commentslist", post_item: post_item %>
+    <%= render "admin/comments/commentslist", post_item: post_item, key: key %>
   </div>
   <!--<p>コメント件数：<%#= post_item.comments.count %></p>-->
     <!--<%# post_item.comments.each do |comment| %>-->

@@ -7,11 +7,19 @@
     <div class="col-lg-3" >
     <div class="">
       <% @posts.each do |post| %>
-    <div><%= link_to image_tag(post.image, width: '150', height: '150'), post_path(post) %></div>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
-      </tr>
+      <% if admin_signed_in? %>
+        <div><%= link_to image_tag(post.image, width: '150', height: '150'), admin_post_path(post) %></div>
+          <tr>
+            <td><%= post.title %></td>
+            <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
+          </tr>
+      <% else %>
+          <div><%= link_to image_tag(post.image, width: '150', height: '150'), post_path(post) %></div>
+          <tr>
+            <td><%= post.title %></td>
+            <td><%= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %></td>
+          </tr>
+      <% end %>
         <!--　  <%# @post_tags.each do |tag| %>-->
      　　 <!--<td> <i class="fa-sharp fa-solid fa-tag"></i>-->
         <!--<%#= link_to tag.name,search_tag_path(tag_id: tag.id) %></td>-->
@@ -20,8 +28,13 @@
          <!--<%#= link_to post.tags.map(&:name).join(', '),search_path(tag_id: tag.id) %></p>-->
       <p>
         <% post.tags.each do |tag| %>
+          <% if admin_signed_in? %>
           <i class="fa-sharp fa-solid fa-tag"></i>
-            <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
+              <%= link_to tag.name, admin_posts_path(tag_id: tag.id), class: "link text-secondary" %>
+          <% else %>
+            <i class="fa-sharp fa-solid fa-tag"></i>
+              <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
+          <% end %>
         <% end %>
       </p>
       <% end %>

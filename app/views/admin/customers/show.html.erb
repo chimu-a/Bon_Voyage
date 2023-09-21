@@ -59,7 +59,7 @@
         <td>
         　  <% post.tags.each do |tag| %>
             <i class="fa-sharp fa-solid fa-tag"></i>
-              <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
+              <%= link_to tag.name, admin_posts_path(tag_id: tag.id), class: "link text-secondary" %>
             <% end %>
             </td>
       </tr>
@@ -99,7 +99,7 @@
                     <p><%#= image_tag comment.customer.get_profile_image(100,100) %></p>
                     <%= comment.customer.user_name %>
                     <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
-                    <%= link_to "削除", post_item_comments_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %>
+                    <%= link_to "削除", admin_comment_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %>
                   <% end %>
               </div>
             </tr>

@@ -1,1 +1,1 @@
-$('#post-id-<%=@post.id%>').html("<%= j(render "admin/comments/post", post: @post) %>");
+$('#post-id-<%=@post.id%>').html("<%= j(render "admin/comments/post", post: @post, key: 'comments') %>");

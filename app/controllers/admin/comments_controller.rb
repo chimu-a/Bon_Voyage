@@ -11,8 +11,12 @@ class Admin::CommentsController < ApplicationController
   def destroy
     comment = Comment.find(params[:id])
     @post = comment.post_item.post
+    @post_item = comment.post_item
     comment.destroy
     # redirect_to request.referer
+    if params[:key] == 'post_item'
+      render :comment_destroy
+    end
   end
 
   private

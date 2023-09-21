@@ -1,0 +1,2 @@
+$('#post-comments-<%="#{@post_item.id}"%>').html("<%= j(render "admin/comments/commentslist", post_item: @post_item, key: 'post_item') %>");
+$('#comment_count-<%="#{@post_item.id}"%>').html("<%= @post_item.comments.count %>")

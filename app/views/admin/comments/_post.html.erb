@@ -9,7 +9,7 @@
   <% post.post_items.each do |post_item| %>
     <% if post_item.comments.count > 0 %>
     <tr id="post_item-id-<%=post_item.id%>">
-      <%= render 'post_item', post_item: post_item %>
+      <%= render 'post_item', post_item: post_item, key: key %>
     </tr>
     <% end %>
   <% end %>

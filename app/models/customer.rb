@@ -9,6 +9,14 @@ class Customer < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_one_attached :image
 
+  validates :email, uniqueness: true
+  validates :encrypted_password, presence: true
+  validates :user_name, presence: true
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :last_name_kana, presence: true
+  validates :first_name_kana, presence: true
+
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |customer|
       customer.password = SecureRandom.urlsafe_base64

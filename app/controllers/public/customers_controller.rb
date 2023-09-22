@@ -15,6 +15,7 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @customer.update(customer_params)
     if @customer.save
+      flash[:notice] = "会員情報を変更しました。"
       redirect_to customer_path
     else
       render :edit
@@ -29,6 +30,7 @@ class Public::CustomersController < ApplicationController
     customer = Customer.find(params[:id])
     customer.update(is_deleted: true)
     reset_session
+    flash[:notice] = "退会処理が完了しました。"
     redirect_to root_path
   end
 
@@ -37,6 +39,7 @@ class Public::CustomersController < ApplicationController
     @favorite_posts = Post.find(favorites)
     @customer = Customer.find(params[:id])
     @posts = @customer.posts
+    # @favorites = @customer.favorites.page(params[:page])
   end
 
 private

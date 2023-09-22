@@ -4,9 +4,8 @@
     <h2>「<%= params[:keywords] if params[:keywords].present? %>」の投稿（<%= @posts.length %>）</h2>
 　</div>
 　<div class="row">
-    <div class="col-lg-3" >
-    <div class="">
       <% @posts.each do |post| %>
+      <div class="col-lg-3" >
       <% if admin_signed_in? %>
         <div><%= link_to image_tag(post.image, width: '150', height: '150'), admin_post_path(post) %></div>
           <tr>
@@ -37,8 +36,8 @@
           <% end %>
         <% end %>
       </p>
+      </div>
       <% end %>
-    </div>
     </div>
       <!--<div>-->
       <!--  <%#= paginate @posts %>-->

@@ -1,16 +1,15 @@
-<!--<div class="container">-->
-<!--  <%# if @post.errors.any? %>-->
-<!--  <%#= @post.errors.count %>件のエラーが発生しました-->
-<!--  <ul>-->
-<!--    <%# @post.errors.full_messages.each do |message| %>-->
-<!--      <li><%#= message %></li>-->
-<!--    <%# end %>-->
-<!--  </ul>-->
-<!--  <%# end %>-->
 <div class="container pt-5">
   <div class="row">
     <div class="col-sm">
       <h2>投稿編集</h2>
+      <!--<%# if @post.errors.any? %>-->
+      <!--  <%#= @post.errors.count %>件のエラーが発生しました-->
+      <!--  <ul>-->
+      <!--    <%# @post.errors.full_messages.each do |message| %>-->
+      <!--      <li><%#= message %></li>-->
+      <!--    <%# end %>-->
+      <!--  </ul>-->
+      <!--<%# end %>-->
       <%= form_with model: @post, url: admin_post_path, method: :patch do |f| %>
       <table>
   　     <tbody>
@@ -62,7 +61,7 @@
                 <%= link_to "削除", admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %></td>
       <% end %>
      </div>
-     <div class="col-sm-2" ></div>
+     <!--<div class="col-sm-2" ></div>-->
     </tbody>
     </table>
   </div>

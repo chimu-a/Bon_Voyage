@@ -1,7 +1,7 @@
 class Admin::CommentsController < ApplicationController
   def index
-    @posts = Post.page(params[:page]).per(10)
-    @comments = Comment.page(params[:page]).per(10)
+    @posts = Post.page(params[:page]).per(2)
+    @comments = Comment.all
     # @customer = @posts.customer
   end
 
@@ -14,9 +14,11 @@ class Admin::CommentsController < ApplicationController
     @post_item = comment.post_item
     comment.destroy
     # redirect_to request.referer
+    # if…で指定してあげることにより"destroy.js"を参照されるところを"comment_destroy.js"を参照に変更
     if params[:key] == 'post_item'
       render :comment_destroy
     end
+    flash[:notice] = "コメントの削除に成功しました"
   end
 
   private

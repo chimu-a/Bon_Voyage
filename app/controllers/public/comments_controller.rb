@@ -14,6 +14,7 @@ class Public::CommentsController < ApplicationController
   def destroy
     @post_item = PostItem.find(params[:post_item_id])
     Comment.find(params[:id]).destroy
+    flash[:notice] = "コメントの削除に成功しました"
     # redirect_to post_path(params[:post_item_id])
   end
 

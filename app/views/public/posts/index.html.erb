@@ -9,6 +9,9 @@
 
  <%#= button_to "作成", {controller: 'posts', action: 'new'}, {method: :get} %>
 <div class="container pt-5">
+  <div class='pt-5'>
+    <%= flash[:success] %>
+  </div>
   <div class="row pt-5">
     <% if signed_in? %>
       <h2>投稿一覧(全<%= @posts.count %>件)

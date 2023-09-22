@@ -1,11 +1,12 @@
 class Admin::CustomersController < ApplicationController
   def index
-    @customers = Customer.page(params[:page]).per(10)
+    @customers = Customer.page(params[:page]).per(2)
   end
 
   def show
     @customer = Customer.find(params[:id])
     @posts = @customer.posts
+    @comments = @customer.comments
   end
 
   def edit
@@ -15,8 +16,12 @@ class Admin::CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
     @customer.update(customer_params)
-    flash[:notice] = "会員情報を変更しました。"
-    redirect_to admin_customer_path
+    if @customer.save
+      flash[:notice] = "会員情報を変更しました。"
+      redirect_to admin_customer_path
+    else
+      render :edit
+    end
   end
 
   private

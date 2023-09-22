@@ -1,6 +1,11 @@
 <!--<td> <%#= post_item.date %></td>-->
 <!--<td> <%#= post_item.time.strftime("%R") %></td>-->
-<td><%= image_tag post_item.image, size: "100x100" %></td>
+<!--<td><%#= image_tag post_item.image, size: "100x100" %></td>-->
+<% if post_item.image.present? %>
+  <td><%= image_tag post_item.image, width: '100', height: '100' %></td>
+<% else %>
+  <td><%= image_tag "noimage.jpg", size: "100x100" %></td>
+<% end %>
 <td><%= post_item.place %></td>
 <td><%= post_item.explanatory_text %></td>
 <td>

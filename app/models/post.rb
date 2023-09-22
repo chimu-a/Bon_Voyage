@@ -18,6 +18,7 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :post_items, allow_destroy: true, reject_if: :all_blank, limit: 8
 
   validates :prefecture_id, numericality: { other_than: 1}
+  validates :title, presence: true
 
   def save_tags(tags)
   # タグが存在していれば、タグの名前を配列として全て取得
@@ -69,6 +70,14 @@ class Post < ApplicationRecord
   #     Post.all
   #   end
   # end
+
+  def get_image
+    if image.attached?
+      image
+    else
+      'noimage.jpg'
+    end
+  end
 
   # 曖昧検索
   def self.search(keyword, prefs)

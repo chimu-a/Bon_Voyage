@@ -6,7 +6,12 @@
 
   <div class="row m-2">
       <div class="col-lg-3" >
-    　　<%= image_tag @post.image, size: "300x200" %>
+    　　<%#= image_tag @post.image, size: "300x200" %>
+    　　<% if @post.image.present? %>
+            <%= image_tag @post.image, size: "300x200" %>
+          <% else %>
+            <%= image_tag "noimage.jpg", size: "300x200" %>
+          <% end %>
         <p><%= link_to @customer.user_name, admin_customer_path(@post.customer_id), class: "link text-secondary" %></p>
     　</div>
     　<div class="col-sm" >
@@ -49,7 +54,14 @@
             <tr>
               <td> <%= post_item.date %></td>
               <td> <%= post_item.time.strftime("%R") %></td>
-              <td><%= image_tag post_item.image, size: "100x100" %></td>
+              <!--<td><%#= image_tag post_item.image, size: "100x100" %></td>-->
+              <td>
+                <% if post_item.image.present? %>
+                  <%= image_tag post_item.image, size: "100x100" %>
+                <% else %>
+                  <%= image_tag "noimage.jpg", size: "100x100" %>
+                <% end %>
+              </td>
               <td><%= post_item.place %></td>
               <td><%= post_item.explanatory_text %></td>
               <td>

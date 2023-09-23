@@ -1,7 +1,7 @@
 <div class="container pt-5">
   <div class="row pt-5">
   <% if @posts.present? %>
-    <h2>「<%= params[:keywords] if params[:keywords].present? %>」の投稿（<%= @posts.length %>）</h2>
+    <h2>「<%= params[:keywords] if params[:keywords].present? %>」の投稿（全<%= @posts_all.length %>件）</h2>
 　</div>
 　<div class="row">
       <% @posts.each do |post| %>
@@ -9,7 +9,7 @@
       <% if admin_signed_in? %>
         <div><%= link_to image_tag(post.image, width: '150', height: '150'), admin_post_path(post) %></div>
           <tr>
-            <td><%= post.title %></td>
+            <td><%= link_to post.title, admin_post_path(post), class: "link text-secondary" %></td>
             <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
           </tr>
       <% else %>
@@ -47,6 +47,7 @@
   <% end %>
   </div>
 </div>
+<%= paginate @posts %>
 <!--  <%# if @tags.present? %>-->
 <!--    <h2>「<%#= params[:q] if params[:q].present? %>」のタグ（<%#= @tags.length %>）</h2>-->
 <!--    <div class="row row-cols-1 row-cols-md-6 g-4">-->

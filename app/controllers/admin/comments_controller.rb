@@ -1,6 +1,7 @@
 class Admin::CommentsController < ApplicationController
   def index
-    @posts = Post.page(params[:page]).per(2)
+    @posts = Post.all
+    @posts = Post.includes(post_items: :comments).where.not(comments: { id: nil } ).page(params[:page]).per(2)
     @comments = Comment.all
     # @customer = @posts.customer
   end

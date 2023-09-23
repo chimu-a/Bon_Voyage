@@ -2,9 +2,11 @@ class Admin::PostsController < ApplicationController
   def index
      if params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
-      @posts = @tag.posts
+      @posts = @tag.posts.page(params[:page]).per(5)
+      @post_count = @tag.posts.all
     else
-      @posts = Post.page(params[:page]).per(8)
+      @posts = Post.page(params[:page]).per(5)
+      @post_count = Post.all
     end
   end
 

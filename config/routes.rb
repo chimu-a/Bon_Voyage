@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     resources :customers, only: [:show, :edit, :update] do
       member do
         get :favorites
+        get :comments
         get :unsubscribe
         patch :withdraw
       end
@@ -47,7 +48,11 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     resources :posts, only: [:index, :show, :edit, :update, :destroy]
     resources :comments, only: [:index, :show, :destroy]
-    resources :customers, only: [:index, :show, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update] do
+      member do
+        get :comments
+      end
+    end
     get "search" => "searches#search"
     get "search_tag" => "posts#search_tag"
   end

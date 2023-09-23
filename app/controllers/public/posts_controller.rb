@@ -4,8 +4,10 @@ class Public::PostsController < ApplicationController
     if params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
       @posts = @tag.posts.page(params[:page])
+      @post_count = @tag.posts.all
     else
       @posts = Post.page(params[:page])
+      @post_count = Post.all
     end
     # @posts = Post.all
     # 追記
@@ -48,7 +50,7 @@ class Public::PostsController < ApplicationController
     if post.save
       post.save_tags(tag_list)
       flash[:notice] = "投稿に成功しました"
-      redirect_to posts_path
+      redirect_to post_path(post.id)
     else
       render :new
     end

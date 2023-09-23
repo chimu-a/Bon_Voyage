@@ -1,4 +1,4 @@
-<% if post.post_items.map{|item| item.comments.count}.sum > 0 %>
+<!--<%# if post.post_items.map{|item| item.comments.count}.sum > 0 %>-->
   <%# if post.comment.present? %>
   <tr>
     <!--<td><%#= image_tag post.image, size: "100x100" %>-->
@@ -13,7 +13,6 @@
     </tr>
     <% end %>
   <% end %>
-<% end %>
-<!--  <%# else %>-->
+<!--<%# else %>-->
 <!--  コメントはありません。-->
 <!--<%# end %>-->

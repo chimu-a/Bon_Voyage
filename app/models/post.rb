@@ -15,7 +15,7 @@ class Post < ApplicationRecord
   # accepts_nested_attributes_for:controllerにてpost_itemsが使えるようにする
   # allow_destroy: true:親モデルのフォームで子モデルの削除を許可
   # reject_if: :all_blank:空の子モデルは作成されない
-  accepts_nested_attributes_for :post_items, allow_destroy: true, reject_if: :all_blank, limit: 8
+  accepts_nested_attributes_for :post_items, allow_destroy: true, reject_if: :all_blank, limit: 20
 
   validates :prefecture_id, numericality: { other_than: 1}
   validates :title, presence: true
@@ -71,12 +71,20 @@ class Post < ApplicationRecord
   #   end
   # end
 
+  # def get_image
+  #   if image.attached?
+  #     image
+  #   else
+  #     'noimage.jpg'
+  #   end
+  # end
+
   def get_image
-    if image.attached?
-      image
-    else
-      'noimage.jpg'
+    unless image.attached?
+      file_path = Rails.root.join('app/assets/images/noimage.jpg')
+      image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
+    image
   end
 
   # 曖昧検索

@@ -1,21 +1,21 @@
 <div class="container pt-5">
   <div class="row pt-5">
-    <h2>投稿一覧(全<%= @posts.count %>件)</h2></br>
+    <h2>投稿一覧(全<%= @post_count.count %>件)</h2></br>
   </div>
   <div class="row m-2">
     <% @posts.each do |post| %>
     <div class="col-lg-3" >
       <div class="">
-        <!--<div> <%#= link_to image_tag(post.image, width: '150', height: '150'), admin_post_path(post) %>  </div>-->
-        <div>
-          <% if post.image.present? %>
-            <%= link_to image_tag(post.image, width: '150', height: '150'), admin_post_path(post) %>
-          <% else %>
-            <%= link_to image_tag("noimage.jpg", size: "150x150"), admin_post_path(post) %>
-          <% end %>
-        </div>
+        <div> <%= link_to image_tag(post.get_image, size: "150x150"), admin_post_path(post) %>  </div>
+        <!--<div>-->
+        <!--  <%# if post.image.present? %>-->
+        <!--    <%#= link_to image_tag(post.image, width: '150', height: '150'), admin_post_path(post) %>-->
+        <!--  <%# else %>-->
+        <!--    <%#= link_to image_tag("noimage.jpg", size: "150x150"), admin_post_path(post) %>-->
+        <!--  <%# end %>-->
+        <!--</div>-->
           <tr>
-        　   <td><%= post.title %></td>
+        　   <td><%= link_to post.title, admin_post_path(post), class: "link text-secondary" %></td>
         　   <td><%= link_to post.customer.user_name,admin_customer_path(post.customer), class: "link text-secondary"%></td>
         　</tr>
         　<p>
@@ -39,4 +39,4 @@
     <% end %>
   </div>
 </div>
-<%#= paginate @posts %>
+<%= paginate @posts %>

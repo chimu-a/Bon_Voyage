@@ -20,7 +20,8 @@ class Public::SearchesController < ApplicationController
     end
 
     # @postsに、結果の重複を取り除いたものを入れる
-    @posts = @results.distinct
+    @posts_all = @results.distinct
+    @posts = @results.distinct.page(params[:page]).per(8)
   end
 
   # def search_tag

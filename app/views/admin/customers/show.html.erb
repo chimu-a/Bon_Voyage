@@ -35,92 +35,108 @@
       </tbody>
     </table>
     <div class="row">
-     <%= link_to "編集する", edit_admin_customer_path(@customer.id), class:"btn btn-outline-secondary btn-block" %></div>
+     <%= link_to "編集する", edit_admin_customer_path(@customer.id), class:"btn btn-outline-secondary btn-block" %>
         </div>
+        　  <div class="row">
+            <%= link_to "コメントした投稿一覧を見る", comments_admin_customer_path(@customer.id), class:"btn btn-outline-warning btn-block" %>
+            </div>
+     </div>
      <div class="col-md-7 offset-md-1">
 
-  <h2>投稿一覧</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>画像</th>
-        <th>タイトル</th>
-        <th>タグ</th>
-        <th coldpan="3"></th>
-      </tr>
-    </thead>
-
-    <% @posts.each do |post| %>
-
-    <tbody>
-      <tr>
-        <td><%#= link_to image_tag(post.image, width: '100', height: '100'), admin_post_path(post) %> </td>
-        <td>
-          <% if post.image.present? %>
-            <%= image_tag post.image, size: "100x100" %>
-          <% else %>
-            <%= image_tag "noimage.jpg", size: "100x100" %>
-          <% end %>
-        </td>
-        <td><%= link_to post.title, admin_post_path(post), class: "link text-secondary" %></td>
-        <td>
-        　  <% post.tags.each do |tag| %>
-            <i class="fa-sharp fa-solid fa-tag"></i>
-              <%= link_to tag.name, admin_posts_path(tag_id: tag.id), class: "link text-secondary" %>
-            <% end %>
-            </td>
-      </tr>
-
-    </tbody>
-    <% end %>
-  </table>
-<!--</div>-->
-<!--            <div class="col-md-8 offset-md-1 h-50">-->
-                <%#= link_to "投稿一覧を見る", admin_customer_path(@post.customer_id), class:"btn btn-success" %>
-                <h2>コメント一覧</h2>
-                  <table class="table">
-    <thead>
-       </thead>
-       <!--<tr><%#= link_to "コメント一覧を見る", admin_comments_path(@customer.id), class:"btn btn-outline-warning" %></tr>-->
-        <tbody>
-           <% @posts.each do |post| %>
-        <% if post.post_items.map{|item| item.comments.count}.sum > 0 %>
-        <%# if post.comment.present? %>
+      <h3>投稿一覧</h3>
+      <table class="table">
+        <thead>
           <tr>
-            <!--<td><%#= image_tag post.image, size: "100x100" %>-->
-            <td><%#= link_to customer.user_name, admin_customer_path(post.customer_id) %></td>
-            <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
-            <td><%= link_to post.title, admin_post_path(post), class: "link text-secondary" %></td>
-            <% post.post_items.each do |post_item| %>
-              <% if post_item.comments.count > 0 %>
-              <tr>
-                <!--<td> <%#= post_item.date %></td>-->
-                <!--<td> <%#= post_item.time.strftime("%R") %></td>-->
-                <td><%= image_tag post_item.image, size: "100x100" %></td>
-                <td><%= post_item.place %></td>
-                <td><%= post_item.explanatory_text %></td>
-                <td>
-                <div>
-                  <p>コメント件数：<%= post_item.comments.count %></p>
-                    <% post_item.comments.each do |comment| %>
-                      <p><%#= image_tag comment.customer.get_profile_image(100,100) %></p>
-                      <%= comment.customer.user_name %>
-                      <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
-                      <%= link_to "削除", admin_comment_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %>
-                    <% end %>
-                </div>
-              </tr>
-              <% end %>
-            <% end %>
+            <th>画像</th>
+            <th>タイトル</th>
+            <th>タグ</th>
+            <th coldpan="3"></th>
           </tr>
-          <% end %>
-        <!--  <%# else %>-->
-        <!--  コメントはありません。-->
-        <!--<%# end %>-->
-         <% end %>
-    </tbody>
-  </table>
-    <!--    </div>-->
+        </thead>
+
+        <% @posts.each do |post| %>
+
+        <tbody>
+          <tr>
+            <td><%= link_to image_tag(post.get_image, size: "100x100"), admin_post_path(post) %> </td>
+            <!--<td>-->
+            <!--  <%# if post.image.present? %>-->
+            <!--    <%#= image_tag post.image, size: "100x100" %>-->
+            <!--  <%# else %>-->
+            <!--    <%#= image_tag "noimage.jpg", size: "100x100" %>-->
+            <!--  <%# end %>-->
+            <!--</td>-->
+            <td><%= link_to post.title, admin_post_path(post), class: "link text-secondary" %></td>
+            <td>
+            　  <% post.tags.each do |tag| %>
+                <i class="fa-sharp fa-solid fa-tag"></i>
+                  <%= link_to tag.name, admin_posts_path(tag_id: tag.id), class: "link text-secondary" %>
+                <% end %>
+                </td>
+          </tr>
+
+        </tbody>
+        <% end %>
+      </table>
     <!--</div>-->
+    <!--            <div class="col-md-8 offset-md-1 h-50">-->
+                    <%#= link_to "投稿一覧を見る", admin_customer_path(@post.customer_id), class:"btn btn-success" %>
+      <!--<h3><%#= @customer.last_name + @customer.first_name %>さんの投稿へのコメント一覧</h3>-->
+      <!--  <table class="table">-->
+      <!--    <thead>-->
+      <!--    </thead>-->
+           <!--<tr><%#= link_to "コメント一覧を見る", admin_comments_path(@customer.id), class:"btn btn-outline-warning" %></tr>-->
+      <!--      <tbody>-->
+      <!--         <%# @posts.each do |post| %>-->
+      <!--      <%# if post.post_items.map{|item| item.comments.count}.sum > 0 %>-->
+            <%# if post.comment.present? %>
+      <!--        <tr>-->
+                <!--<td><%#= image_tag post.image, size: "100x100" %>-->
+      <!--          <td><%#= link_to customer.user_name, admin_customer_path(post.customer_id) %></td>-->
+      <!--          <td><%#= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>-->
+      <!--          <td><%#= link_to post.title, admin_post_path(post), class: "link text-secondary" %></td>-->
+      <!--          <%# post.post_items.each do |post_item| %>-->
+      <!--            <%# if post_item.comments.count > 0 %>-->
+      <!--            <tr>-->
+                    <!--<td> <%#= post_item.date %></td>-->
+                    <!--<td> <%#= post_item.time.strftime("%R") %></td>-->
+      <!--              <td><%#= image_tag post_item.get_image, size: "100x100" %></td>-->
+                   <!-- <td>-->
+                   <!-- <%# if post_item.image.present? %>-->
+                   <!--   <%#= image_tag post_item.image, size: "100x100" %>-->
+                   <!-- <%# else %>-->
+                   <!--   <%#= image_tag "noimage.jpg", size: "100x100" %>-->
+                   <!-- <%# end %>-->
+                  　<!--</td>-->
+      <!--              <td><#%= post_item.place %></td>-->
+      <!--              <td><%#= post_item.explanatory_text %></td>-->
+      <!--              <td>-->
+      <!--              <div>-->
+      <!--                <i class="fa-solid fa-comment-dots"></i>-->
+      <!--                <span id="comment_count-<%#="#{post_item.id}"%>"><%#= post_item.comments.count %></span>-->
+      <!--          <div id="post-comments-<%#="#{post_item.id}"%>">-->
+      <!--            <%#= render "admin/comments/commentslist", post_item: post_item, key: 'comments' %>-->
+      <!--          </div>-->
+                      <!--<p>コメント件数：<%#= post_item.comments.count %></p>-->
+                      <!--  <%# post_item.comments.each do |comment| %>-->
+                          <!--<p><%#= image_tag comment.customer.get_profile_image(100,100) %></p>-->
+                      <!--    <%#= comment.customer.user_name %>-->
+                      <!--    <%#= comment.created_at.strftime('%Y/%m/%d') %><%#= comment.content %>-->
+                      <!--    <%#= link_to "削除", admin_comment_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %>-->
+                      <!--  <%# end %>-->
+      <!--              </div>-->
+      <!--            </tr>-->
+      <!--            <%# end %>-->
+      <!--          <%# end %>-->
+      <!--        </tr>-->
+      <!--        <%# end %>-->
+            <!--  <%# else %>-->
+            <!--  コメントはありません。-->
+            <!--<%# end %>-->
+      <!--       <%# end %>-->
+      <!--  </tbody>-->
+      <!--</table>-->
+
+  </div>
 </div>
-</div></div>
+</div>

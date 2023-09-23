@@ -19,23 +19,23 @@
 
       <div class="pt-3">
         <% if signed_in? %>
-          <h2>投稿一覧
+          <h2>投稿一覧(全<%= @post_count.count %>件)
           <!--(全<%#= @posts.count %>件)-->
           <%= link_to "新規投稿", new_post_path, class:"btn btn-outline-primary" %></h2>
         <% else %>
-          <h2>投稿一覧</h2>
+          <h2>投稿一覧(全<%= @post_count.count %>件)</h2>
           <!--(全<%#= @posts.count %>件)-->
         <% end %>
         <div class="row m-2">
           <% @posts.each do |post| %>
             <div class="col-lg-3">
               <% if signed_in? %>
-                <div class = style="outline-color:#b0c4de"><%= link_to image_tag(post.image, width: "150", height: "150"), post_path(post) %></div>
+                <div class = style="outline-color:#b0c4de"><%= link_to image_tag(post.get_image, size: "150x150" ), post_path(post) %></div>
               <% else %>
-                <div  class = style="outline-color:#b0c4de"><%= image_tag(post.image, width: "150", height: "150") %></div>
+                <div  class = style="outline-color:#b0c4de"><%= image_tag(post.get_image, size: "150x150" ) %></div>
               <% end %>
               <tr>
-                <td><%= post.title %></td>
+                <td><%= link_to post.title, post_path(post), class: "link text-secondary" %></td>
                   <% if signed_in? %>
                     <td><%= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %></td>
                   <% else %>

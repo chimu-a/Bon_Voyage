@@ -5,7 +5,7 @@
   <div class="row m-2">
     <% @customer.favorites.each do |favorite| %>
     <div class="col-lg-3" >
-      <p><%= link_to image_tag( favorite.post.image, size: "150x150" ), post_path(favorite.post.id) %></p>
+      <p><%= link_to image_tag( favorite.post.get_image, size: "150x150" ), post_path(favorite.post.id) %></p>
       <p>
         <%= link_to favorite.post.customer.user_name, customer_path(favorite.post.customer.id), class:"link text-secondary" %>
       <i class="fa fa-heart unlike-btn"></i>
@@ -16,4 +16,4 @@
     <% end %>
   </div>
 </div>
-<!--<%#= paginate @customer.favorites %>-->
+<%#= paginate @customer.favorites %>

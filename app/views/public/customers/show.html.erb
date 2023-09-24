@@ -67,7 +67,7 @@
           </tbody>
           <% end %>
         </table>
-        <%= paginate @comment_posts %>
+        <%= paginate @posts %>
        <% if @customer == current_customer %>
                         <h2>投稿へのコメント一覧</h2>
                   <table class="table">
@@ -106,9 +106,9 @@
                       <!--<%#= comment.customer.user_name %>-->
                       <%= link_to comment.customer.user_name, customer_path(comment.customer), class: "link text-secondary" %>
                       <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
-                    <!--  <%# if comment.customer == current_customer %>-->
-                    <!--    <%#= link_to "削除", comment_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %>-->
-                    <!--<%# end %>-->
+                      <% if comment.customer == current_customer %>
+                        <%= link_to "削除", comments_customer_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %>
+                    <% end %>
                     <% end %>
                 </div>
               </tr>

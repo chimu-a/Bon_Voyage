@@ -1,20 +1,14 @@
 <div class="container pt-5">
   <div class="row pt-5">
-    <div class='col-lg'>
+    <div class='col-md-3'>
   　　<h2>投稿詳細</h2>
-  　</div>
-
-  <div class="row m-2">
-      <div class="col-lg-3" >
-    　　<%= image_tag @post.get_image, size: "300x200" %>
+    　　<%= image_tag @post.get_image, size: "250x200" %>
     　　<!--<%# if @post.image.present? %>-->
       <!--      <%#= image_tag @post.image, size: "300x200" %>-->
       <!--    <%# else %>-->
       <!--      <%#= image_tag "noimage.jpg", size: "300x200" %>-->
       <!--    <%# end %>-->
         <p><%= link_to @customer.user_name, admin_customer_path(@post.customer_id), class: "link text-secondary" %></p>
-    　</div>
-    　<div class="col-sm" >
       　<table class="table">
       　   <tr>
       　     <td>都道府県</td>
@@ -26,7 +20,8 @@
         　</tr>
         　<tr>
         　   <td>日付</td>
-        　   <td><%= @post.start_date %>〜<%= @post.end_date %></td>
+        　   <td><%= @post.start_date %>〜<br>
+        　   <%= @post.end_date %></td>
         　</tr>
         　<tr>
         　   <td>タグ</td>
@@ -38,8 +33,9 @@
             </td>
         　</tr>
         </div>
+        </table>
       </div>
-      <div class='row'>
+      <div class="col-md-9" >
         <table class="table">
           <thead>
             <tr>
@@ -51,7 +47,7 @@
               <th>コメント</th>
             </tr>
           </thead>
-          <% @post.post_items.each do |post_item| %>
+          <% @post_items.each do |post_item| %>
             <tr>
               <td> <%= post_item.date %></td>
               <td> <%= post_item.time.strftime("%R") %></td>
@@ -77,6 +73,7 @@
             </tr>
           <% end %>
         </table>
+         <%= paginate @post_items %>
         <div>
           <% if @post.favorites.present? %>
             ♥<%= @post.favorites.count %> いいね
@@ -86,6 +83,5 @@
         </div>
       </div>
   </div>
-</div>
 <div class="text-center"><%= link_to "削除", admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %></div>
   <%#= link_to "編集する", edit_admin_post_path(@post), class:"btn btn-outline-success" %></div>

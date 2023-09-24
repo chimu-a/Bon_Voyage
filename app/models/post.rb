@@ -99,7 +99,7 @@ class Post < ApplicationRecord
     # INで配列を検索(SQLでのwhereInのこと)
     # joinsで繋いだ先を検索する場合は、テーブル名とカラム名を「.」で連結させる
     joins(:tags, :post_items)
-          .where('title LIKE ? OR tags.name LIKE ? OR post_items.place LIKE ? OR post_items.explanatory_text LIKE ? OR prefecture_id IN (?)',
-                  "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", prefs)
+          .where('title LIKE ? OR tags.name LIKE ? OR post_items.place LIKE ? OR post_items.explanatory_text LIKE ? OR post_items.moving_method LIKE ? OR prefecture_id IN (?)',
+                  "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", prefs)
   end
 end

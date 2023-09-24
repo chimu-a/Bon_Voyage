@@ -1,14 +1,11 @@
 <div class='container pt-5'>
-  <div class='pt-5'>
+  <div>
     <%= flash[:success] %>
   </div>
   <div class='row'>
-    <div class='col-lg'>
+    <div class='col-md-3'>
   　　<h2>投稿詳細</h2>
-  　</div>
-    <div class="row m-2">
-      <div class="col-lg-3" >
-    　　<%= image_tag @post.get_image, size: "300x200" %>
+    　　<%= image_tag @post.get_image, size: "250x200" %>
     　　<!--<td>-->
       <!--    <%# if @post.image.present? %>-->
       <!--      <%#= image_tag @post.image, size: "300x200" %>-->
@@ -17,8 +14,6 @@
       <!--    <%# end %>-->
       <!--  </td>-->
         <p><%= link_to @customer.user_name, customer_path(@post.customer_id), class: "link text-secondary" %></p>
-    　</div>
-    　<div class="col-sm" >
       　<table class="table">
       　   <tr>
       　     <td>都道府県</td>
@@ -30,7 +25,8 @@
         　</tr>
         　<tr>
         　   <td>日時</td>
-        　   <td><%= @post.start_date %>〜<%= @post.end_date %></td>
+        　   <td><%= @post.start_date %>〜<br>
+        　   <%= @post.end_date %></td>
         　</tr>
         　<tr>
         　   <td>タグ</td>
@@ -41,9 +37,10 @@
               <% end %>
             </td>
           </tr>
-        </div>
-      </div>
-      <div class='row'>
+          </div>
+          </table>
+          </div>
+        <div class="col-md-9" >
         <table class="table">
           <thead>
             <tr>
@@ -56,7 +53,7 @@
               <td>コメント</td>
             </tr>
           </thead>
-          <% @post.post_items.each do |post_item| %>
+          <% @post_items.each do |post_item| %>
             <tr>
               <td> <%= post_item.date %></td>
               <td> <%= post_item.time.strftime("%R") %></td>
@@ -85,14 +82,15 @@
             </tr>
           <% end %>
         </table>
+        <%= paginate @post_items %>
         <!--非ログイン時でも閲覧可能にする-->
         <%# if customer_signed_in? && @post.favorited_by?(current_customer) %>
         <div id="favorite_buttons_<%= @post.id %>" >
           <%= render "public/favorites/favorite", post: @post %>
         </div>
       </div>
+      </div>
   </div>
-</div>
 <% if @post.customer == current_customer %>
   <div class="text-center"><%= link_to "編集する", edit_post_path(@post), class:"btn btn-outline-success" %></div>
 <% end %>

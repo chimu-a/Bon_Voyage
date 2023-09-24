@@ -67,7 +67,7 @@
           </tbody>
           <% end %>
         </table>
-        <%= paginate @posts %>
+        <%= paginate @comment_posts %>
        <% if @customer == current_customer %>
                         <h2>投稿へのコメント一覧</h2>
                   <table class="table">
@@ -75,7 +75,7 @@
        </thead>
        <!--<tr><%#= link_to "コメント一覧を見る", admin_comments_path(@customer.id), class:"btn btn-outline-warning" %></tr>-->
         <tbody>
-           <% @posts.each do |post| %>
+           <% @comment_posts.each do |post| %>
         <% if post.post_items.map{|item| item.comments.count}.sum > 0 %>
         <%# if post.comment.present? %>
           <tr>
@@ -122,7 +122,7 @@
          <% end %>
     </tbody>
   </table>
-  <%= paginate @posts %>
+  <%= paginate @comment_posts %>
   <% end %>
     </div>
   </div>

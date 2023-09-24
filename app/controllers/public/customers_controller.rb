@@ -4,7 +4,8 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @posts = @customer.posts.includes(post_items: :comments).where.not(comments: { id: nil } ).page(params[:page]).per(2)
+    @posts = @customer.posts
+    @comment_posts = @customer.posts.includes(post_items: :comments).where.not(comments: { id: nil } ).page(params[:page]).per(2)
   end
 
   def edit

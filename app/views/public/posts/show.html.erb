@@ -52,6 +52,7 @@
               <td>画像</td>
               <td>場所</td>
               <td>説明</td>
+              <td>次への移動方法</td>
               <td>コメント</td>
             </tr>
           </thead>
@@ -70,6 +71,7 @@
 
               <td><%= post_item.place %></td>
               <td><%= post_item.explanatory_text %></td>
+              <td><%= post_item.moving_method %></td>
               <td>
                 <i class="fa-solid fa-comment-dots"></i>
                 <span id="comment_count-<%="#{post_item.id}"%>"><%= post_item.comments.count %></span>

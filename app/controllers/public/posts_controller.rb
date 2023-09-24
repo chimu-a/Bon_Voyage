@@ -35,7 +35,7 @@ class Public::PostsController < ApplicationController
 
   def new
     @post = Post.new
-    4.times { @post.post_items.build }
+    8.times { @post.post_items.build }
     # @post_items = @post.post_items.build
     # 4.times { @post_items }
     # @form = Form::PostItemCollection.new
@@ -43,15 +43,16 @@ class Public::PostsController < ApplicationController
 
   def create
     # @form = Form::PostItemCollection.new(post_item_collection_params)
-    post = Post.new(post_params)
-    post.customer_id = current_customer.id
+    @post = Post.new(post_params)
+    @post.customer_id = current_customer.id
     # 受け取った値を,で区切って配列にして配列に格納して tag_list という変数に代入
     tag_list = params[:post][:name].split(',')
-    if post.save
-      post.save_tags(tag_list)
+    if @post.save
+      @post.save_tags(tag_list)
       flash[:notice] = "投稿に成功しました"
-      redirect_to post_path(post.id)
+      redirect_to post_path(@post.id)
     else
+      8.times { @post.post_items.build }
       render :new
     end
   end
@@ -68,17 +69,18 @@ class Public::PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     @tag_list = @post.tags.pluck(:name).join(',')
-    4.times { @post.post_items.build }
+    8.times { @post.post_items.build }
   end
 
   def update
-    post = Post.find(params[:id])
+    @post = Post.find(params[:id])
     tag_list = params[:post][:name].split(',')
-    if post.update(post_params)
-      post.save_tags(tag_list)
+    if @post.update(post_params)
+      @post.save_tags(tag_list)
       flash[:notice] = "投稿の更新に成功しました"
       redirect_to post_path
     else
+      8.times { @post.post_items.build }
       render :edit
     end
 

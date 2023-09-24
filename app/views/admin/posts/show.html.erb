@@ -47,6 +47,7 @@
               <th>時間</th>
               <th>画像</th>
               <th>場所</th>
+              <th>次への移動方法</th>
               <th>コメント</th>
             </tr>
           </thead>
@@ -65,6 +66,7 @@
               </td>
               <td><%= post_item.place %></td>
               <td><%= post_item.explanatory_text %></td>
+              <td><%= post_item.moving_method %></td>
               <td>
                 <i class="fa-solid fa-comment-dots"></i>
                 <span id="comment_count-<%="#{post_item.id}"%>"><%= post_item.comments.count %></span>

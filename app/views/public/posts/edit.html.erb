@@ -44,6 +44,7 @@
                   <th class="table-active">画像</th>
                   <th class="table-active">場所</th>
                   <th class="table-active">説明文</th>
+                  <th class='table-active'>次への移動方法</th>
                 </tr>
               </thead>
           <%# 8.times do %>
@@ -54,6 +55,7 @@
         　　      <td><%= f.file_field :image, accept: "image/*" %></td>
         　     　<td><%= f.text_field :place %></td><%# 変数tを使っていることに注意！ %>
                 <td><%= f.text_field :explanatory_text %></td><%# 変数tを使っていることに注意！ %>
+                  <td><%= f.select :moving_method, [["徒歩", "徒歩"], ["電車", "電車"], ["バス", "バス"], ["自転車", "自転車"], ["バイク", "バイク"], ["車", "車"], ["飛行機", "飛行機"], ["船", "船"]], include_blank: "選択して下さい" %>
               </tr>
              <%# end %>
               <% end %>

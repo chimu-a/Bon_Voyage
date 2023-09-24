@@ -9,52 +9,11 @@
 
  <%#= button_to "作成", {controller: 'posts', action: 'new'}, {method: :get} %>
 <div class="container pt-5">
-  <div class='pt-5'>
+  <div class="pt-5">
     <%= flash[:success] %>
   </div>
-  <div class="row pt-5">
-    <% if signed_in? %>
-      <h2>投稿一覧(全<%= @post_count.count %>件)
-      <%= link_to "新規投稿", new_post_path, class:"btn btn-outline-primary" %></h2>
-    <% else %>
-      <h2>投稿一覧(全<%= @post_count.count %>件)</h2>
-    <% end %>
-  </div>
-  <div class="row m-2">
-    <% @posts.each do |post| %>
-    <div class="col-lg-3" >
-    <!--<div class="">-->
-      <% if signed_in? %>
-        <!--<div><%#= link_to image_tag(post.image, width: '150', height: '150'), post_path(post) %></div>-->
-        <div><%= link_to image_tag(post.get_image, width: '150', height: '150'), post_path(post) %></div>
-      <% else %>
-        <!--<div><%#= image_tag(post.image, width: '150', height: '150') %></div>-->
-        <div><%= image_tag(post.get_image, width: '150', height: '150') %></div>
-      <% end %>
-      <tr>
-        <td><%= link_to post.title, post_path(post), class: "link text-secondary" %></td>
-        <% if signed_in? %>
-          <td><%= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %></td>
-        <% else %>
-          <td><%= post.customer.user_name %></td>
-        <% end %>
-      </tr>
-        <!--　  <%# @post_tags.each do |tag| %>-->
-     　　 <!--<td> <i class="fa-sharp fa-solid fa-tag"></i>-->
-        <!--<%#= link_to tag.name,search_tag_path(tag_id: tag.id) %></td>-->
-
-         <!--<p><i class="fa-sharp fa-solid fa-tag"></i>-->
-         <!--<%#= link_to post.tags.map(&:name).join(', '),search_path(tag_id: tag.id) %></p>-->
-      <% if signed_in? %>
-      <p>
-      　<% post.tags.each do |tag| %>
-          <i class="fa-sharp fa-solid fa-tag"></i>
-            <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
-        <% end %>
-      </p>
-      <% end %>
-    </div>
-    <% end %>
+  <div class="pt-5">
+    <%= render "posts", post_count: @post_count, posts: @posts %>
   </div>
 </div>
 <%= paginate @posts %>

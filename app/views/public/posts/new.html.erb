@@ -1,13 +1,13 @@
 <div class="container pt-5">
+  <% if @post.errors.any? %>
+    <% @post.errors.count %>件のエラーが発生しました
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
   <div class="row pt-5">
-  <!--<%# if @post.errors.any? %>-->
-  <!--<%# @post.errors.count %>件のエラーが発生しました-->
-  <!--<ul>-->
-  <!--  <%# @post.errors.full_messages.each do |message| %>-->
-  <!--    <li><%#= message %></li>-->
-  <!--  <%# end %>-->
-  <!--</ul>-->
-  <!--<%# end %>-->
     <h2>新規投稿</h2>
       <div class="row">
         <div class="col-sm-1" ></div>
@@ -44,6 +44,7 @@
                       <td class='table-active'>画像</td>
                       <td class='table-active'>場所</td>
                       <td class='table-active'>説明</td>
+                      <td class='table-active'>次への移動方法</td>
                      </tr>
                   </thead>
                   <%# 8.times do %>
@@ -54,6 +55,7 @@
               　　      <td><%= f.file_field :image, accept: "image/*" %></td>
               　     　<td><%= f.text_field :place %></td>
               　     　<td><%= f.text_field :explanatory_text %></td>
+              　      <td><%= f.select :moving_method, [["徒歩", "徒歩"], ["電車", "電車"], ["バス", "バス"], ["自転車", "自転車"], ["バイク", "バイク"], ["車", "車"], ["飛行機", "飛行機"], ["船", "船"]], include_blank: "選択して下さい" %>
         　           </tr>
                   <%# end %>
                   <% end %>

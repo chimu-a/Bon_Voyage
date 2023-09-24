@@ -17,8 +17,13 @@ class Post < ApplicationRecord
   # reject_if: :all_blank:空の子モデルは作成されない
   accepts_nested_attributes_for :post_items, allow_destroy: true, reject_if: :all_blank, limit: 20
 
+  validates_associated :post_items
+
   validates :prefecture_id, numericality: { other_than: 1}
   validates :title, presence: true
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+  validates :post_items, presence: true
 
   def save_tags(tags)
   # タグが存在していれば、タグの名前を配列として全て取得

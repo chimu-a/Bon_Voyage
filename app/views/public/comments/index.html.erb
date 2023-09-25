@@ -1,2 +1,274 @@
 <h1>Public::Comments#index</h1>
 <p>Find me in app/views/public/comments/index.html.erb</p>
+
+customer = Customer.find_or_initialize_by(email: "yamadataro@example.com")
+
+unless customer.persisted?
+  customer.user_name = “たろう
+  customer.last_name = “山田”
+  customer.first_name = “”太郎
+  customer.last_name_kana = “ヤマダ”
+  customer.first_name_kana = “タロウ”
+  customer.self_introduction = “年2回は旅行に行きます！”
+  customer.is_deleted = false
+  customer.password = "taro1111"
+  customer.save
+end
+
+post = customer.posts.build
+post.title = "東京旅行"
+post.start_date = Time.current.to_date
+post.end_date = Time.current.since(2.days).to_date
+post.prefecture_id = 14
+post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/東京タワー.jpg"), filename:"東京タワー.jpg")
+
+post_item = post.post_items.build
+post_item.place = “スカイツリー”
+post_item.explanatory_text = “上からの眺め凄かったです！”
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = “電車”
+post_item.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/スカイツリー.jpg"), filename:"スカイツリー.jpg")
+
+post_item = post.post_items.build
+post_item.place = “東京タワー”
+post_item.explanatory_text = “東京観光の定番ですね！”
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = “電車”
+post_item.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures//東京タワー.jpg"), filename:"東京タワー.jpg")
+
+post_item = post.post_items.build
+post_item.place = “浅草寺”
+post_item.explanatory_text = “”
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = “電車”
+post_item.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures//浅草寺.jpg"), filename:"浅草寺.jpg")
+
+post_item = post.post_items.build
+post_item.place = “SHIBUYA SKY”
+post_item.explanatory_text = “混んでました！座る場所が沢山あり、長居してしまいました！”
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = “電車”
+post_item.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures//よなよな.jpg"), filename:"よなよな.jpg")
+
+post_item = post.post_items.build
+post_item.place = “YONA YONA BEER WORKS　新宿東口店”
+post_item.explanatory_text = “たくさん種類があってビール好きにはおすすめです！”
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = “電車”
+post_item.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures//よなよな.jpg"), filename:"よなよな.jpg")
+
+post_item = post.post_items.build
+post_item.place = “ドーミーインPREMIUM渋谷神宮前”
+post_item.explanatory_text = “サウナ最高でした！”
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = “電車”
+
+post = customer.posts.build
+post.title = "大阪旅行"
+post.start_date = Time.current.to_date
+post.end_date = Time.current.since(3.days).to_date
+post.prefecture_id = 28
+post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/たこ焼き.jpg"), filename:"たこ焼き.jpg")
+
+post_item = post.post_items.build
+post_item.place = “ユニバーサルスタジオジャパン”
+post_item.explanatory_text = “1日楽しめました！マリオエリアの整理券取れず、残念でした、、”
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = “電車”
+
+post_item = post.post_items.build
+post_item.place = “たこ昌　新大阪駅店”
+post_item.explanatory_text = “ふわとろで美味しかったです！”
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = “電車”
+post_item.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/たこ焼き.jpg"), filename:"たこ焼き.jpg")
+
+post = customer.posts.build
+post.title = "京都旅行"
+post.start_date = Time.current.to_date
+post.end_date = Time.current.since(3.days).to_date
+post.prefecture_id = 27
+post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/伏見稲荷大社.jpg"), filename:"伏見稲荷大社.jpg")
+
+post_item = post.post_items.build
+post_item.place = “伏見稲荷大社”
+post_item.explanatory_text = 千本鳥居圧巻でした！”
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = “自転車”
+
+post_item = post.post_items.build
+post_item.place = “錦市場”
+post_item.explanatory_text = “お店が沢山！さくっと食べられる飲食店も多く、楽しかったです！”
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = “電車”
+post_item.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/錦市場.jpg"), filename:"錦市場.jpg")
+
+post.save
+
+customer = Customer.find_or_initialize_by(email: "suzukijiro@example.com")
+
+unless customer.persisted?
+  customer.user_name = "じろう"
+  customer.last_name = "鈴木"
+  customer.first_name = "次郎"
+  customer.last_name_kana = "スズキ"
+  customer.first_name_kana = "ジロウ"
+  customer.self_introduction = "ご当地の名物を食べるのが好きです！"
+  customer.is_deleted = false
+  customer.password = "jiro1111"
+  customer.save
+end
+
+post = customer.posts.build
+post.title = "函館旅行"
+post.start_date = Time.current.to_date
+post.end_date = Time.current.since(3.days).to_date
+post.prefecture_id = 2
+post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/きくよ食堂.jpg"), filename:"きくよ食堂.jpg")
+
+post_item = post.post_items.build
+post_item.place = "きくよ食堂"
+post_item.explanatory_text = "海鮮丼美味しかったです！"
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = "バス"
+post_item.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/きくよ食堂.jpg"), filename:"きくよ食堂.jpg")
+
+post_item = post.post_items.build
+post_item.place = "五稜郭"
+post_item.explanatory_text = "雪景色も綺麗でしたが、桜の見頃にもう一度来てみたいです！"
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = "バス"
+post_item.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/五稜郭.jpg"), filename:"五稜郭.jpg")
+
+post_item = post.post_items.build
+post_item.place = "金森赤レンガ倉庫"
+post_item.explanatory_text = "横浜より少しこじんまりしてました！"
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = "バス"
+
+post_item = post.post_items.build
+post_item.place = "あじさい　函館駅店"
+post_item.explanatory_text = "あっさりしていて美味しかったです！"
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = "バス"
+post_item.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/あじさい.jpg"), filename:"あじさい.jpg")
+
+post_item = post.post_items.build
+post_item.place = "函館山"
+post_item.explanatory_text = "天気が悪く登れず残念でした、、"
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = "バス"
+
+post_item = post.post_items.build
+post_item.place = "ホテル"
+post_item.explanatory_text = "海沿いのホテルでした！"
+post_item.date = Time.current
+post_item.time = Time.current
+
+post.save
+
+post = customer.posts.build
+post.title = "岩手旅行"
+post.start_date = Time.current.to_date
+post.end_date = Time.current.since(2.days).to_date
+post.prefecture_id = 4
+post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/盛楼閣.jpg"), filename:"盛楼閣.jpg")
+
+post_item = post.post_items.build
+post_item.place = "中尊寺"
+post_item.explanatory_text = "金色堂綺麗でした！"
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = "車"
+
+post_item = post.post_items.build
+post_item.place = "盛楼閣"
+post_item.explanatory_text = "冷麺美味しかったです！"
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = "車"
+
+post.save
+
+customer = Customer.find_or_initialize_by(email: "takahashiaoi@example.com")
+
+unless customer.persisted?
+  customer.user_name = "あおい"
+  customer.last_name = "高橋"
+  customer.first_name = "葵"
+  customer.last_name_kana = "タカハシ"
+  customer.first_name_kana = "アオイ"
+  customer.self_introduction = "旅行大好きです！"
+  customer.is_deleted = false
+  customer.password = "aoi1111"
+  customer.save
+end
+
+post = customer.posts.build
+post.title = "宮城旅行"
+post.start_date = Time.current.to_date
+post.end_date = Time.current.since(2.days).to_date
+post.prefecture_id = 5
+post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/すし哲.jpg"), filename:"すし哲.jpg")
+
+post_item = post.post_items.build
+post_item.place = "秋保大滝"
+post_item.explanatory_text = "迫力がありました！"
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = "車"
+post_item.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/秋保大滝.jpg"), filename:"秋保大滝.jpg")
+
+post_item = post.post_items.build
+post_item.place = "さいち"
+post_item.explanatory_text = "有名なおはぎのお店です！"
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = "車"
+
+post_item = post.post_items.build
+post_item.place = "ホテル　佐勘"
+post_item.explanatory_text = "老舗ホテルです！"
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = "車"
+
+post_item = post.post_items.build
+post_item.place = "仙台うみの杜水族館"
+post_item.explanatory_text = "ペンギンに癒されました！"
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = "車"
+post_item.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/仙台うみの杜水族館.jpg"), filename:"仙台うみの杜水族館.jpg")
+
+post_item = post.post_items.build
+post_item.place = "三井アウトレットパーク仙台港"
+post_item.explanatory_text = "水族館の近くです！観覧車がありました！"
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = "車"
+
+post_item = post.post_items.build
+post_item.place = "すし哲　仙台駅店"
+post_item.explanatory_text = "食べログの百名展に選出されている店です！大満足でした！"
+post_item.date = Time.current
+post_item.time = Time.current
+post_item.moving_method = "電車"
+post_item.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/すし哲.jpg"), filename:"すし哲.jpg")
+
+post.save

@@ -8,14 +8,6 @@ class PostItem < ApplicationRecord
   validates :date, presence: true
   validates :time, presence: true
 
-# def get_image
-#     if image.attached?
-#       image
-#     else
-#       'noimage.jpg'
-#     end
-#   end
-
   def get_image
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/noimage.jpg')
@@ -24,11 +16,4 @@ class PostItem < ApplicationRecord
     image
   end
 
-  # def self.search(search)
-  #   if search != nil
-  #     PostItem.where('place LIKE(?)' ,'explanatory_text LIKE(?)' , "%#{search}%", "%#{search}%")
-  #   else
-  #     Post.all
-  #   end
-  # end
 end

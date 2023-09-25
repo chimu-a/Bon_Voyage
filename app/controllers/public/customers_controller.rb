@@ -51,8 +51,6 @@ class Public::CustomersController < ApplicationController
     post_ids = PostItem.where(id: comments).pluck(:post_id)
      # 関連する投稿（Post）を取得
     @comment_posts = Post.where(id: post_ids)
-    # @comment_post_items = Postitem.find(comments)
-    # @posts = @customer.posts
   end
 
 private

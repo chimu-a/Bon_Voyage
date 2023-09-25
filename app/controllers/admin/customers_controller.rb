@@ -7,7 +7,6 @@ class Admin::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @posts = @customer.posts.page(params[:page]).per(3)
     @comments = @customer.comments
-    # @comment_posts = @comments.posts
   end
 
   def edit
@@ -33,13 +32,11 @@ class Admin::CustomersController < ApplicationController
     post_ids = PostItem.where(id: comments).pluck(:post_id)
      # 関連する投稿（Post）を取得
     @comment_posts = Post.where(id: post_ids)
-    # @comment_post_items = Postitem.find(comments)
-    # @posts = @customer.posts
   end
 
   private
 
   def customer_params
-    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :self_introduction, :is_deleted)
+    params.require(:customer).permit(:user_name, :last_name, :first_name, :last_name_kana, :first_name_kana, :email, :self_introduction, :is_deleted)
   end
 end

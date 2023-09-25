@@ -9,40 +9,18 @@ class Public::PostsController < ApplicationController
       @posts = Post.page(params[:page])
       @post_count = Post.all
     end
-    # @posts = Post.all
-    # 追記
     @post = Post.new
     @post_items = @post.post_items.build
-    # @tag_list = Tag.all
     @post_tags = @post.tags
     @prefectures = ['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県']
-    # @search = Post.ransack(params[:q])
-    # @results = @search.result
-    # if params[:new_post]
-    #   @posts = Post.new_post
-    # elsif params[:old_post]
-    #   @posts = Post.old_post
-    # else
-    #   @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
-    # end
-    # if params[:keyword]
-    #   @posts = @posts.search(params[:keyword]).page(params[:page])
-    # else
-    #   @posts = @posts.page(params[:page])
-    # end
-    # @keyword = params[:keyword]
   end
 
   def new
     @post = Post.new
     10.times { @post.post_items.build }
-    # @post_items = @post.post_items.build
-    # 4.times { @post_items }
-    # @form = Form::PostItemCollection.new
   end
 
   def create
-    # @form = Form::PostItemCollection.new(post_item_collection_params)
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
     # 受け取った値を,で区切って配列にして配列に格納して tag_list という変数に代入
@@ -104,17 +82,6 @@ class Public::PostsController < ApplicationController
     @posts = @tag.posts
   end
 
-
-
-  # def search
-  #   # キーワード検索
-  #   @search = Post.ransack(params[:q])
-  #   @results = @search.result.order("created_at DESC").page(params[:page]).per(10)
-
-  #   # タグ検索
-  #   @tag_search = Post.tagged_with(params[:search])
-  # end
-
   private
 
   def post_params
@@ -122,10 +89,4 @@ class Public::PostsController < ApplicationController
     params.require(:post).permit(:customer_id, :prefecture_id, :title, :start_date , :end_date, :image,
     post_items_attributes: [:id, :post_id, :place, :explanatory_text, :image, :date, :time, :moving_method, :number_of_times])
   end
-
-
-  # def post_item_collection_params
-  #       params.require(:form_post_item_collection)
-  #       .permit(post_items_attributes: Form::PostItem::REGISTRABLE_ATTRIBUTES)
-  # end
 end

@@ -3,7 +3,6 @@ class Admin::CommentsController < ApplicationController
     @posts = Post.all
     @posts = Post.includes(post_items: :comments).where.not(comments: { id: nil } ).page(params[:page]).per(2)
     @comments = Comment.all
-    # @customer = @posts.customer
   end
 
   def show
@@ -15,8 +14,8 @@ class Admin::CommentsController < ApplicationController
     @post_item = comment.post_item
     comment.destroy
     # redirect_to request.referer
-    # if…で指定してあげることにより"destroy.js"を参照されるところを"comment_destroy.js"を参照に変更
-    if params[:key] == 'post_item'
+    # if…で指定→参照先が"destroy.js"から"comment_destroy.js"に変更
+    if params[:key] == "post_item"
       render :comment_destroy
     end
     flash[:notice] = "コメントの削除に成功しました"

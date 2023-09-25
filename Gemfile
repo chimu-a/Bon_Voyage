@@ -70,3 +70,7 @@ gem "net-pop"
 gem "net-imap"
 
 gem 'jquery-rails'
+gem 'pry-rails'
+
+gem 'faker'
+gem 'faker-japanese'

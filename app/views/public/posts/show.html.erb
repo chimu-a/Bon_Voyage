@@ -1,18 +1,11 @@
-<div class='container pt-5'>
+<div class="container pt-5">
   <div>
     <%= flash[:success] %>
   </div>
-  <div class='row'>
-    <div class='col-md-3'>
+  <div class="row">
+    <div class="col-md-3">
   　　<h2>投稿詳細</h2>
     　　<%= image_tag @post.get_image, size: "250x200" %>
-    　　<!--<td>-->
-      <!--    <%# if @post.image.present? %>-->
-      <!--      <%#= image_tag @post.image, size: "300x200" %>-->
-      <!--    <%# else %>-->
-      <!--      <%#= image_tag "noimage.jpg", size: "300x200" %>-->
-      <!--    <%# end %>-->
-      <!--  </td>-->
         <p><%= link_to @customer.user_name, customer_path(@post.customer_id), class: "link text-secondary" %></p>
       　<table class="table">
       　   <tr>
@@ -37,9 +30,8 @@
               <% end %>
             </td>
           </tr>
-          </div>
-          </table>
-          </div>
+        </table>
+    </div>
         <div class="col-md-9" >
         <table class="table">
           <thead>
@@ -90,6 +82,7 @@
         </div>
       </div>
       </div>
+  </div>
   </div>
 <% if @post.customer == current_customer %>
   <div class="text-center"><%= link_to "編集する", edit_post_path(@post), class:"btn btn-outline-success" %></div>

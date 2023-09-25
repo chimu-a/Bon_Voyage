@@ -1,0 +1,9 @@
+=> [32m#<PostItem:0x00007f07e52fe128[0m
+ id: [1;36mnil[0m,
+ post_id: [1;36mnil[0m,
+ place: [1;36mnil[0m,
+ explanatory_text: [1;36mnil[0m,
+ date: [1;36mnil[0m,
+ time: [1;36mnil[0m,
+ moving_method: [1;36mnil[0m,
+ number_of_times: [1;36mnil[0m[32m>[0m

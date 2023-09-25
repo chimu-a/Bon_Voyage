@@ -1,26 +1,12 @@
-<!--<td> <%#= post_item.date %></td>-->
-<!--<td> <%#= post_item.time.strftime("%R") %></td>-->
-<td><%= image_tag post_item.get_image, size: "100x100"  %></td>
-<!--<%#if post_item.image.present? %>-->
-<!--  <td><%#= image_tag post_item.image, width: '100', height: '100' %></td>-->
-<!--<%# else %>-->
-<!--  <td><%#= image_tag "noimage.jpg", size: "100x100" %></td>-->
-<!--<%# end %>-->
+<td><%= image_tag post_item.get_image, size: "100x100" %></td>
 <td><%= post_item.place %></td>
 <td><%= post_item.explanatory_text %></td>
 <td>
-<div>
-  <i class="fa-solid fa-comment-dots"></i>
-  <span id="comment_count"><%= post_item.comments.count %></span>
-   <div id="post-comments">
-    <%= render "admin/comments/commentslist", post_item: post_item, key: key %>
+  <div>
+    <i class="fa-solid fa-comment-dots"></i>
+    <span id="comment_count"><%= post_item.comments.count %></span>
+     <div id="post-comments">
+      <%= render "admin/comments/commentslist", post_item: post_item, key: key %>
+    </div>
   </div>
-  <!--<p>コメント件数：<%#= post_item.comments.count %></p>-->
-    <!--<%# post_item.comments.each do |comment| %>-->
-      <%#= image_tag comment.customer.get_profile_image(100,100) %>
-    <!--  <%#= link_to comment.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %>-->
-    <!--  <%#= comment.created_at.strftime('%Y/%m/%d') %><%#= comment.content %>-->
-    <!--  <%#= link_to "削除", admin_comment_path(comment.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %>-->
-    <!--<%# end %>-->
-</div>
 </td>

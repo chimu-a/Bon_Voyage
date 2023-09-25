@@ -3,85 +3,74 @@
     <div class='col-md-3'>
   　　<h2>投稿詳細</h2>
     　　<%= image_tag @post.get_image, size: "250x200" %>
-    　　<!--<%# if @post.image.present? %>-->
-      <!--      <%#= image_tag @post.image, size: "300x200" %>-->
-      <!--    <%# else %>-->
-      <!--      <%#= image_tag "noimage.jpg", size: "300x200" %>-->
-      <!--    <%# end %>-->
-        <p><%= link_to @customer.user_name, admin_customer_path(@post.customer_id), class: "link text-secondary" %></p>
-      　<table class="table">
-      　   <tr>
-      　     <td>都道府県</td>
-      　     <td><%= @prefectures[@post.prefecture_id-2] %></td>
-        　</tr>
-      　   <tr>
-      　     <td>タイトル</td>
-        　   <td><%= @post.title %></td>
-        　</tr>
-        　<tr>
-        　   <td>日付</td>
-        　   <td><%= @post.start_date %>〜<br>
-        　   <%= @post.end_date %></td>
-        　</tr>
-        　<tr>
-        　   <td>タグ</td>
-        　   <td>
-        　     <% @post_tags.each do |tag| %>
-     　　         <i class="fa-sharp fa-solid fa-tag"></i>
-                <%= link_to tag.name, admin_posts_path(tag_id: tag.id), class: "link text-secondary" %>
-              <% end %>
+          <p><%= link_to @customer.user_name, admin_customer_path(@post.customer_id), class: "link text-secondary" %></p>
+          　<table class="table">
+          　   <tr>
+          　     <td>都道府県</td>
+          　     <td><%= @prefectures[@post.prefecture_id-2] %></td>
+            　</tr>
+          　   <tr>
+          　     <td>タイトル</td>
+            　   <td><%= @post.title %></td>
+            　</tr>
+            　<tr>
+            　   <td>日付</td>
+            　   <td><%= @post.start_date %>〜<br>
+            　   <%= @post.end_date %></td>
+            　</tr>
+            　<tr>
+            　   <td>タグ</td>
+            　   <td>
+            　     <% @post_tags.each do |tag| %>
+         　　         <i class="fa-sharp fa-solid fa-tag"></i>
+                    <%= link_to tag.name, admin_posts_path(tag_id: tag.id), class: "link text-secondary" %>
+                  <% end %>
+                </td>
+            　</tr>
+            </table>
+    </div>
+    <div class="col-md-9" >
+      <table class="table">
+        <thead>
+          <tr>
+            <th>日付</th>
+            <th>時間</th>
+            <th>画像</th>
+            <th>場所</th>
+            <th>説明</th>
+            <th>次への移動方法</th>
+            <th>コメント</th>
+          </tr>
+        </thead>
+        <% @post_items.each do |post_item| %>
+          <tr>
+            <td> <%= post_item.date %></td>
+            <td> <%= post_item.time.strftime("%R") %></td>
+            <td><%= image_tag post_item.get_image, size: "100x100" %></td>
+            <td><%= post_item.place %></td>
+            <td><%= post_item.explanatory_text %></td>
+            <td><%= post_item.moving_method %></td>
+            <td>
+              <i class="fa-solid fa-comment-dots"></i>
+              <span id="comment_count-<%="#{post_item.id}"%>"><%= post_item.comments.count %></span>
+              <div id="post-comments-<%="#{post_item.id}"%>">
+                <%= render "admin/comments/commentslist", post_item: post_item, key: 'post_item' %>
+              </div>
             </td>
-        　</tr>
-        </div>
-        </table>
+          </tr>
+        <% end %>
+      </table>
+      <%= paginate @post_items %>
+      <div>
+        <% if @post.favorites.present? %>
+          ♥<%= @post.favorites.count %> いいね
+        <% else %>
+          いいねはありません
+        <% end %>
       </div>
-      <div class="col-md-9" >
-        <table class="table">
-          <thead>
-            <tr>
-              <th>日付</th>
-              <th>時間</th>
-              <th>画像</th>
-              <th>場所</th>
-              <th>次への移動方法</th>
-              <th>コメント</th>
-            </tr>
-          </thead>
-          <% @post_items.each do |post_item| %>
-            <tr>
-              <td> <%= post_item.date %></td>
-              <td> <%= post_item.time.strftime("%R") %></td>
-              <!--<td><%#= image_tag post_item.image, size: "100x100" %></td>-->
-              <td>
-                <%= image_tag post_item.get_image, size: "100x100" %>
-                <!--<%# if post_item.image.present? %>-->
-                <!--  <%#= image_tag post_item.image, size: "100x100" %>-->
-                <!--<%#else %>-->
-                <!--  <%#= image_tag "noimage.jpg", size: "100x100" %>-->
-                <!--<%# end %>-->
-              </td>
-              <td><%= post_item.place %></td>
-              <td><%= post_item.explanatory_text %></td>
-              <td><%= post_item.moving_method %></td>
-              <td>
-                <i class="fa-solid fa-comment-dots"></i>
-                <span id="comment_count-<%="#{post_item.id}"%>"><%= post_item.comments.count %></span>
-                <div id="post-comments-<%="#{post_item.id}"%>">
-                  <%= render "admin/comments/commentslist", post_item: post_item, key: 'post_item' %>
-                </div>
-              </td>
-            </tr>
-          <% end %>
-        </table>
-         <%= paginate @post_items %>
-        <div>
-          <% if @post.favorites.present? %>
-            ♥<%= @post.favorites.count %> いいね
-          <% else %>
-            いいねはありません
-          <% end %>
-        </div>
-      </div>
+    </div>
   </div>
-<div class="text-center"><%= link_to "削除", admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %></div>
-  <%#= link_to "編集する", edit_admin_post_path(@post), class:"btn btn-outline-success" %></div>
+</div>
+<div class="text-center">
+  <%= link_to "削除", admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger" %>
+</div>

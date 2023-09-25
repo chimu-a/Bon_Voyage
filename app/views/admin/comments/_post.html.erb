@@ -1,8 +1,6 @@
 <!--<%# if post.post_items.map{|item| item.comments.count}.sum > 0 %>-->
   <%# if post.comment.present? %>
   <tr>
-    <!--<td><%#= image_tag post.image, size: "100x100" %>-->
-    <td><%#= link_to customer.user_name, admin_customer_path(post.customer_id) %></td>
     <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
     <td><%= link_to post.title, admin_post_path(post), class: "link text-secondary" %></td>
   </tr>
@@ -13,6 +11,3 @@
     </tr>
     <% end %>
   <% end %>
-<!--<%# else %>-->
-<!--  コメントはありません。-->
-<!--<%# end %>-->

@@ -14,6 +14,13 @@
  *= require_self
  */
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  // color: #6c6b6b;
+}
+
  .pagination {
   justify-content: center;
   border: none;     /*枠線をなくす*/
@@ -47,4 +54,29 @@
   background-color: #bcdfff;
   color: #0067C0;
   border: solid 1px #0067C0;
+}
+
+.main {
+  display: flex; /* Flexboxの利用 */
+  justify-content: center; /* 要素の横並び・中央寄せ */
+  margin: 0 auto; /* 要素の中央揃え */
+  padding: 70px 0; /* 上下に70px、左右に0pxの内側余白 */
+}
+
+@media (max-width: 768px) {
+  .image-container {
+    flex-wrap: wrap; /* 画像を折り返す */
+    justify-content: flex-start; /* 画像を左詰めに配置 */
+  }
+
+  .image-container a {
+    width: calc(50% - 10px); /* 2つの画像を横並びに */
+    margin-right: 10px; /* 画像間のスペースを設定 */
+    margin-bottom: 10px; /* 画像行間のスペースを設定 */
+  }
+
+  /* 画像コンテナ内の最後の要素にマージンを追加しない */
+  .image-container a:nth-child(2n) {
+    margin-right: 0;
+  }
 }

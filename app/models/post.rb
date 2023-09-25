@@ -1,7 +1,6 @@
 class Post < ApplicationRecord
   # 下記記載でモジュールを取り込んでいる
   extend ActiveHash::Associations::ActiveRecordExtensions
-  # belongs_to :prefecture
   belongs_to_active_hash :prefecture
 
   has_many :post_tags, dependent: :destroy
@@ -67,22 +66,6 @@ class Post < ApplicationRecord
     # ["customer", "favorites", "image_attachment", "image_blob", "post_items", "post_tags", "prefecture", "tags"]
     %w(prefecture)
   end
-
-  # def self.search(search)
-  #   if search != nil
-  #     Post.where('title LIKE(?)' , "%#{search}%")
-  #   else
-  #     Post.all
-  #   end
-  # end
-
-  # def get_image
-  #   if image.attached?
-  #     image
-  #   else
-  #     'noimage.jpg'
-  #   end
-  # end
 
   def get_image
     unless image.attached?

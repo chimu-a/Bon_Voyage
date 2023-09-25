@@ -1,6 +1,7 @@
 <div class="container pt-5">
   <% if @post.errors.any? %>
-    <% @post.errors.count %>件のエラーが発生しました
+    <!--<%# @post.errors.count %>件の-->
+    エラーが発生しました
     <ul>
       <% @post.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,8 +11,7 @@
   <div class="row pt-5">
     <h2>新規投稿</h2>
       <div class="row">
-        <div class="col-sm-1" ></div>
-          <div class="col-sm-10" >
+          <div class="col-md" >
             <%= form_with model: @post, url: posts_path , method: :post, local: true do |f| %>
             <table>
       　       <tbody>
@@ -33,8 +33,8 @@
           　　      <td><%= f.date_field :start_date %>〜<%= f.date_field :end_date %></td>
           　　    </tr>
           　   　<tr>
-          　　      <td>タグ(,で区切ると複数タグ登録できます)</td>
-          　　      <td><%= f.text_field :name,value: @tag_list, placeholder: "一泊二日,京都,サウナ,酒好き", class: 'form-control' %></td>
+          　　      <td>タグ</td>
+          　　      <td><%= f.text_field :name, :size => "20",value: @tag_list, placeholder:",で区切ると複数タグ登録できます（京都,一泊二日,サウナ,酒好き）", class: 'form-control' %></td>
           　  　  </tr>
   　　            <table class="table">
                   <thead>
@@ -47,8 +47,8 @@
                       <td class='table-active'>次への移動方法</td>
                      </tr>
                   </thead>
-                  <%# 8.times do %>
-        　         <%= f.fields_for :post_items do|f| %> <%# fields_forで子モデルのフォームをネストする %>
+                  <!--fields_forで子モデルのフォームをネストする-->
+        　         <%= f.fields_for :post_items do|f| %>
         　           <tr>
         　             <td><%= f.date_field :date %></td>
         　             <td> <%= f.time_field :time %></td>
@@ -57,7 +57,6 @@
               　     　<td><%= f.text_field :explanatory_text %></td>
               　      <td><%= f.select :moving_method, [["徒歩", "徒歩"], ["電車", "電車"], ["バス", "バス"], ["自転車", "自転車"], ["バイク", "バイク"], ["車", "車"], ["飛行機", "飛行機"], ["船", "船"]], include_blank: "選択して下さい" %>
         　           </tr>
-                  <%# end %>
                   <% end %>
                 </table>
                 <td class = "align-center"><%= f.submit '新規登録', class:"btn btn-outline-success mx-auto d-block" %></td>
@@ -65,7 +64,6 @@
             </table>
             <% end %>
           </div>
-          <div class="col-sm-1" ></div>
       </div>
   </div>
 </div>

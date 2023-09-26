@@ -8,12 +8,12 @@
       <% end %>
     </ul>
   <% end %>
+  <%= form_with model: @post, url: posts_path , method: :post, local: true do |f| %>
   <div class="row pt-5">
     <div class="col-sm-9 offset-sm-1 col-md-9 offset-md-1 col-lg-8 offset-lg-2">
       <div class="px-sm-0 mb-4">
         <h2>新規投稿</h2>
       </div>
-      <%= form_with model: @post, url: posts_path , method: :post, local: true do |f| %>
         <div class="form-group row">
           <%= f.label "都道府県", class: "col-md-4" %>
           <div class="col-md-8">
@@ -61,14 +61,14 @@
            </tr>
         </thead>
         <!--fields_forで子モデルのフォームをネストする-->
-　      <%= f.fields_for :post_items do|f| %>
+　      <%= f.fields_for :post_items do|post_item| %>
 　        <tr>
-　          <td><%= f.date_field :date %></td>
-　          <td> <%= f.time_field :time %></td>
-　　        <td><%= f.file_field :image, accept: "image/*" %></td>
-　          <td><%= f.text_field :place %></td>
-　          <td><%= f.text_field :explanatory_text %></td>
-　          <td><%= f.select :moving_method, [["徒歩", "徒歩"], ["電車", "電車"], ["バス", "バス"], ["自転車", "自転車"], ["バイク", "バイク"], ["車", "車"], ["飛行機", "飛行機"], ["船", "船"]], include_blank: "選択して下さい" %>
+　          <td><%= post_item.date_field :date %></td>
+　          <td> <%= post_item.time_field :time %></td>
+　　        <td><%= post_item.file_field :image, accept: "image/*" %></td>
+　          <td><%= post_item.text_field :place %></td>
+　          <td><%= post_item.text_field :explanatory_text %></td>
+　          <td><%= post_item.select :moving_method, [["徒歩", "徒歩"], ["電車", "電車"], ["バス", "バス"], ["自転車", "自転車"], ["バイク", "バイク"], ["車", "車"], ["飛行機", "飛行機"], ["船", "船"]], include_blank: "選択して下さい" %>
 　       </tr>
         <% end %>
       </table>

@@ -1,71 +1,39 @@
-<!--<h2>Log in</h2>-->
-
-<!--<= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>-->
-<!--  <div class="field">-->
-<!--    <= f.label :email %><br />-->
-<!--    <= f.email_field :email, autofocus: true, autocomplete: "email" %>-->
-<!--  </div>-->
-
-<!--  <div class="field">-->
-<!--    <= f.label :password %><br />-->
-<!--    <= f.password_field :password, autocomplete: "current-password" %>-->
-<!--  </div>-->
-
-<!--  < if devise_mapping.rememberable? %>-->
-<!--    <div class="field">-->
-<!--      <= f.check_box :remember_me %>-->
-<!--      <= f.label :remember_me %>-->
-<!--    </div>-->
-<!--  < end %>-->
-
-<!--  <div class="actions">-->
-<!--    <= f.submit "Log in" %>-->
-<!--  </div>-->
-<!--< end %>-->
-
-<!--<= render "public/shared/links" %>-->
-
 <div class="container pt-5">
   <div class="row pt-5">
-    <div class="col-sm-4 px-sm-0 offset-sm-1">
-      <h2>ログイン</h2>
-    </div>
-  </div>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="row">
+    <div class="col-sm-9 offset-sm-1 col-md-9 offset-md-1 col-lg-8 offset-lg-2">
+      <div class="px-sm-0 mb-4">
+        <h2>ログイン</h2>
+      </div>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 <!--col-sm:マルチデバイス対応,sm (Small:スマホサイズ)以上の時には3:3の割合で、sm サイズより小さな場合は縦方向に並ぶ-->
 <!--.px-sm-0:小以上(≥576px),左右のパディングを0-->
 <!--offset-sm-1:オフセットを指定することでカラムの前に指定分の空白カラムを挿入-->
-    <div class="col-sm-3 px-sm-0 offset-sm-3">
-      <%= f.label "メールアドレス" %><br />
-    </div>
-    <div class="col-sm-3 px-sm-0">
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3 px-sm-0 offset-sm-3">
-      <%= f.label "パスワード" %><br />
-    </div>
-    <div class="col-sm-3 px-sm-0">
-      <%= f.password_field :password, autocomplete: "current-password" %>
-    </div>
-  </div>
-  <div class="row pt-3">
-  <!--col text-center:中央寄せ-->
-    <div class="col text-center">
-    <%= f.submit "ログイン", class:"btn btn-outline-success" %>
-    </div>
-  </div>
-<% end %>
-   <div class="row pt-3">
-    <div class="col-sm-3  px-sm-0 offset-md-3">
-      <h6>会員登録がお済みでない方</h6>
-    </div>
-  　<div class="col-sm-3 px-sm-0">
-    <%= render  "public/shared/links" %>
+        <div class="form-group row">
+          <%= f.label "メールアドレス", class: "col-md-4" %>
+          <div class="col-md-6 offset-lg-2">
+            <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label "パスワード", class: "col-md-4" %>
+          <div class="col-md-6 offset-lg-2">
+            <%= f.password_field :password, class: "form-control", autocomplete: "current-password" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6 offset-md-6">
+            <%= f.submit "ログイン", class:"btn btn-outline-success w-100" %>
+          </div>
+        </div>
+      <% end %>
+        <div class="row">
+          <div class="col-md-5">
+            <h6>会員登録がお済みでない方</h6>
+          </div>
+          <div class="col-md-6 offset-lg-1">
+            <%= render "public/shared/links" %>
+          </div>
+        </div>
     </div>
   </div>
 </div>
-

@@ -1,41 +1,80 @@
 <div class="container pt-5">
-  <div class="row pt-5"></div>
-  <h2>会員情報編集</h2>
-  <% if @customer.errors.any? %>
-    <%= @customer.errors.count %>件のエラーが発生しました
-    <ul>
-      <% @customer.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  <%= form_with model: @customer, url: customer_path, method: :patch do |f| %>
-    <div class="row">
-      <div class="col-2 offset-md-1"><%= f.label "ユーザーネーム" %></div>
-      <div class="col-3"><%= f.text_field :user_name, :size => "20", placeholder: "みちこ" %></div>
-    </div>
-    <div class="row">
-      <div class="col-2 offset-md-1"><%= f.label "氏名" %></div>
-      <div class="col-1"><%= f.text_field :last_name, :size => "10", placeholder: "令和" %></div>
-      <div class="col-1"><%= f.text_field :first_name, :size => "10", placeholder: "道子" %></div>
-    </div>
-    <div class="row">
-      <div class="col-2 offset-md-1"><%= f.label "フリガナ" %></div>
-      <div class="col-1"><%= f.text_field :last_name_kana, :size => "10", placeholder: "レイワ" %></div>
-      <div class="col-1"><%= f.text_field :first_name_kana, :size => "10", placeholder: "ミチコ" %></div>
-    </div>
-    <div class="row">
-      <div class="col-2 offset-md-1"><%= f.label "メールアドレス" %></div>
-      <div class="col-3"><%= f.email_field :email, :size => "25", placeholder: "sample@example.com" %></div>
-    </div>
-     <div class="row">
-      <div class="col-2 offset-md-1"><%= f.label "自己紹介" %></div>
-      <div class="col-3"><%= f.text_area :self_introduction, :size => "25", placeholder: "自己紹介" %></div>
-    </div>
-    <div class="row">
-      <div class="col-2 offset-md-1"></div>
-        <div class="col-3"><%= f.submit '編集内容を保存', class:"btn btn-outline-success" %>
-    　     <%= link_to "退会する", unsubscribe_customer_path, class:"btn btn-outline-danger" %></div>
+  <div class="row pt-5">
+    <div class="col-sm-9 offset-sm-1 col-md-9 offset-md-1 col-lg-8 offset-lg-2">
+      <div class="px-sm-0 mb-4">
+        <h2>会員情報編集</h2>
       </div>
-  <% end %>
+      <% if @customer.errors.any? %>
+        <%= @customer.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @customer.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <%= form_with model: @customer, url: customer_path, method: :patch do |f| %>
+        <div class="form-group row">
+          <%= f.label :user_name, "ユーザーネーム", class: "col-md-4" %>
+          <div class="col-md-8">
+            <%= f.text_field :user_name, class: "form-control", placeholder: "みちこ" %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label "氏名", class: "col-md-4" %>
+          <div class="col-md-8">
+            <div class="d-flex flex-row">
+              <%= f.label "姓:", class: "mx-1", style: "width:12%;" %>
+              <div class="">
+                <%= f.text_field :last_name, class: "form-control",  placeholder: "令和" %>
+              </div>
+
+              <%= f.label "名:", class: "mx-1", style: "width:12%;" %>
+              <div class="">
+                <%= f.text_field :first_name, class: "form-control", placeholder: "道子" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label "フリガナ", class: "col-md-4" %>
+          <div class="col-md-8">
+            <div class="d-flex flex-row">
+              <%= f.label "ｾｲ:", class: "mx-1", style: "width:12%;" %>
+              <div class="">
+                <%= f.text_field :last_name_kana, class: "form-control",  placeholder: "レイワ" %>
+              </div>
+
+              <%= f.label "ﾒｲ:", class: "mx-1", style: "width:12%;" %>
+              <div class="">
+                <%= f.text_field :first_name_kana, class: "form-control", placeholder: "ミチコ" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :email, "メールアドレス", class: "col-md-4" %>
+          <div class="col-md-8">
+            <%= f.email_field :email, class: "form-control", placeholder: "sample@example.com" %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :self_introduction, "自己紹介", class: "col-md-4" %>
+          <div class="col-md-8">
+            <%= f.text_area :self_introduction, rows: 5, class: "form-control", placeholder: "自己紹介" %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-md-8 offset-md-4">
+            <%= f.submit '編集内容を保存', class:"btn btn-outline-success w-100" %>
+            <%= link_to "退会する", unsubscribe_customer_path, class:"btn btn-outline-danger w-100" %>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    </div>
  </div>

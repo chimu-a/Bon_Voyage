@@ -5,17 +5,17 @@
 　</div>
 　<div class="row">
       <% @posts.each do |post| %>
-      <div class="col-lg-3" >
+      <div class="col-6 col-md-3" >
       <% if admin_signed_in? %>
-        <div><%= link_to image_tag(post.image, width: '150', height: '150'), admin_post_path(post) %></div>
+        <div><%= link_to image_tag(post.image, class: "img-fluid"), admin_post_path(post) %></div>
           <tr>
             <td><%= link_to post.title, admin_post_path(post), class: "link text-secondary" %></td>
             <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
           </tr>
       <% else %>
-          <div><%= link_to image_tag(post.image, width: '150', height: '150'), post_path(post) %></div>
+          <div><%= link_to image_tag(post.image, class: "img-fluid"), post_path(post) %></div>
           <tr>
-            <td><%= post.title %></td>
+            <td><%= link_to post.title, post_path(post), class: "link text-secondary" %></td>
             <td><%= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %></td>
           </tr>
       <% end %>

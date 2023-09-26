@@ -4,8 +4,8 @@
   </div>
   <div class="row m-2">
     <% @customer.comments.each do |comment| %>
-      <div class="col-lg-3">
-        <p><%= link_to image_tag( comment.post_item.post.get_image, size: "150x150" ), post_path(comment.post_item.post.id) %></p>
+      <div class="col-6 col-md-3">
+        <p><%= link_to image_tag( comment.post_item.post.get_image, class: "img-fluid" ), post_path(comment.post_item.post.id) %></p>
         <p>
           <%= link_to comment.post_item.post.customer.user_name, customer_path(comment.post_item.post.customer.id), class:"link text-secondary" %>
         　<i class="fa fa-heart unlike-btn"></i>

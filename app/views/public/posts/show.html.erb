@@ -50,14 +50,6 @@
               <td> <%= post_item.date %></td>
               <td> <%= post_item.time.strftime("%R") %></td>
               <td><%= image_tag post_item.get_image, size: "100x100" %></td>
-              <!--<td>-->
-              <!--  <%# if post_item.image.present? %>-->
-              <!--    <%#= image_tag post_item.image, size: "100x100" %>-->
-              <!--  <%# else %>-->
-              <!--    <%#= image_tag "noimage.jpg", size: "100x100" %>-->
-              <!--  <%# end %>-->
-              <!--</td>-->
-
               <td><%= post_item.place %></td>
               <td><%= post_item.explanatory_text %></td>
               <td><%= post_item.moving_method %></td>

@@ -329,7 +329,7 @@ customers_attributes = [
       },
       { place: "稲佐の浜",
         explanatory_text: "綺麗でした",
-        image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/稲佐の浜JPG"), filename:"稲佐の浜.JPG"),
+        image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/稲佐.JPG"), filename:"稲佐.JPG"),
         date: date_times[7],
         time: date_times[7].since(1.hours).to_time,
         moving_method: "バス",

@@ -1,7 +1,7 @@
 class Public::HomesController < ApplicationController
   def top
     @post_count = Post.all
-    @posts = Post.page(params[:page])
+    @posts = Post.page(params[:page]).per(8)
     @post = Post.new
     @post_items = @post.post_items.build
     @post_tags = @post.tags

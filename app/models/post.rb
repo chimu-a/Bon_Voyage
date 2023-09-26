@@ -74,6 +74,14 @@ class Post < ApplicationRecord
     end
     image
   end
+  
+  def get_mini_image
+    unless image.attached?
+      file_path = Rails.root.join('app/assets/images/noimage.jpg')
+      image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+    image.variant(resize: '350x350', gravity: :center, crop: "200x200+0+0")
+  end
 
   # 曖昧検索
   def self.search(keyword, prefs)

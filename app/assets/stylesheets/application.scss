@@ -80,3 +80,11 @@
     margin-right: 0;
   }
 }
+
+.post_image {
+  position:relative;
+  overflow:hidden;
+  padding-bottom:100%;
+  img { position:absolute;
+  }
+}

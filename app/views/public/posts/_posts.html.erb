@@ -6,9 +6,9 @@
 <% end %>
 <div class="row m-2">
   <% posts.each do |post| %>
-    <div class="col-6 col-md-4">
+    <div class="col-6 col-md-3">
       <% if signed_in? %>
-        <div class="image-container"><%= link_to image_tag(post.get_image, size: "150x150" ), post_path(post) %></div>
+        <div><%= link_to image_tag(post.get_image, class: "img-fluid" ), post_path(post) %></div>
           <p>
             <%= link_to post.title, post_path(post), class: "link text-secondary" %>
             <%= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %><br>

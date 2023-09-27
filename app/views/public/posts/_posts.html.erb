@@ -22,7 +22,7 @@
             <% end %>
           </p>
       <% else %>
-        <div><%= image_tag post.get_image, class: "img-fluid" %></div>
+        <div><%= image_tag post.get_mini_image, class: "img-fluid" %></div>
         <p><%= post.title %> <%= post.customer.user_name %></p>
       <% end %>
     </div>

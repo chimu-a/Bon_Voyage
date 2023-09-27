@@ -32,50 +32,49 @@
           </tr>
         </table>
     </div>
-        <div class="col-md-9" >
-        <table class="table">
-          <thead>
-            <tr>
-              <td>日時</td>
-              <td>時間</td>
-              <td>画像</td>
-              <td>場所</td>
-              <td>説明</td>
-              <td>次への移動方法</td>
-              <td>コメント</td>
-            </tr>
-          </thead>
-          <% @post_items.each do |post_item| %>
-            <tr>
-              <td> <%= post_item.date %></td>
-              <td> <%= post_item.time.strftime("%R") %></td>
-              <td><%= image_tag post_item.get_image, size: "100x100" %></td>
-              <td><%= post_item.place %></td>
-              <td><%= post_item.explanatory_text %></td>
-              <td><%= post_item.moving_method %></td>
-              <td>
-                <i class="fa-solid fa-comment-dots"></i>
-                <span id="comment_count-<%="#{post_item.id}"%>"><%= post_item.comments.count %></span>
-                <div id="post-comments-<%="#{post_item.id}"%>">
-                  <%= render "public/comments/commentslist", post_item: post_item, post: @post %>
-                </div>
-                <div id="comment-form">
-                  <%= render "public/comments/form", post_item: post_item, comment: @comment %>
-                </div>
-              </td>
-            </tr>
-          <% end %>
-        </table>
-        <%= paginate @post_items %>
+    <div class="col-md-9" >
+      <table class="table">
+        <thead>
+          <tr>
+            <td>日時</td>
+            <td>時間</td>
+            <td>画像</td>
+            <td>場所</td>
+            <td>説明</td>
+            <td>次への移動方法</td>
+            <td>コメント</td>
+          </tr>
+        </thead>
+        <% @post_items.each do |post_item| %>
+          <tr>
+            <td> <%= post_item.date %></td>
+            <td> <%= post_item.time.strftime("%R") %></td>
+            <td><%= image_tag post_item.get_image, size: "100x100" %></td>
+            <td><%= post_item.place %></td>
+            <td><%= post_item.explanatory_text %></td>
+            <td><%= post_item.moving_method %></td>
+            <td>
+              <i class="fa-solid fa-comment-dots"></i>
+              <span id="comment_count-<%="#{post_item.id}"%>"><%= post_item.comments.count %></span>
+              <div id="post-comments-<%="#{post_item.id}"%>">
+                <%= render "public/comments/commentslist", post_item: post_item, post: @post %>
+              </div>
+              <div id="comment-form">
+                <%= render "public/comments/form", post_item: post_item, comment: @comment %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <%= paginate @post_items %>
         <!--非ログイン時でも閲覧可能にする-->
         <%# if customer_signed_in? && @post.favorited_by?(current_customer) %>
-        <div id="favorite_buttons_<%= @post.id %>" >
-          <%= render "public/favorites/favorite", post: @post %>
-        </div>
+      <div id="favorite_buttons_<%= @post.id %>" >
+        <%= render "public/favorites/favorite", post: @post %>
       </div>
-      </div>
+    </div>
   </div>
-  </div>
+</div>
 <% if @post.customer == current_customer %>
   <div class="text-center"><%= link_to "編集する", edit_post_path(@post), class:"btn btn-outline-success" %></div>
 <% end %>

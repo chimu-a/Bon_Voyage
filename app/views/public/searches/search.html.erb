@@ -4,58 +4,38 @@
     <h2>「<%= params[:keywords] if params[:keywords].present? %>」の投稿（全<%= @posts_all.length %>件）</h2>
 　</div>
 　<div class="row">
-      <% @posts.each do |post| %>
+    <% @posts.each do |post| %>
       <div class="col-6 col-md-3" >
-      <% if admin_signed_in? %>
-        <div><%= link_to image_tag(post.image, class: "img-fluid"), admin_post_path(post) %></div>
-          <tr>
-            <td><%= link_to post.title, admin_post_path(post), class: "link text-secondary" %></td>
-            <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
-          </tr>
-      <% else %>
-          <div><%= link_to image_tag(post.image, class: "img-fluid"), post_path(post) %></div>
-          <tr>
-            <td><%= link_to post.title, post_path(post), class: "link text-secondary" %></td>
-            <td><%= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %></td>
-          </tr>
-      <% end %>
-        <!--　  <%# @post_tags.each do |tag| %>-->
-     　　 <!--<td> <i class="fa-sharp fa-solid fa-tag"></i>-->
-        <!--<%#= link_to tag.name,search_tag_path(tag_id: tag.id) %></td>-->
-
-         <!--<p><i class="fa-sharp fa-solid fa-tag"></i>-->
-         <!--<%#= link_to post.tags.map(&:name).join(', '),search_path(tag_id: tag.id) %></p>-->
-      <p>
-        <% post.tags.each do |tag| %>
-          <% if admin_signed_in? %>
-          <i class="fa-sharp fa-solid fa-tag"></i>
-              <%= link_to tag.name, admin_posts_path(tag_id: tag.id), class: "link text-secondary" %>
-          <% else %>
-            <i class="fa-sharp fa-solid fa-tag"></i>
-              <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
-          <% end %>
+        <% if admin_signed_in? %>
+          <div><%= link_to image_tag(post.get_mini_image, class: "img-fluid"), admin_post_path(post) %></div>
+            <tr>
+              <td><%= link_to post.title, admin_post_path(post), class: "link text-secondary" %></td>
+              <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
+            </tr>
+        <% else %>
+            <div><%= link_to image_tag(post.get_mini_image, class: "img-fluid"), post_path(post) %></div>
+              <tr>
+                <td><%= link_to post.title, post_path(post), class: "link text-secondary" %></td>
+                <td><%= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %></td>
+              </tr>
         <% end %>
-      </p>
+        <p>
+          <% post.tags.each do |tag| %>
+            <% if admin_signed_in? %>
+            <i class="fa-sharp fa-solid fa-tag"></i>
+                <%= link_to tag.name, admin_posts_path(tag_id: tag.id), class: "link text-secondary" %>
+            <% else %>
+              <i class="fa-sharp fa-solid fa-tag"></i>
+                <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
+            <% end %>
+          <% end %>
+        </p>
       </div>
-      <% end %>
-    </div>
-      <!--<div>-->
-      <!--  <%#= paginate @posts %>-->
-      <!--</div>-->
+    <% end %>
+  </div>
   <% else %>
     <h2>一致する投稿がありませんでした。</h2>
   <% end %>
   </div>
 </div>
 <%= paginate @posts %>
-<!--  <%# if @tags.present? %>-->
-<!--    <h2>「<%#= params[:q] if params[:q].present? %>」のタグ（<%#= @tags.length %>）</h2>-->
-<!--    <div class="row row-cols-1 row-cols-md-6 g-4">-->
-<!--      <%# @tags.each do |tag| %>-->
-<!--        <span class="badge rounded-pill text-bg-dark me-2"><%#= tag.name %></span>-->
-<!--      <%# end %>-->
-<!--    <%# else %>-->
-<!--      <h2>一致するタグがありませんでした。</h2>-->
-<!--    <%# end %>-->
-<!--  </div>-->
-<!--</div>-->

@@ -22,7 +22,12 @@
 - 旅行の記録を残す時
 ​
 ## 設計書
-後ほど作成予定
+- ER図
+https://drive.google.com/file/d/13sR_OuNL6V5ofQI2vE7BmenTmgfFn9kp/view?usp=sharing
+- テーブル定義書
+https://docs.google.com/spreadsheets/d/1bnyPjPpHME2iQDFaJZUXdjw1N4f2Jw5XKFBTvq_8yns/edit?usp=sharing
+- アプリケーション詳細設計
+https://docs.google.com/spreadsheets/d/1uOBDknqXRE2dHfr6iw8RagmEzsBhhBpM/edit?usp=sharing&ouid=100696441833642957110&rtpof=true&sd=true
 ​
 ## 開発環境
 - OS：Linux(CentOS)
@@ -32,4 +37,5 @@
 - IDE：Cloud9
 ​
 ## 使用素材
-後ほど記載予定
+- イラストAC https://www.ac-illust.com/
+- フレームぽけっと　https://www.illust-pocket.com/

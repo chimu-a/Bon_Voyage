@@ -33,7 +33,30 @@
         </table>
     </div>
     <div class="col-md-9" >
+      <div class="row">
+        <div class="col-sm-12 col-md-8 offset-lg-4 col-lg-10 offset-lg-2">
+          <% @post_items.each do |post_item| %>
+          <div class="border-bottom">
+          <div> <%= post_item.date %></div>
+            <div> <%= post_item.time.strftime("%R") %>
+            <%= image_tag post_item.get_image, size: "100x100" %>
+            <%= post_item.place %>
+             <%= post_item.explanatory_text %>
+             <div><%= post_item.moving_method %></div>
+             <i class="fa-solid fa-comment-dots"></i>
+              <span id="comment_count-<%="#{post_item.id}"%>"><%= post_item.comments.count %></span>
+              <div id="post-comments-<%="#{post_item.id}"%>">
+                <%= render "public/comments/commentslist", post_item: post_item, post: @post %>
+              </div>
+              <div id="comment-form">
+                <%= render "public/comments/form", post_item: post_item, comment: @comment %>
+              </div>
+             </div>
+            <% end %>
+            </div></div>
+
       <table class="table">
+
         <thead>
           <tr>
             <td>日時</td>

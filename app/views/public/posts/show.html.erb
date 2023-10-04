@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-md-3">
   　　<h2>投稿詳細</h2>
-    　　<%= image_tag @post.get_image, size: "250x200" %>
+    　　<%= image_tag @post.get_image, width: "100%" %>
         <p><%= link_to @customer.user_name, customer_path(@post.customer_id), class: "link text-secondary" %></p>
       　<table class="table">
       　   <tr>
@@ -33,30 +33,73 @@
         </table>
     </div>
     <div class="col-md-9" >
-      <div class="row">
-        <div class="col-sm-12 col-md-8 offset-lg-4 col-lg-10 offset-lg-2">
-          <% @post_items.each do |post_item| %>
-          <div class="border-bottom">
-          <div> <%= post_item.date %></div>
-            <div> <%= post_item.time.strftime("%R") %>
-            <%= image_tag post_item.get_image, size: "100x100" %>
-            <%= post_item.place %>
-             <%= post_item.explanatory_text %>
-             <div><%= post_item.moving_method %></div>
-             <i class="fa-solid fa-comment-dots"></i>
-              <span id="comment_count-<%="#{post_item.id}"%>"><%= post_item.comments.count %></span>
-              <div id="post-comments-<%="#{post_item.id}"%>">
-                <%= render "public/comments/commentslist", post_item: post_item, post: @post %>
-              </div>
-              <div id="comment-form">
-                <%= render "public/comments/form", post_item: post_item, comment: @comment %>
-              </div>
-             </div>
-            <% end %>
-            </div></div>
+      <div class="border p-3">
+        <% @post_items.each do |post_item| %>
+        <div class="border-bottom">
+　　　　　<!--divタグでテーブルを作成-->
+          <!--<div class="table">-->
+          <!--	<div class="table_line">-->
+          <!--		<div class="block">-->
+          <!--		  <%#= post_item.date %><br>-->
+          <!--      <%#= post_item.time.strftime("%R") %>-->
+          <!--    </div>-->
+          <!--		<div class="block">-->
+          <!--		  <%#= image_tag post_item.get_image, size: "100x100" %>-->
+          <!--		</div>-->
+          <!--		<div class="block">-->
+          <!--		  <%#= post_item.place %><br>-->
+          <!--      <span style="font-size:12px; color:gray;">-->
+          <!--        <%#= post_item.explanatory_text %>-->
+          <!--      </span>-->
+          <!--    </div>-->
+          <!--    <div class="block">-->
+          <!--      <i class="fa-solid fa-comment-dots"></i>-->
+          <!--        <span id="comment_count-<%#="#{post_item.id}"%>"><%#= post_item.comments.count %></span>-->
+          <!--        <span id="post-comments-<%#="#{post_item.id}"%>">-->
+          <!--          <%#= render "public/comments/commentslist", post_item: post_item, post: @post %>-->
+          <!--        </span>-->
+          <!--        <div id="comment-form">-->
+          <!--          <%#= render "public/comments/form", post_item: post_item, comment: @comment %>-->
+          <!--        </div>-->
+          <!--    </div>-->
+          <!--  </div>-->
+          <!--  <div><%#= post_item.moving_method %></div>-->
+          <!--</div>-->
 
+　　　　　<!--divタグで作成-->
+　　　　　<div class="row">
+            <div class="col-md-6 col-sm-12 justify-content-center d-flex">
+              <div>
+              <%= post_item.date %><br>
+              <%= post_item.time.strftime("%R") %><br>
+              <%= image_tag post_item.get_image, size: "100x100" %>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <div>
+                <p class="align-middle h-100"><%= post_item.place %><br>
+                  <span style="font-size:12px; color:gray;"><%= post_item.explanatory_text %></span>
+                </p>
+              </div>
+            </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <i class="fa-solid fa-comment-dots"></i>
+                <span id="comment_count-<%="#{post_item.id}"%>"><%= post_item.comments.count %></span>
+                <span id="post-comments-<%="#{post_item.id}"%>">
+                  <%= render "public/comments/commentslist", post_item: post_item, post: @post %>
+                </span>
+                <div id="comment-form">
+                  <%= render "public/comments/form", post_item: post_item, comment: @comment %>
+                </div>
+              </div>
+            <div><%= post_item.moving_method %></div>
+          </div>
+        </div>
+        <% end %>
+        </div>
+
+　　　<!--tableタグで作成-->
       <table class="table">
-
         <thead>
           <tr>
             <td>日時</td>

@@ -67,9 +67,9 @@
               <% @comment_posts.each do |post| %>
                 <% if post.post_items.map{|item| item.comments.count}.sum > 0 %>
                   <tr>
-                    <td></td>
-                    <td></td>
                     <td><%= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %></td>
+                    <td></td>
+                    <td></td>
                     <td><%= link_to post.title, post_path(post), class: "link text-secondary" %></td>
                     <% post.post_items.each do |post_item| %>
                       <% if post_item.comments.count > 0 %>

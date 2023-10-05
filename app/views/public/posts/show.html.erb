@@ -7,74 +7,35 @@
   　　<h2>投稿詳細</h2>
     　　<%= image_tag @post.get_image, width: "100%" %>
         <p><%= link_to @customer.user_name, customer_path(@post.customer_id), class: "link text-secondary" %></p>
-      　<table class="table">
-      　   <tr>
-      　     <td>都道府県</td>
-      　     <td><%= @prefectures[@post.prefecture_id-2] %></td>
-        　</tr>
-      　   <tr>
-      　     <td>タイトル</td>
-        　   <td><%= @post.title %></td>
-        　</tr>
-        　<tr>
-        　   <td>日時</td>
-        　   <td><%= @post.start_date %>〜<br>
-        　   <%= @post.end_date %></td>
-        　</tr>
-        　<tr>
-        　   <td>タグ</td>
-          　<td>
-          　   <% @post_tags.each do |tag| %>
+        <div class="text-center">
+          <div class="bg-light">都道府県</div>
+          <div class="pb-2"><%= @prefectures[@post.prefecture_id-2] %></div>
+          <div class="bg-light">タイトル</div>
+          <div class="pb-2"><%= @post.title %></div>
+          <div class="bg-light">日時</div>
+          <div class="pb-2"><%= @post.start_date %>〜<%= @post.end_date %></div>
+          <div class="bg-light">タグ</div>
+          <div class="pb-2">
+             <% @post_tags.each do |tag| %>
                 <i class="fa-sharp fa-solid fa-tag"></i>
                 <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
               <% end %>
-            </td>
-          </tr>
-        </table>
+          </div>
+        </div>
     </div>
     <div class="col-md-9" >
-      <div class="border p-3">
+      <div class="p-3">
         <% @post_items.each do |post_item| %>
         <div class="border-bottom">
-　　　　　<!--divタグでテーブルを作成-->
-          <!--<div class="table">-->
-          <!--	<div class="table_line">-->
-          <!--		<div class="block">-->
-          <!--		  <%#= post_item.date %><br>-->
-          <!--      <%#= post_item.time.strftime("%R") %>-->
-          <!--    </div>-->
-          <!--		<div class="block">-->
-          <!--		  <%#= image_tag post_item.get_image, size: "100x100" %>-->
-          <!--		</div>-->
-          <!--		<div class="block">-->
-          <!--		  <%#= post_item.place %><br>-->
-          <!--      <span style="font-size:12px; color:gray;">-->
-          <!--        <%#= post_item.explanatory_text %>-->
-          <!--      </span>-->
-          <!--    </div>-->
-          <!--    <div class="block">-->
-          <!--      <i class="fa-solid fa-comment-dots"></i>-->
-          <!--        <span id="comment_count-<%#="#{post_item.id}"%>"><%#= post_item.comments.count %></span>-->
-          <!--        <span id="post-comments-<%#="#{post_item.id}"%>">-->
-          <!--          <%#= render "public/comments/commentslist", post_item: post_item, post: @post %>-->
-          <!--        </span>-->
-          <!--        <div id="comment-form">-->
-          <!--          <%#= render "public/comments/form", post_item: post_item, comment: @comment %>-->
-          <!--        </div>-->
-          <!--    </div>-->
-          <!--  </div>-->
-          <!--  <div><%#= post_item.moving_method %></div>-->
-          <!--</div>-->
-
-　　　　　<!--divタグで作成-->
 　　　　　<div class="row">
-            <div class="col-md-6 col-sm-12 justify-content-center d-flex">
+            <div class="col-md-6 col-sm-12 d-flex">
               <div>
               <%= post_item.date %><br>
               <%= post_item.time.strftime("%R") %><br>
               <%= image_tag post_item.get_image, size: "100x100" %>
             </div>
-            <div class="d-flex justify-content-center align-items-center">
+            <!--<div class="d-flex justify-content-center align-items-center">-->
+            <div class="d-flex pt-5">
               <div>
                 <p class="align-middle h-100"><%= post_item.place %><br>
                   <span style="font-size:12px; color:gray;"><%= post_item.explanatory_text %></span>
@@ -85,53 +46,19 @@
             <div class="col-md-6 col-sm-12">
               <i class="fa-solid fa-comment-dots"></i>
                 <span id="comment_count-<%="#{post_item.id}"%>"><%= post_item.comments.count %></span>
-                <span id="post-comments-<%="#{post_item.id}"%>">
+                <div id="post-comments-<%="#{post_item.id}"%>">
                   <%= render "public/comments/commentslist", post_item: post_item, post: @post %>
-                </span>
+                </div>
                 <div id="comment-form">
                   <%= render "public/comments/form", post_item: post_item, comment: @comment %>
                 </div>
               </div>
-            <div><%= post_item.moving_method %></div>
+            <div><%= post_item.moving_method %><br>
+            <i class="fa-sharp fa-solid fa-arrow-down"></i><span style="font-size:12px;">次の目的地まで</span></div>
           </div>
         </div>
         <% end %>
-        </div>
-
-　　　<!--tableタグで作成-->
-      <table class="table">
-        <thead>
-          <tr>
-            <td>日時</td>
-            <td>時間</td>
-            <td>画像</td>
-            <td>場所</td>
-            <td>説明</td>
-            <td>次への移動方法</td>
-            <td>コメント</td>
-          </tr>
-        </thead>
-        <% @post_items.each do |post_item| %>
-          <tr>
-            <td> <%= post_item.date %></td>
-            <td> <%= post_item.time.strftime("%R") %></td>
-            <td><%= image_tag post_item.get_image, size: "100x100" %></td>
-            <td><%= post_item.place %></td>
-            <td><%= post_item.explanatory_text %></td>
-            <td><%= post_item.moving_method %></td>
-            <td>
-              <i class="fa-solid fa-comment-dots"></i>
-              <span id="comment_count-<%="#{post_item.id}"%>"><%= post_item.comments.count %></span>
-              <div id="post-comments-<%="#{post_item.id}"%>">
-                <%= render "public/comments/commentslist", post_item: post_item, post: @post %>
-              </div>
-              <div id="comment-form">
-                <%= render "public/comments/form", post_item: post_item, comment: @comment %>
-              </div>
-            </td>
-          </tr>
-        <% end %>
-      </table>
+      </div>
       <%= paginate @post_items %>
         <!--非ログイン時でも閲覧可能にする-->
         <%# if customer_signed_in? && @post.favorited_by?(current_customer) %>

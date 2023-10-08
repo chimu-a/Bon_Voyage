@@ -28,6 +28,10 @@ https://drive.google.com/file/d/13sR_OuNL6V5ofQI2vE7BmenTmgfFn9kp/view?usp=shari
 https://docs.google.com/spreadsheets/d/1bnyPjPpHME2iQDFaJZUXdjw1N4f2Jw5XKFBTvq_8yns/edit?usp=sharing
 - アプリケーション詳細設計
 https://docs.google.com/spreadsheets/d/1uOBDknqXRE2dHfr6iw8RagmEzsBhhBpM/edit?usp=sharing&ouid=100696441833642957110&rtpof=true&sd=true
+- AWS構成図
+https://drive.google.com/file/d/1SBMRPbAQC-zBMS7jAPaEJmCM-pOGsopz/view?usp=sharing
+- AWSインフラ設計書
+https://docs.google.com/spreadsheets/d/1SwRcFXO0AWJBlXoRnFd3eVX0ndpeCrak8iCx3WOcXpk/edit?usp=sharing
 ​
 ## 開発環境
 - OS：Linux(CentOS)

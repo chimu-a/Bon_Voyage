@@ -1,0 +1,30 @@
+ja:
+  errors:
+    messages:
+      not_saved: "エラーが発生しました"
+  activerecord:
+    models:
+      customer: 会員
+      post: 投稿
+    attributes:
+      customer:
+        user_name: ユーザーネーム
+        last_name: 氏名(姓)
+        first_name: 氏名(名)
+        last_name_kana: 氏名(姓カナ)
+        first_name_kana: 氏名(名カナ)
+        email: メールアドレス
+        # encrypted_password: パスワード(確認用)
+        password: パスワード
+        password_confirmation: パスワード(確認用)
+      post:
+        prefecture_id: 都道府県
+        title: タイトル
+        start_date: 開始日
+        end_date: 終了日
+        post_items: 投稿項目(必須：日付・時間・場所・説明)
+      post/post_items:
+        date: 日付
+        time: 時間
+        place: 場所
+        explanatory_text: 説明

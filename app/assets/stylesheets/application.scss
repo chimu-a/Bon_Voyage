@@ -88,3 +88,8 @@
   img { position:absolute;
   }
 }
+
+// バリデーションエラーで、「field_with_errors」によるレイアウト崩れを防ぐ
+.field_with_errors {
+  display: contents;
+}

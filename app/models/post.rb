@@ -18,7 +18,7 @@ class Post < ApplicationRecord
 
   validates_associated :post_items
 
-  validates :prefecture_id, numericality: { other_than: 1}
+  validates :prefecture_id, numericality: { other_than: 1, message: "を入力してください" }
   validates :title, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true

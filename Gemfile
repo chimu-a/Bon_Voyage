@@ -74,3 +74,4 @@ gem 'pry-rails'
 
 gem 'faker'
 gem 'faker-japanese'
+gem 'rails-i18n'

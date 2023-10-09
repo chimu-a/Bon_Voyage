@@ -68,11 +68,16 @@
 　　        <td><%= post_item.file_field :image, accept: "image/*" %></td>
 　          <td><%= post_item.text_field :place %></td>
 　          <td><%= post_item.text_field :explanatory_text %></td>
-　          <td><%= post_item.select :moving_method, [["徒歩", "徒歩"], ["電車", "電車"], ["バス", "バス"], ["自転車", "自転車"], ["バイク", "バイク"], ["車", "車"], ["飛行機", "飛行機"], ["船", "船"]], include_blank: "選択して下さい" %>
+　          <td><%= post_item.select :moving_method, [["徒歩", "徒歩"], ["電車", "電車"], ["バス", "バス"], ["自転車", "自転車"], ["バイク", "バイク"], ["車", "車"], ["飛行機", "飛行機"], ["船", "船"]], include_blank: "選択して下さい" %></td>
 　       </tr>
         <% end %>
       </table>
-      <td class = "align-center"><%= f.submit "新規登録", class:"btn btn-outline-success mx-auto d-block" %></td>
+      <td class = "align-center">
+        <div class="mx-auto d-block">
+          <%= f.submit "クリア", type: :reset, class:"btn btn-outline-info" %>
+          <%= f.submit "新規登録", class:"btn btn-outline-success" %>
+        </div>
+      </td>
     <% end %>
   </div>
 </div>

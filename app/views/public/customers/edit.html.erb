@@ -1,18 +1,19 @@
 <div class="container pt-5">
+  <% if @customer.errors.any? %>
+      <!--<%#= @customer.errors.count %>件の-->
+    エラーが発生しました
+    <ul>
+      <% @customer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= form_with model: @customer, url: customer_path, method: :patch do |f| %>
   <div class="row pt-5">
     <div class="col-sm-9 offset-sm-1 col-md-9 offset-md-1 col-lg-8 offset-lg-2">
       <div class="px-sm-0 mb-4">
         <h2>会員情報編集</h2>
       </div>
-      <% if @customer.errors.any? %>
-        <%= @customer.errors.count %>件のエラーが発生しました
-        <ul>
-          <% @customer.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      <% end %>
-      <%= form_with model: @customer, url: customer_path, method: :patch do |f| %>
         <div class="form-group row">
           <%= f.label :user_name, "ユーザーネーム", class: "col-md-4" %>
           <div class="col-md-8">

@@ -5,6 +5,7 @@
         <h2>ログイン</h2>
       </div>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= render "public/shared/error_messages", resource: resource %>
         <div class="form-group row">
           <%= f.label "メールアドレス", class: "col-md-4" %>
           <div class="col-md-6 offset-lg-2">

@@ -14,7 +14,7 @@ ja:
         last_name_kana: 氏名(姓カナ)
         first_name_kana: 氏名(名カナ)
         email: メールアドレス
-        # encrypted_password: パスワード(確認用)
+        encrypted_password: パスワード
         password: パスワード
         password_confirmation: パスワード(確認用)
       post:

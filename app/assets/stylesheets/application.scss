@@ -56,6 +56,22 @@
   border: solid 1px #0067C0;
 }
 
+.flash-message.alert {
+  background-color: #f8d7da;
+  color: #721c24;
+  width: 50%;
+  // text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-color: #f5c6cb;
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
 .main {
   display: flex; /* Flexboxの利用 */
   justify-content: center; /* 要素の横並び・中央寄せ */

@@ -1,12 +1,14 @@
 <div class="container pt-5">
   <% if @post.errors.any? %>
-    <!--<%# @post.errors.count %>件の-->
-    エラーが発生しました
-    <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
+    <div class="alert alert-danger" role="alert">
+      <!--<%# @post.errors.count %>件の-->
+      <i class="fa-solid fa-circle-exclamation"></i><strong>エラーが発生しました</strong>
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
   <%= form_with model: @post, url: posts_path , method: :post, local: true do |f| %>
   <div class="row pt-5">

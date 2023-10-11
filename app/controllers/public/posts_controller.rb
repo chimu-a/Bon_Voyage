@@ -86,7 +86,7 @@ class Public::PostsController < ApplicationController
 
   def post_params
     # Postitemモデルに渡す値をpost_items_attributesで設定
-    params.require(:post).permit(:customer_id, :prefecture_id, :title, :start_date , :end_date, :image,
+    params.require(:post).permit(:customer_id, :prefecture_id, :title, :start_date , :end_date, :image, :privacy,
     post_items_attributes: [:id, :post_id, :place, :explanatory_text, :image, :date, :time, :moving_method, :number_of_times])
   end
 end

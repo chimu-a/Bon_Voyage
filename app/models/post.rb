@@ -23,6 +23,7 @@ class Post < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :post_items, presence: true
+  # validates :privacy, presence: true
 
   def save_tags(tags)
   # タグが存在していれば、タグの名前を配列として全て取得

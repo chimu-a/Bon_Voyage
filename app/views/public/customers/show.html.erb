@@ -3,35 +3,29 @@
   <div class="row pt-5">
     <div class="col-md-3">
       <h2>会員</h2>
-        <table class="table">
-          <tbody>
-            <tr>
-              <td>ユーザーネーム</td>
-              <td><%= @customer.user_name %></td>
-            </tr>
-            <tr>
-              <td>自己紹介</td>
-              <td><%= @customer.self_introduction %></td>
-            </tr>
-          </tbody>
-        </table>
+      　<div class="text-center">
+          <div class="bg-light">ユーザーネーム</div>
+          <div class="pb-2"><%= @customer.user_name %></div>
+          <div class="bg-light">自己紹介</div>
+          <div class="pb-2"><%= @customer.self_introduction %></div>
+        </div>
         <% if @customer == current_customer %>
-          <div class="row">
+          <div class="row pt-5 text-center">
             <%= link_to edit_customer_path(@customer.id), class:"btn btn-outline-secondary btn-block" do%>
               <i class="fas fa-user-cog" aria-hidden="true">編集</i>
             <% end %>
           </div>
-          <div class="row pt-5">
-            <%= link_to favorites_customer_path(@customer.id), class:"btn btn-outline-danger btn-block" do%>
+          <div class="row pt-5 text-center">
+            <%= link_to favorites_customer_path(@customer.id), class:"btn btn-outline-danger btn-block" do %>
               <i class="fa-solid fa-heart" aria-hidden="true">いいね一覧を見る</i>
-     　　  　  <% end %>
-   　　  　  </div>
-   　　  　  <div class="row">
-            <%= link_to comments_customer_path(@customer.id), class:"btn btn-outline-warning btn-block" do%>
-              <i class="fa-solid fa-comment-dots">コメントした投稿一覧を見る</i>
-     　　  　  <% end %>
-   　　  　  </div>
-   　　　  <% end %>
+            <% end %>
+          </div>
+   　　  　  <div class="row pt-4 text-center">
+            <%= link_to comments_customer_path(@customer.id), class:"btn btn-outline-warning btn-block" do %>
+            <i class="fa-solid fa-comment-dots" aria-hidden="true">コメントした投稿一覧を見る</i>
+            <% end %>
+          </div>
+　      <% end %>
     </div>
     <div class="col-md-8 offset-md-1">
       <h2>投稿一覧</h2>
@@ -62,40 +56,73 @@
         <%= paginate @posts %>
         <% if @customer == current_customer %>
           <h2>投稿へのコメント一覧</h2>
-            <table class="table">
-              <tbody>
+            <!--<table class="table">-->
+            <!--  <tbody>-->
               <% @comment_posts.each do |post| %>
                 <% if post.post_items.map{|item| item.comments.count}.sum > 0 %>
-                  <tr>
-                    <td><%= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %></td>
-                    <td></td>
-                    <td></td>
-                    <td><%= link_to post.title, post_path(post), class: "link text-secondary" %></td>
-                    <% post.post_items.each do |post_item| %>
+                <%#= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %>
+                <%= link_to post.title, post_path(post), class: "link text-secondary" %>
+                  <!--  <td></td>-->
+                  <!--  <td></td>-->
+                  <!--  <td><%#= link_to post.title, post_path(post), class: "link text-secondary" %></td>-->
+                  <!--<tr>-->
+                  <!--  <td><%#= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %></td>-->
+                  <!--  <td></td>-->
+                  <!--  <td></td>-->
+                  <!--  <td><%#= link_to post.title, post_path(post), class: "link text-secondary" %></td>-->
+                  <!--  <%# post.post_items.each do |post_item| %>-->
+                  <!--    <%# if post_item.comments.count > 0 %>-->
+                  <!--    <tr>-->
+                  <!--      <td><%#= link_to image_tag(post_item.get_image, size: "100x100"), post_path(post) %></td>-->
+                  <% post.post_items.each do |post_item| %>
                       <% if post_item.comments.count > 0 %>
-                      <tr>
-                        <td><%= link_to image_tag(post_item.get_image, size: "100x100"), post_path(post) %></td>
-                        <td><%= post_item.place %></td>
-                        <td><%= post_item.explanatory_text %></td>
-                        <td>
-                        <div>
-                          <p>コメント件数：<%= post_item.comments.count %></p>
+                        <div class="row">
+                        <div class="col-md-6 col-sm-12 d-flex">
+              <div>
+              <%= link_to image_tag(post_item.get_image, size: "100x100"), post_path(post) %>
+            </div>
+                        <div class="d-flex ml-2">
+              <div>
+                <p class="align-middle h-100"><%= post_item.place %><br>
+                  <span style="font-size:12px; color:gray;"><%= post_item.explanatory_text %></span>
+                </p>
+              </div>
+            </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div>
+                          <i class="fa-solid fa-comment-dots"></i><%= post_item.comments.count %>
                             <% post_item.comments.each do |comment| %>
                               <p><%#= image_tag comment.customer.get_profile_image(100,100) %></p>
                               <%= link_to comment.customer.user_name, customer_path(comment.customer), class: "link text-secondary" %>
                               <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
                             <% end %>
                         </div>
-                      </tr>
-                      <% end %>
+                        <% end %>
                     <% end %>
-                  </tr>
+
+                      <!--  <td><%#= post_item.place %></td>-->
+                      <!--  <td><%#= post_item.explanatory_text %></td>-->
+                      <!--  <td>-->
+                      <!--  <div>-->
+                      <!--    <p>コメント件数：<%#= post_item.comments.count %></p>-->
+                      <!--      <%# post_item.comments.each do |comment| %>-->
+                              <p><%#= image_tag comment.customer.get_profile_image(100,100) %></p>
+                      <!--        <%#= link_to comment.customer.user_name, customer_path(comment.customer), class: "link text-secondary" %>-->
+                      <!--        <%#= comment.created_at.strftime('%Y/%m/%d') %><%#= comment.content %>-->
+                      <!--      <%# end %>-->
+                      <!--  </div>-->
+                      <!--</tr>-->
+              <!--        <%# end %>-->
+              <!--      <%# end %>-->
+                  <!--</tr>-->
                 <% end %>
               <% end %>
-              </tbody>
-            </table>
+            <!--  </tbody>-->
+            <!--</table>-->
             <%= paginate @comment_posts %>
         <% end %>
     </div>
   </div>
+</div>
 </div>

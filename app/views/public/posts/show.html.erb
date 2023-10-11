@@ -21,6 +21,10 @@
                 <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
               <% end %>
           </div>
+          <!--<%# if @post.customer == current_customer %>-->
+      　　　　<!--<div class="bg-light">公開・非公開</div>-->
+          <!--    <div class="pb-2"><%#= @post.privacy %></div>-->
+          <!--<%# end %>-->
         </div>
     </div>
     <div class="col-md-9" >

@@ -23,6 +23,7 @@ ja:
         start_date: 開始日
         end_date: 終了日
         post_items: 投稿項目(必須：日付・時間・場所・説明)
+        privacy: 公開・非公開
       post/post_items:
         date: 日付
         time: 時間

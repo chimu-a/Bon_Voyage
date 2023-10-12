@@ -1,10 +1,9 @@
 <div class="container pt-5">
-  <div class="row pt-5"></div>
-    <h2>コメント一覧</h2>
-      <% @posts.each do |post| %>
-        <table class="table" id="post-id-<%=post.id%>">
-          <%= render 'post', post: post, key: 'comments' %>
-        </table>
-      <% end %>
-      <%= paginate @posts %>
+  <h2>コメント一覧</h2>
+    <% @posts.each do |post| %>
+      <div class="table" id="post-id-<%=post.id%>">
+        <%= render 'post', post: post, key: 'comments' %>
+      </div>
+    <% end %>
+    <%= paginate @posts %>
 </div>

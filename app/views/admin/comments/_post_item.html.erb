@@ -1,7 +1,14 @@
-<td><%= image_tag post_item.get_image, size: "100x100" %></td>
-<td><%= post_item.place %></td>
-<td><%= post_item.explanatory_text %></td>
-<td>
+<%= image_tag post_item.get_image, size: "100x100" %>
+<div class="d-flex pt-2 ml-2">
+  <div>
+    <p class="align-middle h-100"><%= post_item.place %><br>
+      <span style="font-size:12px; color:gray;"><%= post_item.explanatory_text %></span>
+    </p>
+  </div>
+</div>
+</div>
+</div>
+<div class="col-md-6 col-sm-12">
   <div>
     <i class="fa-solid fa-comment-dots"></i>
     <span id="comment_count"><%= post_item.comments.count %></span>
@@ -9,4 +16,4 @@
       <%= render "admin/comments/commentslist", post_item: post_item, key: key %>
     </div>
   </div>
-</td>
+</div>

@@ -1,13 +1,15 @@
 <!--<%# if post.post_items.map{|item| item.comments.count}.sum > 0 %>-->
   <%# if post.comment.present? %>
-  <tr>
-    <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
-    <td><%= link_to post.title, admin_post_path(post), class: "link text-secondary" %></td>
-  </tr>
+  <div class="bg-light">
+    <%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %>
+    <%= link_to post.title, admin_post_path(post), class: "link text-secondary" %>
+  </div>
   <% post.post_items.each do |post_item| %>
     <% if post_item.comments.count > 0 %>
-    <tr id="post_item-id-<%=post_item.id%>">
-      <%= render 'post_item', post_item: post_item, key: key %>
-    </tr>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 d-flex">
+      <div id="post_item-id-<%=post_item.id%>">
+        <%= render 'post_item', post_item: post_item, key: key %>
+      </div>
     <% end %>
   <% end %>

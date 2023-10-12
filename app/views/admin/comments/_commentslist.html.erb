@@ -1,7 +1,7 @@
 <% post_item.comments.each do |comment| %>
   <p><%#= image_tag comment.customer.get_profile_image(100,100) %></p>
-  <%= link_to comment.customer.user_name, admin_customer_path(comment.customer), class: "link text-secondary" %>
+  <span style="font-size:14px;"><%= link_to comment.customer.user_name, admin_customer_path(comment.customer), class: "link text-secondary" %>
   <%= comment.created_at.strftime('%Y/%m/%d') %>
-  <%= comment.content %>
+  <%= comment.content %></span>
   <%= link_to "削除", admin_comment_path(comment.id, key: key), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger", remote:true, data: {"turbolinks" => false} %>
 <% end %>

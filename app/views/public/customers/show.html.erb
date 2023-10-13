@@ -28,31 +28,41 @@
 　      <% end %>
     </div>
     <div class="col-md-8 offset-md-1">
-  <h2>投稿一覧</h2>
-  <div class="row">
-    <% @posts.each do |post| %>
-      <div class="col-md-6 col-sm-12 border-bottom">
-        <%= link_to image_tag(post.get_image, width: '100', height: '100'), post_path(post) %>
-        <%= link_to post.title, post_path(post.id), class: "link text-secondary" %>
-      </div>
-      <div class="col-md-6 col-sm-12 border-bottom">
-        <p class="pt-2">
-          <% post.tags.each do |tag| %>
-            <i class="fa-sharp fa-solid fa-tag"></i>
-            <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
+      <h2>投稿一覧</h2>
+      <div class="row">
+        <% if @posts.empty? %>
+          <div class="col-md-12 ml-3">
+            <p>投稿はありません</p>
+          </div>
+        <% else %>
+          <% @posts.each do |post| %>
+            <div class="col-md-6 col-sm-12 border-bottom">
+              <%= link_to image_tag(post.get_image, width: '100', height: '100'), post_path(post) %>
+              <%= link_to post.title, post_path(post.id), class: "link text-secondary" %>
+            </div>
+            <div class="col-md-6 col-sm-12 border-bottom">
+              <p class="pt-2">
+                <% post.tags.each do |tag| %>
+                  <i class="fa-sharp fa-solid fa-tag"></i>
+                  <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
+                <% end %>
+              </p>
+            </div>
           <% end %>
-        </p>
+        <% end %>
       </div>
-    <% end %>
-  </div>
-
-        <%= paginate @posts %>
-        <% if @customer == current_customer %>
-          <h2 class="pt-3">投稿へのコメント一覧</h2>
+      <%= paginate @posts %>
+      <% if @customer == current_customer %>
+        <h2 class="pt-3">投稿へのコメント一覧</h2>
+          <% if @comment_posts.empty? %>
+            <div class="col-md-12 ml-1">
+              <p>コメントはありません</p>
+            </div>
+          <% else %>
             <% @comment_posts.each do |post| %>
               <% if post.post_items.map{|item| item.comments.count}.sum > 0 %>
               <%#= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %>
-              
+
                 <div class="bg-light"><%= link_to post.title, post_path(post), class: "link text-secondary" %></div>
                   <div class="row">
                     <% post.post_items.each do |post_item| %>
@@ -83,6 +93,7 @@
                       <% end %>
                     <% end %>
                   </div>
+                <% end %>
               <% end %>
             <% end %>
             <%= paginate @comment_posts %>

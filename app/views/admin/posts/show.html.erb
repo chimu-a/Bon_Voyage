@@ -2,7 +2,7 @@
   <div class="row pt-5">
     <div class="col-md-3">
   　　<h2>投稿詳細</h2>
-    　　<%= image_tag @post.get_image, size: "250x200" %>
+    　　<%= image_tag @post.get_image, width: "100%" %>
           <p><%= link_to @customer.user_name, admin_customer_path(@post.customer_id), class: "link text-secondary" %></p>
           <div class="text-center">
             <div class="bg-light">都道府県</div>
@@ -32,7 +32,7 @@
               <%= image_tag post_item.get_image, size: "100x100" %>
             </div>
             <!--<div class="d-flex justify-content-center align-items-center">-->
-            <div class="d-flex pt-5">
+            <div class="d-flex pt-5 ml-1">
               <div>
                 <p class="align-middle h-100"><%= post_item.place %><br>
                   <span style="font-size:12px; color:gray;"><%= post_item.explanatory_text %></span>

@@ -1,72 +1,54 @@
 <div class="container pt-5">
   <div class="row pt-5">
-    <div class="col-md-4">
-      <h3><%= @customer.last_name + @customer.first_name %>さんの会員詳細</h3>
-        <table class='table'>
-          <tbody>
-            <tr>
-              <td>会員ID</th>
-              <td><%= @customer.id %></td>
-            </tr>
-            <tr>
-              <td>ユーザーネーム</td>
-              <td><%= @customer.user_name %></td>
-            </tr>
-            <tr>
-              <td>氏名</td>
-              <td><%= @customer.last_name %> <%= @customer.first_name %></td>
-            </tr>
-            <tr>
-              <td>カナ</td>
-              <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
-            </tr>
-            <tr>
-              <td>メールアドレス</td>
-              <td><%= @customer.email %></td>
-            </tr>
-            <tr>
-              <td>自己紹介</td>
-              <td><%= @customer.self_introduction %></td>
-            </tr>
-            <tr>
-              <td>会員ステータス</td>
-              <td><%#= @customer.is_deleted ? 'text-gray' : 'text-green' %><%= @customer.is_deleted ? '退会済み' : '有効' %></td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="row">
-          <%= link_to "編集する", edit_admin_customer_path(@customer.id), class:"btn btn-outline-secondary btn-block" %>
-        </div>
-      　<div class="row">
-          <%= link_to "コメントした投稿一覧を見る", comments_admin_customer_path(@customer.id), class:"btn btn-outline-warning btn-block" %>
-        </div>
+    <div class="col-md-3">
+      <h3 class="text-center"><%= @customer.last_name + @customer.first_name %>さんの<br>会員詳細</h3>
+      <div class="text-center">
+        <div class="bg-light">会員ID</div>
+        <div class="pb-2"><%= @customer.id %></div>
+        <div class="bg-light">ユーザーネーム</div>
+        <div class="pb-2"><%= @customer.user_name %></div>
+        <div class="bg-light">氏名</div>
+        <div class="pb-2"><%= @customer.last_name %> <%= @customer.first_name %></div>
+        <div class="bg-light">カナ</div>
+        <div class="pb-2"><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></div>
+        <div class="bg-light">メールアドレス</div>
+        <div class="pb-2"><%= @customer.email %></div>
+        <div class="bg-light">自己紹介</div>
+        <div class="pb-2"><%= @customer.self_introduction %></div>
+        <div class="bg-light">会員ステータス</div>
+        <div class="pb-2"><%#= @customer.is_deleted ? 'text-gray' : 'text-green' %><%= @customer.is_deleted ? '退会済み' : '有効' %></div>
+      </div>
+      <div class="row text-center">
+        <%= link_to "編集する", edit_admin_customer_path(@customer.id), class:"btn btn-outline-secondary btn-block" %>
+      </div>
+    　<div class="row text-center pb-3">
+        <%= link_to "コメントした投稿一覧を見る", comments_admin_customer_path(@customer.id), class:"btn btn-outline-warning btn-block" %>
+      </div>
     </div>
-    <div class="col-md-7 offset-md-1">
+    <div class="col-md-8 offset-md-1">
       <h3>投稿一覧</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>画像</th>
-              <th>タイトル</th>
-              <th>タグ</th>
-              <th coldpan="3"></th>
-            </tr>
-          </thead>
-          <% @posts.each do |post| %>
-          <tbody>
-            <tr>
-              <td><%= link_to image_tag(post.get_image, size: "100x100"), admin_post_path(post) %> </td>
-              <td><%= link_to post.title, admin_post_path(post), class: "link text-secondary" %></td>
-              <td>
+        <div class="row">
+          <% if @posts.empty? %>
+            <div class="col-md-12 ml-3">
+              <p>投稿はありません</p>
+            </div>
+          <% else %>
+            <% @posts.each do |post| %>
+              <div class="col-md-6 col-sm-12 border-bottom">
+                <%= link_to image_tag(post.get_image, size: "100x100"), admin_post_path(post) %>
+                <%= link_to post.title, admin_post_path(post), class: "link text-secondary" %>
+              </div>
+              <div class="col-md-6 col-sm-12 border-bottom">
+                <p class="pt-2">
               　   <% post.tags.each do |tag| %>
                     <i class="fa-sharp fa-solid fa-tag"></i>
                       <%= link_to tag.name, admin_posts_path(tag_id: tag.id), class: "link text-secondary" %>
                   <% end %>
-              </td>
-            </tr>
-          </tbody>
+                </p>
+              </div>
+            <% end %>
           <% end %>
-        </table>
+        </div>
         <%= paginate @posts %>
     </div>
   </div>

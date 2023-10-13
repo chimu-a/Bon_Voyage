@@ -3,16 +3,20 @@
     <h2>コメントした投稿一覧</h2>
   </div>
   <div class="row m-2">
-    <% @customer.comments.each do |comment| %>
-      <div class="col-6 col-md-3">
-        <p><%= link_to image_tag( comment.post_item.post.get_mini_image, class: "img-fluid" ), post_path(comment.post_item.post.id) %></p>
-        <p>
-          <%= link_to comment.post_item.post.customer.user_name, customer_path(comment.post_item.post.customer.id), class:"link text-secondary" %>
-        　<i class="fa fa-heart unlike-btn"></i>
-          <%= comment.post_item.comments.length %>
-          <%= link_to comment.post_item.post.title, post_path(comment.post_item.post.id), class:"link text-secondary" %>
-        </p>
+    <% if @customer.comments.empty? %>
+      <div class="col-md-12 mr-5">
+        <p>コメントした投稿はありません</p>
       </div>
+    <% else %>
+      <% @customer.comments.each do |comment| %>
+        <div class="col-6 col-md-3">
+          <p><%= link_to image_tag( comment.post_item.post.get_mini_image, class: "img-fluid" ), post_path(comment.post_item.post.id) %></p>
+          <p>
+            <%= link_to comment.post_item.post.customer.user_name, customer_path(comment.post_item.post.customer.id), class:"link text-secondary" %>
+            <%= link_to comment.post_item.post.title, post_path(comment.post_item.post.id), class:"link text-secondary" %>
+          </p>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

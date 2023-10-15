@@ -16,7 +16,7 @@
         <div class="bg-light">自己紹介</div>
         <div class="pb-2"><%= @customer.self_introduction %></div>
         <div class="bg-light">会員ステータス</div>
-        <div class="pb-2"><%#= @customer.is_deleted ? 'text-gray' : 'text-green' %><%= @customer.is_deleted ? '退会済み' : '有効' %></div>
+        <div class="pb-2"><%= @customer.is_deleted ? "退会済み" : "有効" %></div>
       </div>
       <div class="row text-center">
         <%= link_to "編集する", edit_admin_customer_path(@customer.id), class:"btn btn-outline-secondary btn-block" %>
@@ -49,7 +49,7 @@
             <% end %>
           <% end %>
         </div>
-        <%= paginate @posts %>
+      <%= paginate @posts %>
     </div>
   </div>
 </div>

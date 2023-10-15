@@ -7,7 +7,6 @@ class Public::CommentsController < ApplicationController
     comment = current_customer.comments.new(comment_params)
     comment.post_item_id = @post_item.id
     comment.save
-    # flash[:notice] = "コメントの投稿に成功しました"
     @post = @post_item.post
     # redirect_to post_path(post)
   end
@@ -15,7 +14,6 @@ class Public::CommentsController < ApplicationController
   def destroy
     @post_item = PostItem.find(params[:post_item_id])
     Comment.find(params[:id]).destroy
-    # flash[:notice] = "コメントの削除に成功しました"
     # redirect_to post_path(params[:post_item_id])
   end
 

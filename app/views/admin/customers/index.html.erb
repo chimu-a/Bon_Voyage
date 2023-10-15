@@ -15,7 +15,7 @@
             <td><%= customer.id %></td>
             <td><%= link_to customer.last_name + customer.first_name, admin_customer_path(customer.id), class: "link text-secondary" %></td>
             <td><%= customer.email %></td>
-            <td class="<%= customer.is_deleted ? 'text-gray' : 'text-green' %>"><%= customer.is_deleted ? '退会済み' : '有効' %></td>
+            <td><%= customer.is_deleted ? "退会済み" : "有効" %></td>
           </tr>
         <% end %>
       </table>

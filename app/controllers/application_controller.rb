@@ -2,13 +2,6 @@ class ApplicationController < ActionController::Base
   # before_action :search
 
   def search
-
-
-    # @q = Post.ransack(params[:q])
-    # @posts = @q.result(distinct: true)
-    # @results = params[:q]&.values&.reject(&:blank?)
-    # @tags = Tag.ransack(name_cont: @q).result(distinct: true)
-    # @tag_search = Post.tagged_with(params[:search])
   end
 
   def search_tag

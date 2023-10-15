@@ -1,7 +1,6 @@
 <div class="container pt-5">
   <% if @customer.errors.any? %>
     <div class="alert alert-danger" role="alert">
-    <!--<%#= @customer.errors.count %>件の-->
       <i class="fa-solid fa-circle-exclamation"></i><strong>エラーが発生しました</strong>
       <ul>
         <% @customer.errors.full_messages.each do |message| %>
@@ -33,12 +32,12 @@
           <div class="col-md-8">
             <div class="d-flex flex-row">
               <%= f.label "姓:", class: "mx-1", style: "width:12%;" %>
-              <div class="">
+              <div>
                 <%= f.text_field :last_name, class: "form-control",  placeholder: "令和" %>
               </div>
 
               <%= f.label "名:", class: "mx-1", style: "width:12%;" %>
-              <div class="">
+              <div>
                 <%= f.text_field :first_name, class: "form-control", placeholder: "道子" %>
               </div>
             </div>
@@ -50,12 +49,12 @@
           <div class="col-md-8">
             <div class="d-flex flex-row">
               <%= f.label "ｾｲ:", class: "mx-1", style: "width:12%;" %>
-              <div class="">
+              <div>
                 <%= f.text_field :last_name_kana, class: "form-control",  placeholder: "レイワ" %>
               </div>
 
               <%= f.label "ﾒｲ:", class: "mx-1", style: "width:12%;" %>
-              <div class="">
+              <div>
                 <%= f.text_field :first_name_kana, class: "form-control", placeholder: "ミチコ" %>
               </div>
             </div>
@@ -79,7 +78,7 @@
         <div class="form-group row">
           <%= f.label "会員ステータス", class: "col-md-4" %>
           <div class="col-md-8">
-            <%= f.select :is_deleted, [['有効', false], ['退会済み', true]], {}, { class: 'form-control' } %>
+            <%= f.select :is_deleted, [["有効", false], ["退会済み", true]], {}, { class: "form-control" } %>
           </div>
         </div>
 

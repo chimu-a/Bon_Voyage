@@ -13,14 +13,14 @@
             <%= link_to image_tag(post.get_mini_image, class: "img-fluid" ), post_path(post) %>
           </div>
         </div>
-          <p>
-            <%= link_to post.title, post_path(post), class: "link text-secondary" %>
-            <%= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %><br>
-            <% post.tags.each do |tag| %>
-              <i class="fa-sharp fa-solid fa-tag"></i>
-                <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
-            <% end %>
-          </p>
+        <p>
+          <%= link_to post.title, post_path(post), class: "link text-secondary" %>
+          <%= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %><br>
+          <% post.tags.each do |tag| %>
+            <i class="fa-sharp fa-solid fa-tag"></i>
+              <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
+          <% end %>
+        </p>
       <% else %>
         <div><%= image_tag post.get_mini_image, class: "img-fluid" %></div>
         <p><%= post.title %> <%= post.customer.user_name %></p>

@@ -4,5 +4,5 @@
     <%= comment.created_at.strftime('%Y/%m/%d') %>
     <%= comment.content %>
   </span>
-  <%= link_to "削除", admin_comment_path(comment.id, key: key), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-sm btn-outline-danger", remote:true, data: {"turbolinks" => false} %>
+  <%= link_to "削除", admin_comment_path(comment.id, key: key), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-sm btn-outline-danger", remote:true, data: {"turbolinks" => false} %><br>
 <% end %>

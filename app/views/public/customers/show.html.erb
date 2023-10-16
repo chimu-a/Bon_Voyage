@@ -1,4 +1,3 @@
-<!--pt-5:画面サイズ全て、上側のパディングを3rem-->
 <div class="container pt-5">
   <div class="row">
     <div class="col-md-3">
@@ -37,7 +36,7 @@
         <% else %>
           <% @posts.each do |post| %>
             <div class="col-md-6 col-sm-12 border-bottom">
-              <%= link_to image_tag(post.get_image, width: '100', height: '100'), post_path(post) %>
+              <%= link_to image_tag(post.get_image, size: "100x100"), post_path(post) %>
               <%= link_to post.title, post_path(post.id), class: "link text-secondary" %>
             </div>
             <div class="col-md-6 col-sm-12 border-bottom">
@@ -61,14 +60,11 @@
           <% else %>
             <% @comment_posts.each do |post| %>
               <% if post.post_items.map{|item| item.comments.count}.sum > 0 %>
-              <%#= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %>
-
                 <div class="bg-light"><%= link_to post.title, post_path(post), class: "link text-secondary" %></div>
                   <div class="row">
                     <% post.post_items.each do |post_item| %>
                       <% if post_item.comments.count > 0 %>
                       <div class="col-md-6 col-sm-12 d-flex">
-
                         <%= link_to image_tag(post_item.get_image, size: "100x100"), post_path(post) %>
                         <div class="d-flex pt-2 ml-2">
                           <div>
@@ -80,14 +76,13 @@
                       </div>
                       <div class="col-md-6 col-sm-12">
                         <div>
-                          <i class="fa-solid fa-comment-dots"></i><%= post_item.comments.count %>
-
+                          <i class="fa-solid fa-comment-dots"></i><%= post_item.comments.count %><br>
                             <% post_item.comments.each do |comment| %>
-                              <p><%#= image_tag comment.customer.get_profile_image(100,100) %></p>
-                              <span style="font-size:14px;"><%= link_to comment.customer.user_name, customer_path(comment.customer), class: "link text-secondary" %>
-                              <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %></span>
+                              <span style="font-size:14px;">
+                                <%= link_to comment.customer.user_name, customer_path(comment.customer), class: "link text-secondary" %>
+                                <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
+                              </span><br>
                             <% end %>
-
                         </div>
                       </div>
                       <% end %>
@@ -96,7 +91,7 @@
                 <% end %>
               <% end %>
             <% end %>
-            <%= paginate @comment_posts %>
+          <%= paginate @comment_posts %>
         <% end %>
     </div>
   </div>

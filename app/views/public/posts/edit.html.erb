@@ -1,7 +1,6 @@
 <div class="container pt-5">
   <% if @post.errors.any? %>
     <div class="alert alert-danger" role="alert">
-    <!--<%# @post.errors.count %>件の-->
       <i class="fa-solid fa-circle-exclamation"></i><strong>エラーが発生しました</strong>
       <ul>
         <% @post.errors.full_messages.each do |message| %>
@@ -50,14 +49,6 @@
             <%= f.text_field :name, class: "form-control",value: @tag_list, placeholder:",で区切ると複数タグ登録できます(一泊二日,京都,グルメ等)", class: "form-control" %>
           </div>
         </div>
-
-        <!--<div class="form-group row">-->
-        <!--  <%#= f.label "公開・非公開", class: "col-md-4" %>-->
-        <!--  <div class="col-md-8">-->
-        <!--    <%#= f.select :privacy, [["公開", "公開"], ["非公開", "非公開"]], include_blank: "選択して下さい" %>-->
-        <!--  </div>-->
-        <!--</div>-->
-
       </div>
 　　  <table class="text-center">
         <thead>
@@ -78,7 +69,7 @@
   　　      <td><%= post_item.file_field :image, accept: "image/*" %></td>
   　     　<td><%= post_item.text_field :place %></td>
           <td><%= post_item.text_field :explanatory_text %></td>
-          <td><%= post_item.select :moving_method, [["徒歩", "徒歩"], ["電車", "電車"], ["バス", "バス"], ["自転車", "自転車"], ["バイク", "バイク"], ["車", "車"], ["飛行機", "飛行機"], ["船", "船"]], include_blank: "選択して下さい" %>
+          <td><%= post_item.select :moving_method, [["徒歩", "徒歩"], ["電車", "電車"], ["バス", "バス"], ["自転車", "自転車"], ["バイク", "バイク"], ["車", "車"], ["飛行機", "飛行機"], ["船", "船"]], include_blank: "選択して下さい" %></td>
         </tr>
         <% end %>
       </table>
@@ -86,7 +77,6 @@
           <%= f.submit "変更を保存", class:"btn btn-outline-success mx-auto d-block" %>
           <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger mx-auto d-block" %>
         </td>
-      <% end %>
-    </div>
   </div>
+  <% end %>
 </div>

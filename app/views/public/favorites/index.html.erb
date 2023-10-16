@@ -4,5 +4,7 @@
       <%= link_to image_tag( post.image.variant(resize: '100x100') ), post_path(post.id) %>
       <%= link_to post.user_name.name, user_path(post.customer.id), class:"link text-secondary" %>
         <i class="fa fa-heart unlike-btn"></i>
-      <%= post.likes.length %>
+      <%= post.favorites.length %>
       <%= link_to post.title, post_path(post.id), class:"link text-secondary" %>
+  </div>
+</div>

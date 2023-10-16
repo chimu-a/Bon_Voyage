@@ -21,10 +21,6 @@
                 <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
               <% end %>
           </div>
-          <!--<%# if @post.customer == current_customer %>-->
-      　　　　<!--<div class="bg-light">公開・非公開</div>-->
-          <!--    <div class="pb-2"><%#= @post.privacy %></div>-->
-          <!--<%# end %>-->
         </div>
     </div>
     <div class="col-md-9" >
@@ -34,18 +30,17 @@
 　　　　　<div class="row">
             <div class="col-md-6 col-sm-12 d-flex">
               <div>
-              <%= post_item.date %><br>
-              <%= post_item.time.strftime("%R") %><br>
-              <%= image_tag post_item.get_image, size: "100x100" %>
-            </div>
-            <!--<div class="d-flex justify-content-center align-items-center">-->
-            <div class="d-flex pt-5 ml-1">
-              <div>
-                <p class="align-middle h-100"><%= post_item.place %><br>
-                  <span style="font-size:12px; color:gray;"><%= post_item.explanatory_text %></span>
-                </p>
+                <%= post_item.date %><br>
+                <%= post_item.time.strftime("%R") %><br>
+                <%= image_tag post_item.get_image, size: "100x100" %>
               </div>
-            </div>
+              <div class="d-flex pt-5 ml-1">
+                <div>
+                  <p class="align-middle h-100"><%= post_item.place %><br>
+                    <span style="font-size:12px; color:gray;"><%= post_item.explanatory_text %></span>
+                  </p>
+                </div>
+              </div>
             </div>
             <div class="col-md-6 col-sm-12">
               <i class="fa-solid fa-comment-dots"></i>
@@ -56,16 +51,15 @@
                 <div id="comment-form">
                   <%= render "public/comments/form", post_item: post_item, comment: @comment %>
                 </div>
-              </div>
+            </div>
             <div><%= post_item.moving_method %><br>
-            <i class="fa-sharp fa-solid fa-arrow-down"></i><span style="font-size:12px;">次の目的地まで</span></div>
+              <i class="fa-sharp fa-solid fa-arrow-down"></i><span style="font-size:12px;">次の目的地まで</span>
+            </div>
           </div>
         </div>
         <% end %>
       </div>
       <%= paginate @post_items %>
-        <!--非ログイン時でも閲覧可能にする-->
-        <%# if customer_signed_in? && @post.favorited_by?(current_customer) %>
       <div id="favorite_buttons_<%= @post.id %>" >
         <%= render "public/favorites/favorite", post: @post %>
       </div>

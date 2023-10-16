@@ -7,35 +7,32 @@
     <% @posts.each do |post| %>
       <div class="col-6 col-md-3" >
         <% if admin_signed_in? %>
-          <div><%= link_to image_tag(post.get_mini_image, class: "img-fluid"), admin_post_path(post) %></div>
-            <tr>
-              <td><%= link_to post.title, admin_post_path(post), class: "link text-secondary" %></td>
-              <td><%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %></td>
-            </tr>
+          <div>
+            <%= link_to image_tag(post.get_mini_image, class: "img-fluid"), admin_post_path(post) %>
+          </div>
+            <%= link_to post.title, admin_post_path(post), class: "link text-secondary" %>
+            <%= link_to post.customer.user_name, admin_customer_path(post.customer), class: "link text-secondary" %><br>
         <% else %>
-            <div><%= link_to image_tag(post.get_mini_image, class: "img-fluid"), post_path(post) %></div>
-              <tr>
-                <td><%= link_to post.title, post_path(post), class: "link text-secondary" %></td>
-                <td><%= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %></td>
-              </tr>
+          <div>
+            <%= link_to image_tag(post.get_mini_image, class: "img-fluid"), post_path(post) %>
+          </div>
+            <%= link_to post.title, post_path(post), class: "link text-secondary" %>
+            <%= link_to post.customer.user_name, customer_path(post.customer), class: "link text-secondary" %><br>
         <% end %>
-        <p>
           <% post.tags.each do |tag| %>
             <% if admin_signed_in? %>
-            <i class="fa-sharp fa-solid fa-tag"></i>
+              <i class="fa-sharp fa-solid fa-tag"></i>
                 <%= link_to tag.name, admin_posts_path(tag_id: tag.id), class: "link text-secondary" %>
             <% else %>
               <i class="fa-sharp fa-solid fa-tag"></i>
                 <%= link_to tag.name, posts_path(tag_id: tag.id), class: "link text-secondary" %>
             <% end %>
           <% end %>
-        </p>
       </div>
     <% end %>
   </div>
   <% else %>
     <h2>一致する投稿がありませんでした。</h2>
   <% end %>
-  </div>
 </div>
 <%= paginate @posts %>

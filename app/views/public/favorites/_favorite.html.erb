@@ -1,13 +1,13 @@
 <% if post.favorited_by?(current_customer) %>
   <p>
     <%= link_to post_favorites_path(post), class: "link text-danger", method: :delete, remote: true, data: {"turbolinks" => false} do %>
-      ♥<%= post.favorites.count %> いいね
+      <i class="fa-solid fa-heart"></i><%= post.favorites.count %> いいね
     <% end %>
   </p>
   <% else %>
   <p>
     <%= link_to post_favorites_path(post), class: "link text-secondary", method: :post, remote: true, data: {"turbolinks" => false} do %>
-      ♡<%= post.favorites.count %> いいね
+      <i class="fa-regular fa-heart"></i><%= post.favorites.count %> いいね
     <% end %>
   </p>
 <% end %>

@@ -40,7 +40,6 @@ class Public::CustomersController < ApplicationController
     @favorite_posts = Post.find(favorites)
     @customer = Customer.find(params[:id])
     @posts = @customer.posts
-    # @favorites = @customer.favorites.page(params[:page]).per(2)
   end
 
   def comments

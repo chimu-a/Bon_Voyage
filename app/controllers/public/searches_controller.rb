@@ -1,5 +1,6 @@
 class Public::SearchesController < ApplicationController
-  before_action :authenticate_customer!, except: [:top]
+  before_action :redirect_root
+
   def search
     # キーワードを分割して配列にする。(全角・半角スペース_連続にも対応)
     @keywords = params[:keywords].split(/[[:blank:]]+/)
@@ -24,4 +25,11 @@ class Public::SearchesController < ApplicationController
     @posts_all = @results.distinct
     @posts = @results.distinct.page(params[:page]).per(8)
   end
+
+  private
+
+  def redirect_root
+    redirect_to root_path unless customer_signed_in? || admin_signed_in?
+  end
+
 end

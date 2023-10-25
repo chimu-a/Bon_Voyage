@@ -9,7 +9,7 @@
         <p><%= link_to @customer.user_name, customer_path(@post.customer_id), class: "link text-secondary" %></p>
         <div class="text-center">
           <div class="bg-light">都道府県</div>
-          <div class="pb-2"><%= @prefectures[@post.prefecture_id-2] %></div>
+          <div class="pb-2"><%= @post.prefecture.name %></div>
           <div class="bg-light">タイトル</div>
           <div class="pb-2"><%= @post.title %></div>
           <div class="bg-light">日時</div>

@@ -8,7 +8,9 @@ class PostItem < ApplicationRecord
   validates :date, presence: true
   validates :time, presence: true
 
-  validate :date_within_post_period
+  scope :order_by_date_time, -> { order(date: :asc, time: :asc) }
+
+  validate :date_within_post_period, on: :update
 
   def get_image
     unless image.attached?

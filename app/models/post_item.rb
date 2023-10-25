@@ -8,6 +8,8 @@ class PostItem < ApplicationRecord
   validates :date, presence: true
   validates :time, presence: true
 
+  validate :date_within_post_period
+
   def get_image
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/noimage.jpg')
@@ -16,4 +18,11 @@ class PostItem < ApplicationRecord
     image
   end
 
+  private
+
+  def date_within_post_period
+    unless (post.start_date..post.end_date).cover?(date)
+      errors.add(:date, ":投稿の旅行期間内に設定してください")
+    end
+  end
 end

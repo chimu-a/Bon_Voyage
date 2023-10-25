@@ -1,4 +1,5 @@
 class Public::FavoritesController < ApplicationController
+  before_action :authenticate_customer!, except: [:top]
   def index
     @customer = Customer.find(params{:id})
   end

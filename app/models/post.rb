@@ -8,7 +8,7 @@ class Post < ApplicationRecord
   has_many :tags, through: :post_tags
   belongs_to :customer
   has_many :favorites, dependent: :destroy
-  has_many :post_items, dependent: :destroy
+  has_many :post_items, -> { order(date: :asc, time: :asc) }, dependent: :destroy
   has_one_attached :image
 
   # accepts_nested_attributes_for:controllerにてpost_itemsが使えるようにする

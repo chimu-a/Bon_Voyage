@@ -1,4 +1,5 @@
 class Public::CustomersController < ApplicationController
+  before_action :authenticate_customer!, except: [:top]
   before_action :is_matching_login_user, only: [:edit, :update, :unsubscribe, :withdraw]
   before_action :set_customer, only: [:favorites]
 

@@ -1,4 +1,5 @@
 class Public::SearchesController < ApplicationController
+  before_action :authenticate_customer!, except: [:top]
   def search
     # キーワードを分割して配列にする。(全角・半角スペース_連続にも対応)
     @keywords = params[:keywords].split(/[[:blank:]]+/)

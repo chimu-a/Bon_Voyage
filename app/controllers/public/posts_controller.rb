@@ -1,4 +1,6 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_customer!, except: [:top]
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
   def index
     # タグ名押すと絞り込んで表示される
     if params[:tag_id].present?
@@ -41,7 +43,7 @@ class Public::PostsController < ApplicationController
     @customer = @post.customer
     @post_tags = @post.tags
     @comment = Comment.new
-    @post_items = PostItem.where(post_id: @post.id).page(params[:page]).per(5)
+    @post_items = PostItem.where(post_id: @post.id).order(date: :asc, time: :asc).page(params[:page]).per(5)
     @prefectures = ['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県']
   end
 
@@ -88,5 +90,12 @@ class Public::PostsController < ApplicationController
     # Postitemモデルに渡す値をpost_items_attributesで設定
     params.require(:post).permit(:customer_id, :prefecture_id, :title, :start_date , :end_date, :image, :privacy,
     post_items_attributes: [:id, :post_id, :place, :explanatory_text, :image, :date, :time, :moving_method, :number_of_times])
+  end
+
+  def is_matching_login_user
+    post = Post.find(params[:id])
+    unless post.customer.id == current_customer.id
+      redirect_to posts_path
+    end
   end
 end

@@ -1,4 +1,5 @@
 class Admin::CommentsController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @posts = Post.all
     @posts = Post.includes(post_items: :comments).where.not(comments: { id: nil } ).page(params[:page]).per(2)

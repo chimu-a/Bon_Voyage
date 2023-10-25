@@ -1,4 +1,5 @@
 class Admin::CustomersController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @customers = Customer.page(params[:page]).per(5)
   end
@@ -38,5 +39,9 @@ class Admin::CustomersController < ApplicationController
 
   def customer_params
     params.require(:customer).permit(:user_name, :last_name, :first_name, :last_name_kana, :first_name_kana, :email, :self_introduction, :is_deleted)
+  end
+
+  def if_not_admin
+    redirect_to root_path unless current_user.admin?
   end
 end

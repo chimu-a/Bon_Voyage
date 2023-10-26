@@ -19,7 +19,7 @@
         <div class="form-group row">
           <%= f.label "都道府県", class: "col-md-4" %>
           <div class="col-md-8">
-            <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"select-box ", id:"item-prefecture"}) %>
+            <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {class:"select-box ", id:"item-prefecture"}) %>
           </div>
         </div>
 
@@ -77,9 +77,18 @@
       <td class = "align-center">
         <div class="mx-auto d-block">
           <%= f.submit "クリア", type: :reset, class:"btn btn-outline-info" %>
+          <%= f.submit "リセット", class:"btn btn-outline-info", id:"reset-button" %>
+
           <%= f.submit "新規登録", class:"btn btn-outline-success" %>
         </div>
       </td>
     <% end %>
   </div>
 </div>
+
+<script>
+  $("#reset-button").bind("click", function(event){
+    event.preventDefault();
+    $(this.form).find('textarea, :text, select, date, input[type="date"], input[type="time"]').val("").end().find(":checked").prop("checked", false);
+  });
+</script>

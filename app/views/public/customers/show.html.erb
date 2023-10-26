@@ -8,12 +8,14 @@
           <div class="bg-light">自己紹介</div>
           <div class="pb-2"><%= @customer.self_introduction %></div>
         </div>
-        <% if @customer == current_customer %>
+        <% if current_customer.present? && current_customer == @customer && !current_customer.guest? %>
           <div class="row pt-5 text-center">
             <%= link_to edit_customer_path(@customer.id), class:"btn btn-outline-secondary btn-block" do%>
               <i class="fas fa-user-cog" aria-hidden="true">編集</i>
             <% end %>
           </div>
+        <% end %>
+        <% if @customer == current_customer %>
           <div class="row pt-5 text-center">
             <%= link_to favorites_customer_path(@customer.id), class:"btn btn-outline-danger btn-block" do %>
               <i class="fa-solid fa-heart" aria-hidden="true">いいね一覧を見る</i>

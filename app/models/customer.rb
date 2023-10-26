@@ -33,4 +33,8 @@ class Customer < ApplicationRecord
     super && (self.is_deleted == false)
   end
 
+  def guest?
+    email == 'guest@example.com'
+  end
+
 end

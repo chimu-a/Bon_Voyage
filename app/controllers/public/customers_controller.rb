@@ -1,6 +1,6 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!, except: [:top]
-  before_action :is_matching_login_user, only: [:edit, :update, :unsubscribe, :withdraw]
+  before_action :is_matching_login_user, only: [:edit, :update, :unsubscribe, :withdraw, :favorites, :comments]
   before_action :set_customer, only: [:favorites]
 
   def show
@@ -65,9 +65,8 @@ private
 
   def is_matching_login_user
     customer = Customer.find(params[:id])
-    unless customer.id == current_customer.id
+    if !customer_signed_in? || (customer.id != current_customer.id) || (current_customer.email == 'guest@example.com')
       redirect_to customer_path(current_customer.id)
     end
   end
-
 end

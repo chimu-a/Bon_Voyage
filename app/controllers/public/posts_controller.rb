@@ -64,6 +64,7 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     tag_list = params[:post][:name].split(',')
+
     if @post.update(post_params)
       @post.save_tags(tag_list)
       flash[:notice] = "投稿の更新に成功しました"

@@ -75,8 +75,16 @@
       </table>
         <td class = "align-center">
           <%= f.submit "変更を保存", class:"btn btn-outline-success mx-auto d-block" %>
+          <%= f.submit "クリア", class:"btn btn-outline-info mx-auto d-block", id:"reset-button" %>
           <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-danger mx-auto d-block" %>
         </td>
   </div>
   <% end %>
 </div>
+
+<script>
+  $("#reset-button").bind("click", function(event){
+    event.preventDefault();
+    $(this.form).find('textarea, :text, select, date, input[type="date"], input[type="time"]').val("").end().find(":checked").prop("checked", false);
+  });
+</script>

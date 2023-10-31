@@ -12,7 +12,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:user_name, :last_name, :first_name, :last_name_kana, :first_name_kana,:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :self_introduction])
   end
-  # 特定のパラメータを設定およびカスタマイズするためのメソッド
+
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:user_name, :last_name, :first_name, :last_name_kana, :first_name_kana,:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :self_introduction])
   end

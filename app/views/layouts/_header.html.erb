@@ -2,12 +2,12 @@
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#b0c4de">
     <div class="container">
       <% if admin_signed_in? %>
-        <a class="text-light" href="/admin"><%#= image_tag('', size: '50x50') %>BonVoyage</a>
+        <a class="text-light" href="/admin">BonVoyage</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
       <% else %>
-        <a class="text-light" href="/"><%#= image_tag('', size: '50x50') %>BonVoyage</a>
+        <a class="text-light" href="/">BonVoyage</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -17,22 +17,22 @@
           <% if admin_signed_in? %>
             <li>
               <%= link_to admin_posts_path,class: "nav-link text-light" do %>
-                <i class=""></i> 投稿一覧
+                投稿一覧
               <% end %>
             </li>
             <li>
               <%=  link_to admin_customers_path,class: "nav-link text-light" do %>
-                <i class=""></i> 会員一覧
+                会員一覧
               <% end %>
             </li>
             <li>
               <%=  link_to admin_comments_path ,class: "nav-link text-light" do %>
-                <i class=""></i> コメント一覧
+                コメント一覧
               <% end %>
             </li>
             <li>
               <%= link_to destroy_admin_session_path, method: :delete,class: "nav-link text-light" do %>
-                <i class=""></i> ログアウト
+                ログアウト
               <% end %>
             </li>
             <% elsif customer_signed_in? %>
@@ -41,43 +41,43 @@
               </li>
               <li>
                 <%= link_to about_path,class: "nav-link text-light" do %>
-                  <i class=""></i> サービス紹介
+                  サービス紹介
                 <% end %>
               </li>
               <li>
               <%= link_to posts_path,class: "nav-link text-light" do %>
-                <i class=""></i> 投稿一覧
+                投稿一覧
               <% end %>
               </li>
               <li>
                 <%= link_to customer_path(current_customer),class: "nav-link text-light" do %>
-                  <i class=""></i> マイページ
+                  マイページ
                 <% end %>
               </li>
               <li>
                 <%= link_to destroy_customer_session_path, method: :delete,class: "nav-link text-light" do %>
-                  <i class=""></i> ログアウト
+                  ログアウト
                 <% end %>
               </li>
             <% else %>
               <li>
                 <%= link_to about_path,class: "nav-link text-light" do %>
-                  <i class=""></i> サービス紹介
+                  サービス紹介
                 <% end %>
               </li>
               <li>
                 <%= link_to new_customer_registration_path,class: "nav-link text-light" do %>
-                  <i class=""></i> 新規登録
+                  新規登録
                 <% end %>
               </li>
               <li>
                 <%= link_to customer_session_path ,class: "nav-link text-light" do %>
-                  <i class=""></i> ログイン
+                  ログイン
                 <% end %>
               </li>
               <li>
                 <%= link_to customers_guest_sign_in_path, method: :post, class: "nav-link text-light" do %>
-                <i class=""></i> ゲストログイン
+                  ゲストログイン
                 <% end %>
               </li>
              <% end %>

@@ -1,7 +1,6 @@
 <div class="container pt-5">
   <% if @post.errors.any? %>
     <div class="alert alert-danger" role="alert">
-      <!--<%# @post.errors.count %>件の-->
       <i class="fa-solid fa-circle-exclamation"></i><strong>エラーが発生しました</strong>
       <ul>
         <% @post.errors.full_messages.each do |message| %>
@@ -62,7 +61,6 @@
             <td class="table-active">次への移動方法</td>
            </tr>
         </thead>
-        <!--fields_forで子モデルのフォームをネストする-->
 　      <%= f.fields_for :post_items do|post_item| %>
 　        <tr>
 　          <td><%= post_item.date_field :date %></td>

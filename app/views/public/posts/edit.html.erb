@@ -61,7 +61,6 @@
             <td class="table-active">次への移動方法</td>
           </tr>
         </thead>
-        <!--fields_forで子モデルのフォームをネストする-->
   　     <%= f.fields_for :post_items do|post_item| %>
   　     <tr>
   　       <td><%= post_item.date_field :date %></td>

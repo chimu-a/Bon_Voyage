@@ -15,11 +15,6 @@ Admin.create!(
   password: "password123"
   )
 
-# ここから下を繰り返す
-# ランダムなデータ
-# 1https://magazine.techacademy.jp/magazine/37864
-# 2gem faker
-# 1..10のところ変える
 customers = (1..10).map do |i|
   user_name = Faker::Japanese::Name.name
   last_name = Faker::Japanese::Name.last_name
@@ -36,7 +31,6 @@ customers = (1..10).map do |i|
                               password: "password")
 end
 
-# タグ追記
 tag_names = %w(一人旅
               日本
               絶景
@@ -51,7 +45,6 @@ end
 
 date_times = customers.size.times.map{ Faker::Time.between(from: Time.zone.now.ago(30.days), to: Time.zone.now.ago(10.days)).in_time_zone }
 
-# 新たに作る時はここから
 customers_attributes = [
   { title: "沖縄旅行",
     start_date: date_times[0],
@@ -76,7 +69,7 @@ customers_attributes = [
       }
     ]
   },
-  # ここまでコピー
+
   { title: "東京旅行",
     start_date: date_times[1],
     end_date: date_times[1].since(2.days),
@@ -359,4 +352,3 @@ customers.each.with_index(0) do |customer, i|
   end
   puts nil
 end
-# ここまで

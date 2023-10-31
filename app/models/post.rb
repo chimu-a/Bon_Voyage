@@ -1,19 +1,14 @@
 class Post < ApplicationRecord
-  # 下記記載でモジュールを取り込んでいる
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
 
   has_many :post_tags, dependent: :destroy
-  # "through: :post_tags"は2つのモデル間の関連が"post_tagsモデル"を通して行われることを示す
   has_many :tags, through: :post_tags
   belongs_to :customer
   has_many :favorites, dependent: :destroy
   has_many :post_items, dependent: :destroy
   has_one_attached :image
 
-  # accepts_nested_attributes_for:controllerにてpost_itemsが使えるようにする
-  # allow_destroy: true:親モデルのフォームで子モデルの削除を許可
-  # reject_if: :all_blank:空の子モデルは作成されない
   accepts_nested_attributes_for :post_items, allow_destroy: true, reject_if: :all_blank, limit: 20
 
   validates_associated :post_items
@@ -23,7 +18,6 @@ class Post < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :post_items, presence: true
-  # validates :privacy, presence: true
 
   def save_tags(tags)
   # タグが存在していれば、タグの名前を配列として全て取得
@@ -86,10 +80,6 @@ class Post < ApplicationRecord
 
   # 曖昧検索
   def self.search(keyword, prefs)
-    # joinsで各テーブルを結合して1つのテーブルとみなす
-    # LIKEであいまい検索(%は何が入ってもOK)
-    # INで配列を検索(SQLでのwhereInのこと)
-    # joinsで繋いだ先を検索する場合は、テーブル名とカラム名を「.」で連結させる
     joins(:tags, :post_items)
           .where('title LIKE ? OR tags.name LIKE ? OR post_items.place LIKE ? OR post_items.explanatory_text LIKE ? OR post_items.moving_method LIKE ? OR prefecture_id IN (?)',
                   "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", prefs)
